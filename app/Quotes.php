@@ -10,17 +10,23 @@ class Quotes extends Model
 {
     protected $table = "quotes";
 
-    public static function getForListing( $id = null )
+    protected $primaryKey = "id_quote";
+
+    public static function getForListing( $id = null, $limit )
     {
         if ( $id === null )
         {
             $id = $_REQUEST['id'];
         }
-        $quotes = DB::select('SELECT *, (SELECT COUNT(*) FROM message_listing WHERE id_listing = quotes.id_listing) AS num_questions FROM quotes
+        $quotes = DB::select('SELECT *,
+                            (SELECT COUNT(*) FROM message_listing WHERE id_listing = quotes.id_listing) AS num_questions,
+                            (SELECT COUNT(*) FROM user_feedback WHERE user_feedback.id_user = quotes.id_user ) AS user_feedback
+
+                            FROM quotes
                             LEFT JOIN users ON users.id = quotes.id_user
                             LEFT JOIN vehicles ON vehicles.id_vehicle = quotes.id_vehicle
                             LEFT JOIN time_scales ON time_scales.id_time_scale = quotes.id_time_scale
-                            WHERE id_listing = '.$id);
+                            WHERE id_status = 1 AND id_listing = '.$id.Quotes::makeLimit($limit));
 
         return $quotes;
     }
@@ -55,5 +61,11 @@ class Quotes extends Model
         $surcharge = $ourPrice - $userPrice;
 
         return array($ourPrice, $userPrice, $surcharge);
+    }
+
+    public static function makeLimit( $page )
+    {
+        $limit = ( (int)$page - 1 )*20;
+        return " LIMIT $limit, 20 ";
     }
 }

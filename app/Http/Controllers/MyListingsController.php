@@ -16,7 +16,7 @@ use \App\Listings;
 use \App\Categories;
 use \App\Quotes;
 
-use \App\Classes\SecurePage;
+use \App\Classes\ListingsOU;
 
 class MyListingsController extends BaseController
 {
@@ -27,7 +27,6 @@ class MyListingsController extends BaseController
         parent::__construct();
         $this->id = $_REQUEST['id'];
         $listing = Listings::where('id_listing', $this->id)->first();
-        $secure = new SecurePage($listing, "id_user");
     }
 
     public function defaultAction() {
@@ -86,18 +85,16 @@ class MyListingsController extends BaseController
     {
         $listing = Listings::where('id_listing', $this->id)->first();
 
-        $quotes = Quotes::getForListing($this->id);
-
-        $html = "";
-        foreach ( $quotes as $quote )
-        {
-            $html .= "<div class='row'><div class='col-8'>$quote->str_user : $quote->num_cantidad $quote->code_currency </div><div class='col-4'><div class='btn btn-success' onclick='acceptQuote($quote->id_quote)'>Accept quote</div></div>";
-        }
-
+        $paginated = $this->paginatedQuotesAction();
         $this->cont->body = view('mylistings/quotes_for_listing', array(
-            "listing" => $listing
+            "listing" => $listing,
+            "quotes" => $paginated
         ));
-
         return $this->RenderView();
+    }
+
+    public function paginatedQuotesAction()
+    {
+        return ListingsOU::paginatedQuotes($this->id);
     }
 }
