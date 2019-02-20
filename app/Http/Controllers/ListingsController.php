@@ -14,6 +14,8 @@ use \App\User;
 use \App\Categories;
 use \App\Listings;
 
+use App\Classes\ListingsOU;
+
 class ListingsController extends BaseController
 {
 
@@ -59,6 +61,12 @@ class ListingsController extends BaseController
             Listings::addUserFirst();
         }
         return \Redirect::to('MyAccount');
+    }
+
+    public function expiredDetailAction()
+    {
+        $this->cont->body = ListingsOU::expiredDetail();
+        return $this->RenderView();
     }
 
 }

@@ -10,36 +10,36 @@
             <tr>
                 <td>
                     <div class="col-12">
-                        <div class="listing-card">
-                            @if ( $row->url_image != "" )
-                            <div class="image">
-                                <img src="{{ $row->url_image }}" />
-                            </div>
-                            @else
-                            <div class="image-icon">
-                                <img src="archivos/img/delivery-van.png" alt="">
-                            </div>
-                            @endif
-                            <div class="info">
-                                    <div class="title">
-                                        {{ $row->str_title }}
+                        <div class="listing-card" style="min-height: 100px;">
+                            <div class="container-fluid">
+                                <div class="row xs-center">
+                                    <div class="col-12 mylisting">
+                                        <p>
+                                            <a href="Listings.expiredDetail?id={{ $row->id_listing }}">
+                                                <i class="fas fa-box"></i> {{ $row->str_title }}
+                                            </a>
+                                        </p>
                                     </div>
-                                    <div class="detail row" style="margin: 0;">
-                                        <div class="col-6">
-                                            <div class="row">
-                                                {{ $row->str_description }}
-                                            </div>
-                                            <div class="row">
-                                                Quotes: 
-                                            </div>
-                                            <div class="row">
-                                                Date listed: 
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <a href="MyListings.relist?id={{ $row->id_listing }}" class="btn btn-success">Relist</a>
-                                        </div>
+                                    <div class="col-12 col-sm-5 mylisting">
+                                        <p>
+                                            <i class="fas fa-hourglass-end"></i> Expired: {{ $row->expires_on }}
+                                        </p>
+                                        <p>
+                                            <i class="fas fa-money-bill-wave"></i> <a href="MyListings.quotes?id={{ $row->id_listing }}">Quotes: {{ $row->quotes }}</a>
+                                        </p>
                                     </div>
+                                    <div class="col-12 col-sm-3 mylisting">
+                                        <p>
+                                            <i style="color: green;" class="fas fa-map-marker-alt"></i> {{ $row->collection_postcode }}
+                                        </p>
+                                        <p>
+                                            <i style="color: red;" class="fas fa-map-marker-alt"></i> {{ $row->delivery_postcode }}
+                                        </p>
+                                    </div>
+                                    <div class="col-12 col-sm-4 mylisting">
+                                        <a href="MyListings.relist?id={{ $row->id_listing }}" class="btn btn-success">Relist</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -54,7 +54,7 @@
     $(document).ready( function()
     {        
         $('#results').DataTable({
-            "pageLength": 5,
+            "pageLength": 20,
             searching: false
         });
         $('#results_length').hide();

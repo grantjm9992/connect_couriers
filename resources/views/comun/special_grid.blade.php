@@ -1,18 +1,4 @@
 <style>
-    .mylisting > p {
-        padding: 4px 0;
-        margin-bottom: 0;
-        min-height: 16px;
-    }
-    @media ( max-width: 578px )
-    {
-        .xs-center {
-            text-align: center;
-        }
-    }
-    .mylisting > p {
-        min-height: 0;
-    }
 </style>
 <table style="width: 100%;" id="results">
     <thead style='display: none;'>

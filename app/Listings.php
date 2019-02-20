@@ -76,6 +76,8 @@ class Listings extends Model
         $new->units = $original->units;
         $new->weight = $original->weight;
         $new->distance = $original->distance;
+        $date->modify('+ 1 month');
+        $new->expires_on = $date->format('Y-m-d H:i:s');
         $new->save();
 
         $listing_images = ImagesListings::where('id_listing', $id)->get();
@@ -92,12 +94,12 @@ class Listings extends Model
 
     public static function myActiveListings()
     {        
-        $data = DB::select('SELECT *, listing_status.description AS status, (SELECT COUNT(*) FROM quotes WHERE quotes.id_listing = listings.id_listing) AS quotes FROM listings LEFT JOIN listing_status ON listing_status.id = listings.id_status WHERE id_user = '.$_SESSION['id'].' AND id_status = 1' );
+        $data = DB::select('SELECT *, listing_status.description AS status, (SELECT COUNT(*) FROM quotes WHERE quotes.id_listing = listings.id_listing) AS quotes FROM listings LEFT JOIN listing_status ON listing_status.id = listings.id_status WHERE id_user = '.$_SESSION['id'].' AND id_status = 1 AND expires_on > NOW()' );
         return Listings::makeSearchArray( $data );
     }
     public static function myExpiredListings()
     {
-        return Listings::where('id_user', $_SESSION['id'])->where('id_status', 3)->get();
+        return Listings::makeSearchArray( Listings::where('id_user', $_SESSION['id'])->where('id_status', 3)->get() );
     }
     public static function myAcceptedListings()
     {
@@ -117,6 +119,8 @@ class Listings extends Model
         $listing->id_user = $_SESSION['id'];
         //$listing->bln_flexible = $_REQUEST['bln_flexible'];
         $listing->delivery_date1 = $dd1->format('Y-m-d');
+        $date->modify('+ 1 month');
+        $listing->expires_on = $date->format('Y-m-d H:i:s');
         
         //$url = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=OL139NS&destinations=BL99ST&mode=driving&key=AIzaSyA-5_Xlc2AzrqCECR9hGx210eUTCBuOOZI";
         //$data = file_get_contents($url);
