@@ -13,7 +13,6 @@
         <link type="text/css" rel="stylesheet" href="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid-theme.min.css')}}" />
         <link rel="stylesheet" href="{{ asset('/css/styles.css')}}">
         <link rel="stylesheet" type="text/css" href="{{ asset('https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.css')}}"/>
-        <link href="{{ asset('http://cdn.syncfusion.com/15.1.0.41/js/web/flat-azure/ej.web.all.min.css')}}" rel="stylesheet" />
         <link rel="stylesheet" href="{{ asset('https://use.fontawesome.com/releases/v5.3.1/css/all.css')}}" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     </head>
     <body>
@@ -23,7 +22,6 @@
         <script type="text/javascript" src="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.js')}}"></script>
         <script src="{{ asset('/js/main.js')}}"></script>
         <script src="{{ asset('/js/jsrender.min.js')}}"></script>
-        <script src="{{ asset('/js/ej.web.all.min.js')}}"></script>
         <script src="{{ asset('/js/jquery.easyPaginate.js')}}"></script>
         <script src="{{ asset('/js/jquery.jqGrid.min.js')}}"></script>
         <script src="{{ asset('/js/plupload.full.min.js')}}"></script>
