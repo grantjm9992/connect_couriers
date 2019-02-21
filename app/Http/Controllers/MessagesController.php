@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Routing\Controller as BaseController;
+use App\Http\Controllers\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
@@ -12,6 +12,8 @@ use \App\Providers\TranslationProvider;
 use Illuminate\Http\Request;
 use \App\User;
 use \App\Messages;
+use \App\Conversations;
+use \App\MessagesSent;
 use \App\Listings;
 
 class MessagesController extends BaseController
@@ -24,49 +26,43 @@ class MessagesController extends BaseController
     public function sendAction()
     {
         $date = new \DateTime();
-        $message = new Messages;
+        $message = new MessagesSent;
         $message->id_sender = $_SESSION['id'];
-        $message->id_reciever = $_REQUEST['id_reciever'];
+        $message->id_conversation = $_REQUEST['id'];
         $this->checkMessage();
-        $message->str_message = $_REQUEST['str_message'];
-        if ( isset ( $_REQUEST['id_reply_to'] ) && $_REQUEST['id_reply_to'] != "" ) {
-            $message->id_reply_to = $_REQUEST['id_reply_to'];
-        }
-        $message->id_listing = $_REQUEST['id_listing'];
-        $message->fecha_enviado = $date->format('Y-m-d H:i:s');
+        $message->str_message = nl2br($_REQUEST['str_message']);
+        $message->date_sent = $date->format('Y-m-d H:i:s');
         $message->save();
 
-        if ( isset( $_REQUEST['url'] ) && $_REQUEST['url'] != "" )
-        {
-            return \Redirect::to($_REQUEST['url']);
-        }
-        else
-        {
-            return \Redirect::to('Messages');
-        }
+        
+        $id = $_REQUEST['id'];
+        $conversation = Conversations::where("id", $id)->first();
+        $messages = $conversation->getMessages();
+
+        $response = $this::makeConversation($messages);  
+        
+        return $response;
     }
 
 
     public function defaultAction() {
-        /*$this->data = $this->makeArray(DB::select('SELECT *, CONCAT(users.str_name, " ", users.str_surname) AS sender, messages.id FROM messages
-                                    LEFT JOIN users ON messages.id_sender = users.id
-                                    WHERE messages.id_reciever = '.$_SESSION['id']));*/
-
         $this->data = $this->makeArray(
             DB::select('SELECT *, CONCAT(users.str_name, " ", users.str_surname) AS sender
+            , conversations.id
             FROM conversations
             LEFT JOIN users ON users.id = conversations.id_courier
+            LEFT JOIN listings ON listings.id_listing = conversations.id_listing
             WHERE conversations.id_user = '.$_SESSION["id"])
         );
-        
+
         $this->campos[] = array(
-            'name' => 'sender',
+            'name' => 'str_user',
             'title' => "Sender",
             'width' => "40"
         );
         $this->campos[] = array(
-            'name' => 'str_message',
-            'title' => "Message"
+            'name' => 'str_title',
+            'title' => "Listing"
         );
         $this->campos[] = array(
             'name' => 'input',
@@ -86,17 +82,36 @@ class MessagesController extends BaseController
     {
         $date = new \DateTime();
         $id = $_REQUEST['id'];
-        $message = Messages::getFromId($id);
+        $conversation = Conversations::where("id", $id)->first();
+        $messages = $conversation->getMessages();
 
-        $msg = Messages::where('id', $message->id)->first();
+        $msg = $this::makeConversation($messages);        
+
+        /*$msg = Messages::where('id', $message->id)->first();
         $msg->fecha_leido = $date->format('Y-m-d H:i:s');
-        $msg->save();
+        $msg->save();*/
 
         $this->cont->body = view('messages/message', array(
-            'message' => $message
+            'msgs' => $msg,
+            "conversation" => $conversation
         ));
 
         return $this->RenderView();
+    }
+
+    
+    protected static function makeConversation( $messages )
+    {
+        $response = "";
+        foreach ( $messages as $message )
+        {
+            $class = ( (int)$message->id_sender === (int)$_SESSION['id'] ) ? "msg-reply" : "msg-initial";
+            $response .= view('messages/message_block', array(
+                "message" => $message,
+                "class" => $class
+            ));
+        }
+        return $response;
     }
 
     public function newFromModalAction()
@@ -120,7 +135,8 @@ class MessagesController extends BaseController
             $arr[] = array(
                 'input' => '<input type="checkbox" id="'.$row->id.'">',
                 'str_message' => "",
-                'sender' => $row->sender,
+                "str_title" => $row->str_title,
+                'str_user' => $row->str_user,
                 'id' => $row->id
             );
         }

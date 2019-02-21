@@ -9,6 +9,6 @@
         </div>
     </div>
     <div style="width: 100%; padding: 0 10px;">
-        {{ $message->str_message }}
+        {!! $message->str_message !!}
     </div>
 </div>

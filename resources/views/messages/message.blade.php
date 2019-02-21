@@ -2,23 +2,44 @@
 <div class="container-fluid">
     <div class="row">
         <div style="margin: 50px auto;" class="col-10">
-            <p> Message about delivery: <a href="Deliveries.detail?id={{ $message->id_listing }}">{{ $message->listing }}</a></p>
-            <p>
-                {{ $message->str_user }} wrote:
-            </p>
-            <div class="alert alert-success">
-                {{ $message->str_message }}
+            @if ( (int)$conversation->bln_is_private === 0 )
+            <div class="alert alert-warning width100"><i class="fas fa-exclamation-circle"></i>  All messages in this chat are public and will be displayed on the listing page</div>
+            @endif
+            <h5>Messages regarding XXXXX</h5>
+            <div class="row" id="msgs">
+                {!! $msgs !!}
             </div>
-            <form action="Messages.send">
-                <input type="text" name="id_reciever" value="{{ $message->id_sender }}" hidden>
-                <input type="text" name="id_reply_to" value="{{ $message->id }}" hidden>
-                <input type="text" name="id_listing" value="{{ $message->id_listing }}" hidden>
-                <textarea name="str_message" id="str_message" cols="30" rows="4" class="form-control" placeholder="Reply...">
-                </textarea>
+            <form action="Messages.send" id="form">
+                <input type="text" name="id" value="{{ $conversation->id }}" hidden>
+                <textarea name="str_message" id="str_message" cols="30" rows="4" class="form-control" placeholder="Reply..."></textarea>
                 <p style="margin-top: 15px;">
-                    <button type="submit" class="btn btn-success">Reply</button>
+                    <div class="btn btn-success" onclick="sendMessage()">Reply</div>
                 </p>
             </form>
         </div>
     </div>
 </div>
+<script>
+    $(document).ready( function() {
+        updateScroll();
+    })
+    function updateScroll(){
+        var element = document.getElementById("msgs");
+        element.scrollTop = element.scrollHeight;
+    }
+    function sendMessage()
+    {
+        $.ajax({
+            type: "POST",
+            url: "Messages.send",
+            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+            data: $('#form').serialize(),
+            success: function(data)
+            {
+                $('#str_message').val('');
+                $('#msgs').html(data);
+                updateScroll();
+            }
+        })
+    }
+</script>
