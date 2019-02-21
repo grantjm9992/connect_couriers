@@ -543,3 +543,59 @@ body {
 .mylisting > p {
     min-height: 0;
 }
+
+.msg-initial
+{
+    color: #0c5460;
+    background-color: #d1ecf1;
+    border-color: #bee5eb;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    padding: 10px;
+    font-size: 11px;
+    margin: 5px 0;
+}
+
+.msg-reply
+{
+    color: #1b1e21;
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    padding: 10px;
+    font-size: 11px;
+    margin: 5px 0;
+    margin-left: 16.6666667%;
+
+}
+
+.quote-messages
+{
+    display: none;
+}
+
+.width100 {
+    width: 100%;
+}
+
+.quote-information {
+    font-size: 12px;
+}
+
+.quote-information div:first-child {
+    font-weight: bold;
+}
+.text-button
+{
+    cursor: pointer;   
+}
+
+.quote-section > div
+{
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+.quote-section > div:last-child
+{
+    border-bottom: none;
+}

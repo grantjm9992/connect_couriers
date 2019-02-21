@@ -22,11 +22,15 @@ class MyListingsController extends BaseController
 {
 
     private $id;
+    private $listing;
 
     public function __construct() {
         parent::__construct();
-        $this->id = $_REQUEST['id'];
-        $listing = Listings::where('id_listing', $this->id)->first();
+        if ( isset( $_REQUEST['id'] ) && $_REQUEST['id'] != "" )
+        {
+            $this->id = $_REQUEST['id'];
+            $this->listing = Listings::where('id_listing', $this->id)->first();
+        }
     }
 
     public function defaultAction() {
@@ -85,10 +89,12 @@ class MyListingsController extends BaseController
     {
         $listing = Listings::where('id_listing', $this->id)->first();
 
+        $url = ( isset ( $_SERVER['HTTP_REFERER'] ) && $_SERVER['HTTP_REFERER'] != "" ) ? $_SERVER['HTTP_REFERER'] : "MyListings.myActiveListings";
         $paginated = $this->paginatedQuotesAction();
         $this->cont->body = view('mylistings/quotes_for_listing', array(
             "listing" => $listing,
-            "quotes" => $paginated
+            "quotes" => $paginated,
+            "url" => $url
         ));
         return $this->RenderView();
     }
@@ -96,5 +102,10 @@ class MyListingsController extends BaseController
     public function paginatedQuotesAction()
     {
         return ListingsOU::paginatedQuotes($this->id);
+    }
+
+    public function summaryAction()
+    {
+        ListingsOU::summary();
     }
 }

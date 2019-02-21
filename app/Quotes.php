@@ -65,7 +65,21 @@ class Quotes extends Model
 
     public static function makeLimit( $page )
     {
-        $limit = ( (int)$page - 1 )*20;
-        return " LIMIT $limit, 20 ";
+        if ( $page !== null )
+        {
+            $limit = ( (int)$page - 1 )*20;
+            return " LIMIT $limit, 20 ";
+        }
+        else
+        {
+            return "";
+        }
+    }
+
+    public static function getMessages( $quote )
+    {
+        $conversation = Conversations::where('id_quote', $quote->id_quote)->where('bln_is_private', 0)->first();
+        $messages = DB::select("SELECT * FROM messages_sent LEFT JOIN users ON users.id = messages_sent.id_sender WHERE messages_sent.id_conversation = $conversation->id ");
+        return $messages;
     }
 }

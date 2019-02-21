@@ -99,7 +99,8 @@ class Listings extends Model
     }
     public static function myExpiredListings()
     {
-        return Listings::makeSearchArray( Listings::where('id_user', $_SESSION['id'])->where('id_status', 3)->get() );
+        $data = DB::select('SELECT *, listing_status.description AS status, (SELECT COUNT(*) FROM quotes WHERE quotes.id_listing = listings.id_listing) AS quotes FROM listings LEFT JOIN listing_status ON listing_status.id = listings.id_status WHERE id_user = '.$_SESSION['id'].' AND ( id_status = 3 OR ( id_status = 1 AND expires_on < NOW() ) )' );
+        return Listings::makeSearchArray( $data );
     }
     public static function myAcceptedListings()
     {
@@ -131,14 +132,17 @@ class Listings extends Model
     
     public static function getMyListingsCount()
     {
-        $active = \App\Listings::where('id_user', $_SESSION['id'])
-                                ->where('id_status', 1)->get();
+        /*$active = \App\Listings::where('id_user', $_SESSION['id'])
+                                ->where('expires_on', '>', 'NOW()')
+                                ->where('id_status', 1)->get();*/
+        $active = DB::select('SELECT * FROM listings WHERE id_user = '.$_SESSION['id'].' AND id_status = 1 AND expires_on > NOW() ');
                                 
         $accepted = \App\Listings::where('id_user', $_SESSION['id'])
                                 ->where('id_status', 2)->get();
                                 
-        $ended = \App\Listings::where('id_user', $_SESSION['id'])
-                                ->where('id_status', 3)->get();
+        /*$ended = \App\Listings::where('id_user', $_SESSION['id'])
+                                ->where('id_status', 3)->get();*/
+        $ended = DB::select('SELECT * FROM listings WHERE id_user = 1 AND ( id_status = 3 OR ( id_status = 1 AND expires_on < NOW() ) )');
         
         return array(
             'active' => count($active),
@@ -397,5 +401,31 @@ class Listings extends Model
             $order = " ORDER BY listings.date_listed DESC ";
         }
         return $order;
+    }
+
+    public function getQuotes()
+    {
+        $quotes = DB::select('SELECT *,
+                (SELECT COUNT(*) FROM message_listing WHERE id_listing = quotes.id_listing) AS num_questions,
+                (SELECT COUNT(*) FROM user_feedback WHERE user_feedback.id_user = quotes.id_user ) AS user_feedback
+                FROM quotes
+                LEFT JOIN users ON users.id = quotes.id_user
+                LEFT JOIN vehicles ON vehicles.id_vehicle = quotes.id_vehicle
+                LEFT JOIN time_scales ON time_scales.id_time_scale = quotes.id_time_scale
+                WHERE id_status = 1 AND id_listing = '.$this->id_listing);
+
+        return $quotes;
+    }
+
+    public function getConversations()
+    {
+        $arr = array();
+        $conv = DB::select("SELECT * FROM conversations WHERE id_listing = $this->id_listing AND ( id_quote = '' OR id_quote IS NULL ) AND bln_is_private = 0 ");
+        foreach ( $conv as $c )
+        {
+            $arr[] = Conversations::where('id', $c->id)->first();
+        }
+
+        return $arr;
     }
 }

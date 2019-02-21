@@ -2,7 +2,8 @@
 
 <div class="container-fluid" style="max-width: 1100px; margin: 100px auto; padding: 20px auto 0 auto; max-width: 800px;">
 
-  <div class="alert alert-cc" style="width: 100%; margin: 20px 0;">
+  <a href="{{ $url }}" class="btn btn-dark"><i class="fas fa-arrow-left"></i> Back</a>
+  <div class="alert alert-dark" style="width: 100%; margin: 20px 0;">
     <h5>Quotes for: {{ $listing->str_title }}</h5>
   </div>
   <div class="row" style="margin: 25px 0 0 0;" id="quotes">

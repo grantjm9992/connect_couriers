@@ -16,6 +16,8 @@ use \App\Listings;
 use \App\Quotes;
 use \App\Messages;
 
+use \App\Classes\DeliveriesOU;
+
 class DeliveriesController extends BaseController
 {
 
@@ -33,7 +35,7 @@ class DeliveriesController extends BaseController
     {
         $id = $_REQUEST['id'];
         $buttons = "";
-        $quotes = Quotes::getForListing($id);
+        $quotes = Quotes::getForListing($id, null);
         $msgs = Messages::getForListing($id);
 
         $quote_html = view('comun/nodata');
@@ -45,6 +47,11 @@ class DeliveriesController extends BaseController
             $url = "data/listings/$image->id_listing/$image->file_name";
             $img .= "<div class='col-4' style='line-height: 100px;'><img style='max-width: 100%; max-height: 100%;' src='$url'/></div>";
         }
+
+        $quotes = DeliveriesOU::getQuoteSection();
+        $messages = DeliveriesOU::getMessageSection();
+
+        /*
         if ( count( $quotes ) > 0 )
         {
             $quote_html = "";
@@ -67,7 +74,7 @@ class DeliveriesController extends BaseController
                     'reply' => $reply
                 ));
             }
-        }
+        }*/
 
         $listing = Listings::getListingDetail($id);
         if ( !is_object($listing) )
@@ -78,8 +85,8 @@ class DeliveriesController extends BaseController
         $this->cont->body = view('deliveries/detail', array(
             'data' => $listing,
             'buttons' => $buttons,
-            'quotes' => $quote_html,
-            'messages' => $mesages,
+            'quotes' => $quotes,
+            'messages' => $messages,
             "img" => $img
         ));
 

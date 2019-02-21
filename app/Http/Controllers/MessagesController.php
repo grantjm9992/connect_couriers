@@ -48,9 +48,16 @@ class MessagesController extends BaseController
 
 
     public function defaultAction() {
-        $this->data = $this->makeArray(DB::select('SELECT *, CONCAT(users.str_name, " ", users.str_surname) AS sender, messages.id FROM messages
+        /*$this->data = $this->makeArray(DB::select('SELECT *, CONCAT(users.str_name, " ", users.str_surname) AS sender, messages.id FROM messages
                                     LEFT JOIN users ON messages.id_sender = users.id
-                                    WHERE messages.id_reciever = '.$_SESSION['id']));
+                                    WHERE messages.id_reciever = '.$_SESSION['id']));*/
+
+        $this->data = $this->makeArray(
+            DB::select('SELECT *, CONCAT(users.str_name, " ", users.str_surname) AS sender
+            FROM conversations
+            LEFT JOIN users ON users.id = conversations.id_courier
+            WHERE conversations.id_user = '.$_SESSION["id"])
+        );
         
         $this->campos[] = array(
             'name' => 'sender',
@@ -110,17 +117,9 @@ class MessagesController extends BaseController
         $arr = array();
         foreach ( $rs as $row )
         {
-            if ( strlen($row->str_message) > 80 )
-            {
-                $row->str_message = substr($row->str_message, 0, 77).'...';
-            }
-            if ( $row->fecha_leido == "" )
-            {
-                $row->str_message = '<b>'.$row->str_message.'</b>';
-            }
             $arr[] = array(
                 'input' => '<input type="checkbox" id="'.$row->id.'">',
-                'str_message' => $row->str_message,
+                'str_message' => "",
                 'sender' => $row->sender,
                 'id' => $row->id
             );
