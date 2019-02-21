@@ -4,7 +4,7 @@
         <div class="col-md-12 col-lg-3">
             <div class="card">
                 <div class="card-header">
-                    {{ $translator->get("filter_results") }}
+                    <i class="fas fa-filter"></i> {{ $translator->get("filter_results") }}
                 </div>
                 <div class="card-body">
                     <form action="Deliveries.results" id="search-form">

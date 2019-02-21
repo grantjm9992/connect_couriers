@@ -9,6 +9,7 @@
         $('[message-toggle]').on("click", function() {
             var id = $(this).attr('message-toggle');
             $('[messages-id="'+id+'"]').slideToggle(500);
+            $('[message-toggle="'+id+'"]').toggle();
         })
     });
 </script>

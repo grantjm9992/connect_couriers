@@ -15,6 +15,6 @@ class Conversations extends Model
         return DB::select("SELECT *, CONCAT(users.str_name, ' ', users.str_surname) AS sender
                 FROM messages_sent
                 LEFT JOIN users ON users.id = messages_sent.id_sender
-                WHERE messages_sent.id_conversation = $id ORDER BY messages_sent.id ASC");
+                WHERE messages_sent.id_conversation = $id  ORDER BY date_sent ASC");
     }
 }

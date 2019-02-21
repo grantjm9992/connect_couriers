@@ -28,9 +28,13 @@
                         {{ $data->str_description }}
                     </div>
                 </div>
-                <div class="row" style="height: 200px; text-align: center; margin: 10px 0; width: 100%;border-radius: 4px; border: 1px solid rgba(0,0,0,0.1);">
-                <div class="col-12"><h6>Images</h6></div>
-                    {!! $img !!}
+                <div style="margin-top: 10px;" class="card">
+                    <div class="card-header">
+                        <i class="fas fa-file-image"></i> Images
+                    </div>
+                    <div class="card-body row">
+                        {!! $img !!}
+                    </div>
                 </div>
             </div>
             <div class="col-12 col-md-6" style="margin-bottom: 20px;">

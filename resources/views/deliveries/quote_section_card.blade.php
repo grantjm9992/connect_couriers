@@ -2,16 +2,19 @@
 <div class="col-12">
     <div class="row">
         <div class="col-12" style="">
-            <div class="row" style="line-height: 38px; width: 100%; font-weight: bold;">
-                <div class="col-8 col-sm-6 col-md-4">
+            <div class="row quote-row" style="">
+                <div class="col-8 col-sm-12 col-md-5">
                     {{ $quote->str_user }} ({{ $quote->user_feedback }})            
                 </div>
-                <div class="col-6 col-sm-6 col-md-4">
+                <div class="col-6 col-sm-6 col-md-3">
                     {{ $quote->num_cantidad }} {{ $quote->code_currency }}            
                 </div>
-                <div class="col-6 col-md-4">
+                <div class="col-6 col-sm-6 col-md-4">
                     <div class="text-button" message-toggle="{{ $quote->id_quote }}">
-                        View more
+                        <span class="btn-inverse">View more <i class="fas fa-chevron-down xs-hidden"></i></span>
+                    </div>
+                    <div class="text-button" style="display: none;" message-toggle="{{ $quote->id_quote }}">
+                        <span class="btn-inverse">View less <i class="fas fa-chevron-up xs-hidden"></i></span>
                     </div>
                 </div>
             </div>

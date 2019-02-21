@@ -351,7 +351,7 @@ textarea {
 }
 
 .card-header > i {
-    color: #6D5959;
+    color: #fff;
 }
 
 .listing {
@@ -487,6 +487,7 @@ body {
 
 .listing-summary {
     text-align: center;
+    padding-top: 30px;
 }
 
 .listing-summary > a:hover {
@@ -609,4 +610,46 @@ body {
 .quote-section > div:last-child
 {
     border-bottom: none;
+}
+
+.card
+{
+    border-color: #6D5959;
+}
+.card-header
+{
+    background: #6D5959;
+    color: #fff;
+}
+
+body
+{
+    color: #6D5959;
+}
+
+.btn-inverse
+{
+    padding: 4px 6px;
+    border-radius: 4px;
+}
+
+.btn-inverse:hover
+{
+    background-color: #6D5959;
+    color: #fff;
+}
+
+.quote-row
+{
+    line-height: 38px;
+    width: 100%;
+    font-weight: bold;
+}
+
+@media ( max-width: 578px )
+{
+    .quote-row {
+        line-height: 28px;
+        font-size: .75rem;
+    }
 }

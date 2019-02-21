@@ -79,7 +79,7 @@ class Quotes extends Model
     public static function getMessages( $quote )
     {
         $conversation = Conversations::where('id_quote', $quote->id_quote)->where('bln_is_private', 0)->first();
-        $messages = DB::select("SELECT * FROM messages_sent LEFT JOIN users ON users.id = messages_sent.id_sender WHERE messages_sent.id_conversation = $conversation->id ");
+        $messages = DB::select("SELECT * FROM messages_sent LEFT JOIN users ON users.id = messages_sent.id_sender WHERE messages_sent.id_conversation = $conversation->id ORDER BY date_sent ASC");
         return $messages;
     }
 }
