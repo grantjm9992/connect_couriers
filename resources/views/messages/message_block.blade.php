@@ -1,6 +1,6 @@
 @inject('translator', 'App\Providers\TranslationProvider')
-<div class="col-10 {{ $class }}">
-    <div style="width: 100%; display: inline-flex; justify-content: space-between;">
+<div class="col-10 msg {{ $class }}">
+    <div style="">
         <div>
             {{ $message->str_user }}
         </div>
