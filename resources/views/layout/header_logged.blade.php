@@ -1,7 +1,7 @@
 @inject('translator', 'App\Providers\TranslationProvider')
 <nav class="navbar navbar-expand-lg navbar-dsh fixed-top">
     <a class="navbar-brand" href="{{ url('/') }}" style="font-variant: small-caps;">
-        <img src="archivos/img/logo-blank.png" alt=""> connect couriers
+        <img src="couriers-service-quote/archivos/img/logo/courier-quote-compare.png" alt="compare courier quotes"> connect couriers
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>

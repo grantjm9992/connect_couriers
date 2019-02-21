@@ -3,10 +3,12 @@
 <div class="home-splash">
     <div class="splash-container">
         <div class="title">
-            Some catchy little title to get their attention
+            <div>Connect to couriers</div>
+            <div>Compare quotes</div>
+            <div>Save money</div>
         </div>
         <div class="tag-line">
-            Start saving money now, it only takes 60 seconds!
+            Courier quote comparison made easy
         </div>
         <form action="Listings.new">
             <div class="input-group mb-3">

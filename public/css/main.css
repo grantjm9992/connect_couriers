@@ -142,6 +142,17 @@ a:hover {
     padding: 0 0 20px 0;
 }
 
+.splash-container > .title > div {
+    display: block;
+}
+
+.splash-container > .title > div > span {
+    font-size: 16px;
+    background-color: #fff;
+    color: #6D5959;
+    padding: 6px;
+    border-radius: 50%;
+}
 
 /**
 *Box-style
