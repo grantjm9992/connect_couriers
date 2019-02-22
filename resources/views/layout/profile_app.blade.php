@@ -28,8 +28,8 @@
         <script type="text/javascript" src="{{ asset('https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js')}}"></script>
         {!! $set_menu !!}
         {!! $header !!}
-        <div class="body" style="background: #6D5959;">
-            <div style="max-width: 1200px; margin: 0 auto; background: #fff; min-height: calc(100vh - 285px);">
+        <div class="body" style="background: #e1dddd;">
+            <div style="max-width: 1200px; margin: 0 auto; background: #fff; min-height: calc(100vh - 285px); box-shadow: 0 2px 15px 0 rgb(109,89,89);">
                 {!! $errors !!}
                 {!! $content !!}
             </div>

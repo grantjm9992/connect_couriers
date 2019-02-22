@@ -586,8 +586,8 @@ body {
 .msg-reply
 {
     color: #1b1e21;
-    background-color: #fff3cd;
-    border-color: #ffeeba;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
     border: 1px solid transparent;
     border-radius: .25rem;
     padding: 10px;
@@ -640,7 +640,6 @@ body {
 body
 {
     color: #6D5959;
-    background: rgba(109,89,89,1);
 }
 
 .btn-inverse

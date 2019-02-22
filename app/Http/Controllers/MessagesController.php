@@ -19,8 +19,12 @@ use \App\Listings;
 class MessagesController extends BaseController
 {
 
+    private $url;
+
     public function __construct() {
         parent::__construct();
+
+        $this->url = ( isset ( $_SERVER['HTTP_REFERER'] ) && $_SERVER['HTTP_REFERER'] != "" ) ? $_SERVER['HTTP_REFERER'] : "Messages";
     }
 
     public function sendAction()
@@ -83,6 +87,7 @@ class MessagesController extends BaseController
         $date = new \DateTime();
         $id = $_REQUEST['id'];
         $conversation = Conversations::where("id", $id)->first();
+        $listing = Listings::where('id_listing', $conversation->id_listing)->first();
         $messages = $conversation->getMessages();
 
         $msg = $this::makeConversation($messages);        
@@ -93,7 +98,9 @@ class MessagesController extends BaseController
 
         $this->cont->body = view('messages/message', array(
             'msgs' => $msg,
-            "conversation" => $conversation
+            "conversation" => $conversation,
+            "url" => "Messages",
+            "listing" => $listing
         ));
 
         return $this->RenderView();

@@ -50,44 +50,21 @@ class DeliveriesController extends BaseController
 
         $quotes = DeliveriesOU::getQuoteSection();
         $messages = DeliveriesOU::getMessageSection();
-
-        /*
-        if ( count( $quotes ) > 0 )
-        {
-            $quote_html = "";
-            foreach( $quotes as $quote )
-            {
-                $quote_html .= view('comun/quote_row', array(
-                    'quote' => $quote
-                ));
-            }
-        }
-        if ( count( $msgs ) > 0 )
-        {
-            $mesages = "";
-            foreach( $msgs as $msg )
-            {
-                $reply = "";
-                $reply = Messages::getReply($msg->id);
-                $mesages .= view('deliveries/message', array(
-                    'message' => $msg,
-                    'reply' => $reply
-                ));
-            }
-        }*/
-
         $listing = Listings::getListingDetail($id);
         if ( !is_object($listing) )
         {
             return \Redirect::to('Deliveries.search');
         }
 
+        $url = ( isset( $_SERVER['HTTP_REFERER'] ) && $_SERVER['HTTP_REFERER'] != "" ) ? $_SERVER['HTTP_REFERER'] : "Deliveries.search";
+
         $this->cont->body = view('deliveries/detail', array(
             'data' => $listing,
             'buttons' => $buttons,
             'quotes' => $quotes,
             'messages' => $messages,
-            "img" => $img
+            "img" => $img,
+            "url" => $url
         ));
 
         return $this->RenderView();

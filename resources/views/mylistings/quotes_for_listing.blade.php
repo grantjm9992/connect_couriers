@@ -1,6 +1,6 @@
 @inject('translator', 'App\Providers\TranslationProvider')
 
-<div class="container-fluid" style="max-width: 1100px; margin: 100px auto; padding: 20px auto 0 auto; max-width: 800px;">
+<div class="container-fluid" style="max-width: 1100px; margin: 0 auto; padding: 30px 0; max-width: 800px;">
 
   <a href="{{ $url }}" class="btn btn-dark"><i class="fas fa-arrow-left"></i> Back</a>
   <div class="alert alert-dark" style="width: 100%; margin: 20px 0;">

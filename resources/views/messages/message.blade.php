@@ -2,10 +2,15 @@
 <div class="container-fluid">
     <div class="row">
         <div style="margin: 50px auto;" class="col-10">
-            @if ( (int)$conversation->bln_is_private === 0 )
-            <div class="alert alert-warning width100"><i class="fas fa-exclamation-circle"></i>  All messages in this chat are public and will be displayed on the listing page</div>
-            @endif
-            <h5>Messages regarding XXXXX</h5>
+            <div class="width100" style="display: inline-flex; justify-content: space-between; height: 66px;">
+                <div>
+                    <a href="{{ $url }}" class="btn btn-cc-outline"><i class="fas fa-arrow-left"></i> Back to inbox</a>
+                </div>
+                @if ( (int)$conversation->bln_is_private === 0 )
+                    <div class="alert alert-warning "><i class="fas fa-exclamation-circle"></i>  All messages in this chat are public and will be displayed on the listing page</div>
+                @endif
+            </div>
+            <h5>Messages for <a href="Deliveries.detail?id={{  $listing->id_listing }}&title={{ $listing->str_title }}">{{ $listing->str_title }}</a></h5>
             <div class="row" id="msgs">
                 {!! $msgs !!}
             </div>

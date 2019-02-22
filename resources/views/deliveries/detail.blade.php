@@ -3,7 +3,7 @@
     <div class="listing">
         <div class="listing-nav">
             <div>
-                <div class="btn btn-cc-outline" onclick="history.back()"><i class="fas fa-arrow-left"></i> Return to search</div>
+                <a class="btn btn-cc-outline" href="{{ $url }}"><i class="fas fa-arrow-left"></i> Return </a>
             </div>
             <div>
                 @if ( isset( $_SESSION['id_user_type'] ) and $_SESSION['id_user_type'] == "2" )
@@ -122,6 +122,7 @@
                         <i class="fas fa-hand-holding-usd"></i> Quotes
                     </div>
                     <div class="card-body">
+                        <div class="alert alert-info">Current lowest quote: {{ $data->lowest_quote }} EUR</div>
                         {!! $quotes !!}
                     </div>
                 </div>

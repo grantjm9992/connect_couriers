@@ -414,7 +414,24 @@ class Listings extends Model
                 LEFT JOIN time_scales ON time_scales.id_time_scale = quotes.id_time_scale
                 WHERE id_status = 1 AND id_listing = '.$this->id_listing);
 
-        return $quotes;
+        return $this->publicArray($quotes);
+    }
+
+    public function publicArray( $ds )
+    {
+        foreach ( $ds as $row )
+        {
+            $current = (int)$row->amount_current;
+            if ( $current <= 50 )
+            {
+                $row->num_cantidad = $current + 5;
+            }
+            else
+            {
+                $row->num_cantidad = floor( $current * 1.11 );
+            }
+        }
+        return $ds;
     }
 
     public function getConversations()

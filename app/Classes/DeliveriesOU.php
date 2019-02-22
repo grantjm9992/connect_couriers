@@ -33,7 +33,7 @@ class DeliveriesOU
         $quotes = $listing->getQuotes();
         foreach ( $quotes as $quote )
         {
-            $messages = DeliveriesOU::makeConversation( Quotes::getMessages($quote), $listing );
+            $messages = ( Quotes::getMessages($quote) !== null ) ? DeliveriesOU::makeConversation( Quotes::getMessages($quote), $listing ) : "";
             $response .= view('deliveries/quote_section_card', array(
                 "quote" => $quote,
                 "messages" => $messages
@@ -55,8 +55,9 @@ class DeliveriesOU
         foreach ( $conversations as $convo )
         {
             $messages = $convo->getMessages();
+            $msgs = ( count( $messages ) > 0 ) ? DeliveriesOU::makeConversation( $messages, $listing ) : "" ;
             $msg .= view('deliveries/message_section_card', array(
-                "messages" => DeliveriesOU::makeConversation( $messages, $listing )
+                "messages" => $msgs
             ));
         }
         $response = view('deliveries/message_section', array(

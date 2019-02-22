@@ -18,7 +18,13 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1">€</span>
                 </div>
-                <input type="number" step="0.01" name="num_cantidad" class="form-control" placeholder="Quote amount" aria-label="Quote amount" aria-describedby="basic-addon1">
+                <input type="number" step="1" min="10" name="amount_start" class="form-control" placeholder="Quote amount" aria-label="Quote amount" aria-describedby="basic-addon1">
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon2">€</span>
+                </div>
+                <input type="number" step="1" min="10" name="amount_min" class="form-control" placeholder="Minimum quote" aria-label="Minimum quote" aria-describedby="basic-addon2">
             </div>
         </div>
         <div class="form-group">
