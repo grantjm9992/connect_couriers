@@ -57,7 +57,7 @@ class LoginController extends BaseController
         }
         else
         {
-            $user = User::where('login', $_REQUEST['login'])->first();
+            $user = User::where('str_user', $_REQUEST['login'])->first();
             if ( is_object($user) ) {
                 $message = $this->translator->get('wrong_password');
             } else {
