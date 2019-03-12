@@ -479,7 +479,7 @@ class Listings extends Model
                             ->where('id_listing', $quote->id_listing)->first();
             if ( is_object( $winning_quote ) )
             {
-                $listing->lowest_quote = $winning_quote->amount_current;
+                $quote->lowest_quote = $winning_quote->amount_current;
             }
         }
         return $quotes;
