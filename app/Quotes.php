@@ -34,12 +34,18 @@ class Quotes extends Model
     public static function addQuote()
     {
         $date = new \DateTime();
-        $quote = new Quotes;
+        $id_listing = $_REQUEST['id_listing'];
+        $id_user = $_SESSION['id'];
+        $oldQuote = Quotes::where('id_listing', $id_listing)->where('id_user', $id_user)->first();
+        $quote = ( is_object( $oldQuote ) ) ? $oldQuote : new Quotes;
         $quote->amount_start = $_REQUEST['amount_start'];
         $quote->amount_min = $_REQUEST['amount_min'];
         $quote->id_vehicle = $_REQUEST['id_vehicle'];
         $quote->id_time_scale = $_REQUEST['id_time_scale'];
-        $quote->str_description = $_REQUEST['str_description'];
+        if ( $_REQUEST['str_description'] != "" )
+        {
+            $quote->str_description = $_REQUEST['str_description'];
+        }
         $quote->id_listing = $_REQUEST['id_listing'];
         $quote->id_user = $_SESSION['id'];
         $quote->code_currency = "EUR";
@@ -65,6 +71,24 @@ class Quotes extends Model
         
         $new_low = (int)$new_quote->amount_min;
         
+        if ( !is_object( $quote ) )
+        {
+            $listing->lowest_quote_courier = $new_low;
+            if ( $new_quote->amount_start <= 50 )
+            {
+                $new_low = $new_quote->amount_start + 5;
+            }
+            else
+            {
+                $new_low = floor( $new_quote->amount_start * 1.11 );
+            }
+            $listing->lowest_quote = $new_low;
+            $listing->id_winning_bidder = $new_quote->id_user;
+            $listing->save();
+            $new_quote->amount_current = $new_quote->amount_start;
+            $new_quote->save();
+            return true;
+        }
         if ( (int)$quote->amount_min < $new_low )
         {
             $new_quote->amount_current = $new_quote->amount_min;
@@ -72,7 +96,7 @@ class Quotes extends Model
             $new_low--;
             $quote->amount_current = $new_low;
             $quote->save();
-            
+            $listing->lowest_quote_courier = $new_low;
             if ( $new_low <= 50 )
             {
                 $new_low = $new_low + 5;
@@ -81,6 +105,7 @@ class Quotes extends Model
             {
                 $new_low = floor( $new_low * 1.11 );
             }
+            $listing->id_winning_bidder = $quote->id_user;
             $listing->lowest_quote = $new_low;
             $listing->save();
         }
@@ -88,10 +113,11 @@ class Quotes extends Model
         {
             $quote->amount_current = $quote->amount_min;
             $quote->save();
-            $new_quote->amount_current = (int)$quote->amount_min - 1;
+            $new_quote->amount_current = ( (int)$new_quote->amount_start < (int)$quote->amount_min ) ? (int)$new_quote->amount_start : (int)$quote->amount_min - 1;
             $new_quote->save();
             
-            $new_low = (int)$quote->amount_min - 1;
+            $new_low = ( (int)$new_quote->amount_start < (int)$quote->amount_min ) ? (int)$new_quote->amount_start : (int)$quote->amount_min - 1;
+            $listing->lowest_quote_courier = $new_low;
             if ( $new_low <= 50 )
             {
                 $new_low = $new_low + 5;
@@ -100,6 +126,7 @@ class Quotes extends Model
             {
                 $new_low = floor( $new_low * 1.11 );
             }
+            $listing->id_winning_bidder = $new_quote->id_user;
             $listing->lowest_quote = $new_low;
             $listing->save();
         }
@@ -109,7 +136,8 @@ class Quotes extends Model
             $quote->save();
             $new_quote->amount_current = $new_low;
             $new_quote->save();
-            
+
+            $listing->lowest_quote_courier = $new_low;
             if ( $new_low <= 50 )
             {
                 $new_low = $new_low + 5;
@@ -118,6 +146,7 @@ class Quotes extends Model
             {
                 $new_low = floor( $new_low * 1.11 );
             }
+            $listing->id_winning_bidder = $new_quote->id_user.", ".$quote->id_user;
             $listing->lowest_quote = $new_low;
             $listing->save();
         }
@@ -133,6 +162,66 @@ class Quotes extends Model
         $surcharge = $ourPrice - $userPrice;
 
         return array($ourPrice, $userPrice, $surcharge);
+    }
+
+    public static function getMySummary()
+    {
+        $active = Quotes::myActiveQuotes();
+        $outbid = Listings::myOutbidQuotes();
+        $completed = Quotes::myCompletedQuotes();
+        $accepted = Quotes::myAcceptedQuotes();
+        $unsuccessful = Quotes::myUnsuccessfulQuotes();
+
+        return array(
+            count( $active ),
+            count( $outbid ),
+            count( $accepted ),
+            count( $unsuccessful ),
+            count( $completed )
+        );
+    }
+
+    public static function myCompletedQuotes()
+    {
+        return Quotes::where('id_user', $_SESSION['id'])
+                    ->where('id_status', 4)
+                    ->get();
+    }
+
+    public static function myAcceptedQuotes()
+    {
+        return Quotes::where('id_user', $_SESSION['id'])
+                    ->where('id_status', 2)
+                    ->get();
+    }
+
+    public static function myUnsuccessfulQuotes()
+    {
+        return Quotes::where('id_user', $_SESSION['id'])
+                    ->where('id_status', 3)
+                    ->get();
+    }
+
+    public static function myActiveQuotes()
+    {
+        $id = $_SESSION['id'];
+
+        $quotes = DB::select(
+            "SELECT * FROM listings LEFT JOIN quotes ON listings.id_listing = quotes.id_listing
+            WHERE quotes.id_user = $id
+            AND listings.id_status = 1
+            AND listings.expires_on >= NOW() "
+        );
+        foreach ( $quotes as $quote )
+        {
+            $winning_quote = Quotes::where('id_user', $quote->id_winning_bidder)
+                            ->where('id_listing', $quote->id_listing)->first();
+            if ( is_object( $winning_quote ) )
+            {
+                $quote->lowest_quote = $winning_quote->amount_current;
+            }
+        }
+        return $quotes;
     }
 
     public static function makeLimit( $page )
@@ -161,4 +250,5 @@ class Quotes extends Model
         }
         return $messages;
     }
+
 }

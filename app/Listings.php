@@ -208,6 +208,18 @@ class Listings extends Model
                                     LEFT JOIN users ON listings.id_user = users.id
                                     WHERE id_listing = '.$id);
         
+        foreach ( $listing_array as $listing )
+        {
+            if ( isset ( $_SESSION['id_user_type'] ) && (int)$_SESSION['id_user_type'] === 2 )
+            {
+                $quote = Quotes::where('id_user', $listing->id_winning_bidder)
+                                ->where('id_listing', $id)->first();
+                if ( is_object( $quote ) )
+                {
+                    $listing->lowest_quote = $quote->amount_current;
+                }
+            }
+        }
         return $listing_array[0];
     }
 
@@ -421,15 +433,24 @@ class Listings extends Model
     {
         foreach ( $ds as $row )
         {
-            $current = (int)$row->amount_current;
-            if ( $current <= 50 )
+            
+            if ( !isset ( $_SESSION['id_user_type'] ) || (int)$_SESSION['id_user_type'] !== 2 )
             {
-                $row->num_cantidad = $current + 5;
+                $current = (int)$row->amount_current;
+                if ( $current <= 50 )
+                {
+                    $row->num_cantidad = $current + 5;
+                }
+                else
+                {
+                    $row->num_cantidad = floor( $current * 1.11 );
+                }
             }
             else
             {
-                $row->num_cantidad = floor( $current * 1.11 );
+                $row->num_cantidad = (int)$row->amount_current;
             }
+            
         }
         return $ds;
     }
@@ -444,5 +465,23 @@ class Listings extends Model
         }
 
         return $arr;
+    }
+    
+    public static function myOutbidQuotes()
+    {
+        $id = $_SESSION['id'];
+        $quotes = DB::select("SELECT * FROM quotes LEFT JOIN listings ON listings.id_listing = quotes.id_listing
+        WHERE quotes.id_user = $id AND listings.id_winning_bidder != $id AND listings.expires_on > NOW() ORDER BY listings.expires_on ASC");
+
+        foreach ( $quotes as $quote )
+        {
+            $winning_quote = Quotes::where('id_user', $quote->id_winning_bidder)
+                            ->where('id_listing', $quote->id_listing)->first();
+            if ( is_object( $winning_quote ) )
+            {
+                $listing->lowest_quote = $winning_quote->amount_current;
+            }
+        }
+        return $quotes;
     }
 }

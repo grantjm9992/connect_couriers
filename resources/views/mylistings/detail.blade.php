@@ -3,6 +3,7 @@
     <h4 style="border-bottom: 1px solid; padding-bottom: 15px;">
         <i class="fas fa-pencil-alt"></i>  Edit Listing
         <div class="buttons">
+            <a href="{{ $returnURL }}" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Back</a>
             <div class="btn btn-primary" onclick="submitForm()"><i class="fas fa-save"></i> Save</div>
         </div>
     </h4>
@@ -21,6 +22,11 @@
                     <option value="{{ $category->id_category }}">{{ $category->str_category }}</option>
                 @endforeach
             </select>
+            <script>
+                $(document).ready( function() {
+                    $('#id_category').val('{{ $listing->id_category }}');
+                })
+            </script>
         </div>
         <div class="form-group col-12">
             <label for="str_description">Description</label>
@@ -45,25 +51,37 @@
             <div class="row">
                 <div class="col-12 col-sm-4">
                     <div class="input-group mb-3">
-                        <input type="number" class="form-control" name="height" placeholder="height" value="{{ $listing->height }}" aria-describedby="height">
+                        <input type="number" class="form-control" name="height" placeholder="height" value="{{ $listing->height }}" aria-describedby="length_unit">
                         <div class="input-group-append">
-                            <span class="input-group-text" id="height">cm</span>
+                            <select class="input-group-text" name="length_unit" id="length_unit">
+                                <option value="cm">cm</option>
+                                <option value="m">m</option>
+                                <option value="ft">ft</option>
+                            </select>
                         </div>
                     </div>
                 </div>
                 <div class="col-12 col-sm-4">
                     <div class="input-group mb-3">
-                        <input type="number" class="form-control" name="width" placeholder="width" value="{{ $listing->width }}" aria-describedby="width">
+                        <input type="number" class="form-control" name="width" placeholder="width" value="{{ $listing->width }}" aria-describedby="length_unit">
                         <div class="input-group-append">
-                            <span class="input-group-text" id="width">cm</span>
+                            <select class="input-group-text" name="length_unit" id="length_unit">
+                                <option value="cm">cm</option>
+                                <option value="m">m</option>
+                                <option value="ft">ft</option>
+                            </select>
                         </div>
                     </div>
                 </div>
                 <div class="col-12 col-sm-4">
                     <div class="input-group mb-3">
-                        <input type="number" class="form-control" name="length" placeholder="length" value="{{ $listing->length }}" aria-describedby="length">
+                        <input type="number" class="form-control" name="length" placeholder="length" value="{{ $listing->length }}" aria-describedby="length_unit">
                         <div class="input-group-append">
-                            <span class="input-group-text" id="length">cm</span>
+                            <select class="input-group-text" name="length_unit" id="length_unit">
+                                <option value="cm">cm</option>
+                                <option value="m">m</option>
+                                <option value="ft">ft</option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -72,9 +90,12 @@
         <div class="form-group col-12 col-sm-4">
             <label for="weight">Weight</label>
             <div class="input-group mb-3">
-                <input type="number" class="form-control" name="weight" value="{{ $listing->weight }}" aria-describedby="weight">
+                <input type="number" class="form-control" name="weight" value="{{ $listing->weight }}" aria-describedby="weight_unit">
                 <div class="input-group-append">
-                    <span class="input-group-text" id="weight">kg</span>
+                    <select class="input-group-text" name="weight_unit" id="weight_unit">
+                        <option value="kg">kg</option>
+                        <option value="lb">lb</option>
+                    </select>
                 </div>
             </div>
         </div>
@@ -98,6 +119,11 @@
         
         $('#submit').click();
     }
+    $(document).ready( function() {
+    $('[name="length_unit"]').on('change', function() {
+        $('[name="length_unit"]').val($(this).val());
+    })
+    })
 </script>
 <script>
 

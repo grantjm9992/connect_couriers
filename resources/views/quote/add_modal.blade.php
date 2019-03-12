@@ -49,8 +49,9 @@
         </div>
       </div>
       <div class="modal-footer">
+        <button hidden type="submit" id="submit"></button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Send</button>
+        <div class="btn btn-primary" onclick="submitQuote()">Send</div>
       </div>
       </form>
     </div>
@@ -60,4 +61,19 @@
     $(document).ready( function() {
         $('#quoteModal').modal('show');
     });
+
+    function submitQuote()
+    {
+        var min = parseInt( $("[name='amount_min']").val() );
+        var start = parseInt( $('[name="amount_start"]').val() );
+
+        if ( min > start )
+        {
+            alert( "Min has to be less than or equal to the start value ");
+        }
+        else
+        {
+            $('#submit').click();
+        }
+    }
 </script>

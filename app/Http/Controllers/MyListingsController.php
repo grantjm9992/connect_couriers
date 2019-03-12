@@ -39,12 +39,14 @@ class MyListingsController extends BaseController
 
     public function detailAction()
     {
+        $url = ( isset ( $_SERVER['HTTP_REFERER'] ) && $_SERVER['HTTP_REFERER'] != "" ) ? $_SERVER['HTTP_REFERER'] : "MyAccount.myActiveListings";
         $listing = Listings::where('id_listing', $this->id)->first();
         $categories = Categories::get();
 
         $this->cont->body = view('mylistings/detail', array(
             'listing' => $listing,
-            "categories" => $categories
+            "categories" => $categories,
+            "returnURL" => $url
         ));
 
         return $this->RenderView();

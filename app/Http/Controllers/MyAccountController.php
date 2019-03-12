@@ -12,6 +12,7 @@ use \App\Providers\TranslationProvider;
 use Illuminate\Http\Request;
 use \App\User;
 use \App\LogSesiones;
+use \App\Quotes;
 use \App\Listings;
 
 class MyAccountController extends BaseController
@@ -24,7 +25,14 @@ class MyAccountController extends BaseController
     public function defaultAction() {
         if ( isset( $_SESSION['id_user_type'] ) && $_SESSION['id_user_type'] == "2" )
         {
-            $this->cont->body = view('myaccount/courier_index');
+            list( $active, $outbid, $accepted, $unsuccessful, $completed ) = Quotes::getMySummary();
+            $this->cont->body = view('myaccount/courier_index', array(
+                "outbid" => $outbid,
+                "active" => $active,
+                "accepted" => $accepted,
+                "unsuccessful" => $unsuccessful,
+                "completed" => $completed
+            ));
         }
         else
         {

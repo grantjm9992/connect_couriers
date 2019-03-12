@@ -672,3 +672,13 @@ body
         display: block;
     }
 }
+
+.dark-gray
+{
+    color: #454545 !important;
+}
+
+.blue
+{
+    color: blue !important;
+}

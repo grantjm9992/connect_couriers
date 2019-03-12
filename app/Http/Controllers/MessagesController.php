@@ -125,7 +125,7 @@ class MessagesController extends BaseController
     {
         $id = $_REQUEST['id'];
         $url = $_SERVER['HTTP_REFERER'];
-
+        
         $listing = Listings::getListingWithUser($id);
         return view('messages/add_modal', array(
             'listing' => $listing,
