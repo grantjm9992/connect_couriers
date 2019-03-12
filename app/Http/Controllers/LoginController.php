@@ -47,7 +47,7 @@ class LoginController extends BaseController
     public function checkLoginAction() {
 
         $user = User::where('str_user', $_REQUEST['login'])
-                    ->where('str_password', $_REQUEST['password'])
+                    ->where('str_password', md5( $_REQUEST['password']) )
                     ->first();
         if (is_object( $user )) {
             $_SESSION['user'] = rtrim($user->str_name).' '.rtrim($user->str_surname);
