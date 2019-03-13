@@ -14,6 +14,7 @@ use \App\User;
 use \App\Messages;
 use \App\Conversations;
 use \App\MessagesSent;
+use \App\Notifications;
 use \App\Listings;
 
 class MessagesController extends BaseController
@@ -27,12 +28,42 @@ class MessagesController extends BaseController
         $this->url = ( isset ( $_SERVER['HTTP_REFERER'] ) && $_SERVER['HTTP_REFERER'] != "" ) ? $_SERVER['HTTP_REFERER'] : "Messages";
     }
 
+    
+    public function askQuestionAction()
+    {
+        $conversation = new Conversations;
+        $conversation->id_courier = $_SESSION['id'];
+        $conversation->id_user = $_REQUEST['id_receiver'];
+        $conversation->id_listing = $_REQUEST['id_listing'];
+        $conversation->save();
+
+        $date = new \DateTime();
+        $message = new MessagesSent;
+        $message->id_sender = $_SESSION['id'];
+        $message->id_conversation = $conversation->id;
+        $message->id_receiver = $_REQUEST['id_receiver'];
+        $this->checkMessage();
+        $message->str_message = nl2br($_REQUEST['str_message']);
+        $message->date_sent = $date->format('Y-m-d H:i:s');
+        $message->save();
+        
+        $listing = Listings::where('id_listing', $_REQUEST['id_listing'])->first();
+        $notify = new Notifications;
+        $notify->id_user = $message->id_receiver;
+        $notify->bln_notified = 0;
+        $notify->str_message = "Someone has messaged you about your listing: $listing->str_title";
+        $notify->save();
+
+        return \Redirect::to($_REQUEST['url']);
+    }
+
     public function sendAction()
     {
         $date = new \DateTime();
         $message = new MessagesSent;
         $message->id_sender = $_SESSION['id'];
         $message->id_conversation = $_REQUEST['id'];
+        $message->id_receiver = $_REQUEST['id_receiver'];
         $this->checkMessage();
         $message->str_message = nl2br($_REQUEST['str_message']);
         $message->date_sent = $date->format('Y-m-d H:i:s');
@@ -43,35 +74,50 @@ class MessagesController extends BaseController
         $conversation = Conversations::where("id", $id)->first();
         $messages = $conversation->getMessages();
 
-        $response = $this::makeConversation($messages);  
+        $response = $this::makeConversation($messages);
+
+        
+        $notify = new Notifications;
+        $notify->id_user = $message->id_receiver;
+        $notify->bln_notified = 0;
+        $notify->str_message = "You have a new message";
+        $notify->save();
         
         return $response;
     }
 
 
     public function defaultAction() {
-        $this->data = $this->makeArray(
-            DB::select('SELECT *, CONCAT(users.str_name, " ", users.str_surname) AS sender
+        if ( (int)$_SESSION['id_user_type'] === 2 )
+        {
+            $sql = 'SELECT *, CONCAT(users.str_name, " ", users.str_surname) AS sender
             , conversations.id
             FROM conversations
             LEFT JOIN users ON users.id = conversations.id_courier
             LEFT JOIN listings ON listings.id_listing = conversations.id_listing
-            WHERE conversations.id_user = '.$_SESSION["id"])
+            WHERE conversations.id_courier = '.$_SESSION["id"];
+        }
+        else
+        {
+            $sql = 'SELECT *, CONCAT(users.str_name, " ", users.str_surname) AS sender
+            , conversations.id
+            FROM conversations
+            LEFT JOIN users ON users.id = conversations.id_courier
+            LEFT JOIN listings ON listings.id_listing = conversations.id_listing
+            WHERE conversations.id_user = '.$_SESSION["id"];
+        }
+        $this->data = $this->makeArray(
+            DB::select($sql)
         );
 
         $this->campos[] = array(
             'name' => 'str_user',
             'title' => "Sender",
-            'width' => "40"
+            'width' => "60"
         );
         $this->campos[] = array(
             'name' => 'str_title',
             'title' => "Listing"
-        );
-        $this->campos[] = array(
-            'name' => 'input',
-            'title' => '',
-            'width' => '4px'
         );
         $this->detailURL = "Messages.message?id=";
         $table = $this->createTable();

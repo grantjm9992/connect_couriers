@@ -41,6 +41,8 @@ class Listings extends Model
         $this->width = $_REQUEST['width'];
         $this->length = $_REQUEST['length'];
         $this->weight = $_REQUEST['weight'];
+        $this->weight_unit = $_REQUEST['weight_unit'];
+        $this->length_unit = $_REQUEST['length_unit'];
         $this->collection_postcode = $_REQUEST['collection_postcode'];
         $this->delivery_postcode = $_REQUEST['delivery_postcode'];
         if ( $_REQUEST['collection_postcode'] != $_REQUEST['original_cpo'] || $_REQUEST['delivery_postcode'] != $_REQUEST['original_dpo'] )

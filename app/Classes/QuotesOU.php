@@ -24,4 +24,14 @@ class QuotesOU
 
         return view('quote/process');
     }
+
+    public static function withdraw()
+    {
+        $id_quote = base64_decode( $_REQUEST['id_quote'] );
+        $quote = Quotes::where('id_quote', $id_quote)->first();
+        $quote->id_status = 5;
+        $quote->save();
+
+        return \Redirect::to( url( 'MyQuotes.myUnsuccessfulQuotes' ) );
+    }
 }

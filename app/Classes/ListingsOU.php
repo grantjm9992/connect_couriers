@@ -35,12 +35,12 @@ class ListingsOU
         }
     }
 
-    public static function paginatedQuotes($id)
+    public static function paginatedQuotes($id, $status = 1)
     {
         $listing = Listings::where('id_listing', $id)->first();
         $html = "";
         $page = ( isset( $_REQUEST['page'] ) && $_REQUEST['page'] != "" ) ? $_REQUEST['page'] : 1;
-        $quotes = Quotes::getForListing($id, $page);
+        $quotes = Quotes::getForListing($id, $page, $status);
         $disabledUp = ( count( $quotes ) < 20 ) ? "disabled" : "";
         $disabledDown = ( (int)$page === 1 ) ? "disabled" : "";
         foreach ( $quotes as $quote )

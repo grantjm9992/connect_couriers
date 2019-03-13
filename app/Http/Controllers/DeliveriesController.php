@@ -15,6 +15,7 @@ use \App\LogSesiones;
 use \App\Listings;
 use \App\Quotes;
 use \App\Messages;
+use \App\Watching;
 
 use \App\Classes\DeliveriesOU;
 
@@ -51,6 +52,16 @@ class DeliveriesController extends BaseController
         $quotes = DeliveriesOU::getQuoteSection();
         $messages = DeliveriesOU::getMessageSection();
         $listing = Listings::getListingDetail($id);
+        $listing->is_favourite = 0;
+        if ( isset ( $_SESSION['id_user_type'] ) && (int)$_SESSION['id_user_type'] === 2 )
+        {
+            $fav = Watching::where('id_user', $_SESSION['id'])
+                            ->where('id_listing', $id)->first();
+            if ( is_object( $fav ) )
+            {
+                $listing->is_favourite = 1;
+            }
+        }
         if ( !is_object($listing) )
         {
             return \Redirect::to('Deliveries.search');

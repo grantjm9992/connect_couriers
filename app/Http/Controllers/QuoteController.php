@@ -115,4 +115,16 @@ class QuoteController extends BaseController
         }
     }
 
+    public function restoreQuoteAction()
+    {
+        $id_quote = base64_decode( $_REQUEST['quote'] );
+        $quote = Quotes::where('id_quote', $id_quote)->first();
+        $quote->id_status = 1;
+        $quote->save();
+
+        $url = isset( $_SERVER['HTTP_REFERER'] ) ? $_SERVER['HTTP_REFERER'] : url("MyAccount");
+
+        return \Redirect::to($url);
+    }
+
 }

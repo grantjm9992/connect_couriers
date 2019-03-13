@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use \App\User;
 use \App\LogSesiones;
 use \App\Quotes;
+use \App\Watching;
 use \App\Listings;
 
 class MyAccountController extends BaseController
@@ -44,6 +45,31 @@ class MyAccountController extends BaseController
             ));
         }
         return $this->RenderView();
+    }
+
+    public function toggleFavsAction()
+    {
+        $id_listing = $_REQUEST['id'];
+        $watching = Watching::where('id_user', $_SESSION['id'])
+                            ->where('id_listing', $id_listing)
+                            ->first();
+        
+        if ( is_object( $watching ) )
+        {
+            $watching->delete();
+        }
+        else
+        {
+            $new = new Watching;
+            $new->id_user = $_SESSION['id'];
+            $new->id_listing = $id_listing;
+            $new->save();
+        }
+        return json_encode(
+            array(
+                "success" => 1
+            )
+        );
     }
 
     protected function getListingCards()

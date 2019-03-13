@@ -14,8 +14,17 @@
                             <div class="container-fluid">
                                 <div class="row xs-center">
                                     @if ( (int)$row->id_winning_bidder === (int)$_SESSION['id'] )
-                                        <div class="col-12 alert alert-info">
-                                            You are the current lowest bidder on this listing
+                                        <div class="col-12 alert alert-success" style="margin-bottom: 0;">
+                                            You are the current lowest bidder on this listing <i class="fas fa-smile-beam"></i>
+                                            <div class="buttons">
+                                                <a href="MyQuotes.withdraw?id_quote={{ base64_encode( $row->id_quote ) }}" class="btn btn-outline-danger">
+                                                    Withdraw quote
+                                                </a>
+                                            </div>
+                                        </div>
+                                    @else
+                                        <div class="col-12 alert alert-danger" style="margin-bottom: 0;">
+                                            You have been outbid! <i class="fas fa-sad-tear"></i>
                                         </div>
                                     @endif
                                     <div class="col-12 mylisting">

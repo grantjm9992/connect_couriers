@@ -31,18 +31,25 @@ class DeliveriesOU
         $id = $_REQUEST['id'];
         $listing = Listings::where('id_listing', $id)->first();
         $quotes = $listing->getQuotes();
-        foreach ( $quotes as $quote )
+        if ( count( $quotes ) > 0 )
         {
-            $messages = ( Quotes::getMessages($quote) !== null ) ? DeliveriesOU::makeConversation( Quotes::getMessages($quote), $listing ) : "";
-            $response .= view('deliveries/quote_section_card', array(
-                "quote" => $quote,
-                "messages" => $messages
+            foreach ( $quotes as $quote )
+            {
+                $messages = ( Quotes::getMessages($quote) !== null ) ? DeliveriesOU::makeConversation( Quotes::getMessages($quote), $listing ) : "";
+                $response .= view('deliveries/quote_section_card', array(
+                    "quote" => $quote,
+                    "messages" => $messages
+                ));
+            }
+    
+            return view('deliveries/quote_section', array(
+                "quotes" => $response
             ));
         }
-
-        return view('deliveries/quote_section', array(
-            "quotes" => $response
-        ));
+        else
+        {
+            return "";
+        }
     }
 
     public static function getMessageSection( )
@@ -63,6 +70,10 @@ class DeliveriesOU
         $response = view('deliveries/message_section', array(
             "messages" => $msg
         ));
+        if ( count( $conversations ) === 0 )
+        {
+            $response = "";
+        }
         return $response;
     }
 

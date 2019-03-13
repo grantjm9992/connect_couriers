@@ -29,7 +29,7 @@
                             I'm flexible
                         </label>
                     </div>
-                    <input type="text" class="form-control" name="delivery_date" id="delivery_date" placeholder="Delivery Date">
+                    <input type="text" class="form-control" name="delivery_date" autocomplete="off" id="delivery_date" placeholder="Delivery Date">
                 </div>
                 <div class="form-group">
                     <button class="btn btn-cc" type="submit">Send</button>
@@ -41,11 +41,7 @@
 <script>
     $(document).ready(function() {
         $('#id_category').val('{{ $tipo }}');
-        $('#delivery_date').ejDatePicker({
-            width: "100%",
-            minDate: new Date(),
-            height: "38px"
-        });
+        $('#delivery_date').datepicker();
         $('#bln_flexible').on('change', function() {
             if(this.checked ) {
                 $('[name="bln_flexible"]').val(1);

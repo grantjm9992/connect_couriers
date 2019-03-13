@@ -34,7 +34,7 @@
         </div>
         <div class="form-group col-12">
             <label for="">Images</label>
-            <div id="container" class="draganddrop" style="height: 134px; width: 100%; border: 3px dashed gray; line-height: 134px; text-align: center;">
+            <div id="container" class="draganddrop" style="padding: 20px 0; min-height: 134px; width: 100%; border: 3px dashed gray; line-height: 134px; text-align: center;">
                 <div class="inner-holder">
                     <i class="fas fa-cloud-upload-alt"></i>
                     Drag and drop images here or 
@@ -51,7 +51,7 @@
             <div class="row">
                 <div class="col-12 col-sm-4">
                     <div class="input-group mb-3">
-                        <input type="number" class="form-control" name="height" placeholder="height" value="{{ $listing->height }}" aria-describedby="length_unit">
+                        <input type="number" class="form-control" name="height" min="0" placeholder="height" value="{{ $listing->height }}" aria-describedby="length_unit">
                         <div class="input-group-append">
                             <select class="input-group-text" name="length_unit" id="length_unit">
                                 <option value="cm">cm</option>
@@ -63,7 +63,7 @@
                 </div>
                 <div class="col-12 col-sm-4">
                     <div class="input-group mb-3">
-                        <input type="number" class="form-control" name="width" placeholder="width" value="{{ $listing->width }}" aria-describedby="length_unit">
+                        <input type="number" class="form-control" name="width" min="0"  placeholder="width" value="{{ $listing->width }}" aria-describedby="length_unit">
                         <div class="input-group-append">
                             <select class="input-group-text" name="length_unit" id="length_unit">
                                 <option value="cm">cm</option>
@@ -75,7 +75,7 @@
                 </div>
                 <div class="col-12 col-sm-4">
                     <div class="input-group mb-3">
-                        <input type="number" class="form-control" name="length" placeholder="length" value="{{ $listing->length }}" aria-describedby="length_unit">
+                        <input type="number" class="form-control" name="length" min="0"  placeholder="length" value="{{ $listing->length }}" aria-describedby="length_unit">
                         <div class="input-group-append">
                             <select class="input-group-text" name="length_unit" id="length_unit">
                                 <option value="cm">cm</option>
@@ -90,7 +90,7 @@
         <div class="form-group col-12 col-sm-4">
             <label for="weight">Weight</label>
             <div class="input-group mb-3">
-                <input type="number" class="form-control" name="weight" value="{{ $listing->weight }}" aria-describedby="weight_unit">
+                <input type="number" class="form-control" name="weight" min="0"  value="{{ $listing->weight }}" aria-describedby="weight_unit">
                 <div class="input-group-append">
                     <select class="input-group-text" name="weight_unit" id="weight_unit">
                         <option value="kg">kg</option>
@@ -120,9 +120,11 @@
         $('#submit').click();
     }
     $(document).ready( function() {
-    $('[name="length_unit"]').on('change', function() {
-        $('[name="length_unit"]').val($(this).val());
-    })
+        $('[name="length_unit"]').on('change', function() {
+            $('[name="length_unit"]').val($(this).val());
+        })
+        $('[name="length_unit"]').val('{{ $listing->length_unit }}');
+        $('[name="weight_unit"]').val('{{ $listing->weight_unit }}');
     })
 </script>
 <script>

@@ -93,3 +93,32 @@ function login()
         }
     });
 }
+
+$(document).ready( function() {
+    checkNotifications();
+    setInterval( function() {
+        checkNotifications() }, 5000 );
+})
+
+function checkNotifications()
+{
+    $.ajax({
+        type: "POST",
+        url: "Notifications.checkNotifications",
+        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+        success: function(data)
+        {
+            var s = jQuery.parseJSON( data );
+            if ( s.count > 0 )
+            {
+                for ( var i = 0; i < s.messages.length; i++ )
+                {
+                    $.notify( s.messages[i], {
+                        position: "bottom-left",
+                        className: "success"
+                    } );
+                }
+            }
+        }
+    });
+}

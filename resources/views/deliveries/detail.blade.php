@@ -7,6 +7,15 @@
             </div>
             <div>
                 @if ( isset( $_SESSION['id_user_type'] ) and $_SESSION['id_user_type'] == "2" )
+                    @if ( $data->is_favourite === 1 )
+                    <div class="favourite" style="cursor: pointer; display: inline-block; font-size: 30px; margin-right: 10px; line-height: 38px; height: 38px;" toggleFavs>
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    @else
+                    <div style="display: inline-block; font-size: 30px; margin-right: 10px; line-height: 38px; height: 38px;" toggleFavs>
+                        <i class="far fa-heart"></i>
+                    </div>
+                    @endif
                     <div onclick="addQuote({{ $data->id_listing }})" class="btn btn-outline-primary"><i class="fas fa-plus"></i> Add quote</div>
                 @endif
                 {!! $buttons !!}
@@ -89,7 +98,7 @@
                                     Expires On
                                 </div>
                                 <div class="col-6">
-                                    
+                                    {{ $data->expires_on }}
                                 </div>
                             </div>
                         </div>
@@ -99,7 +108,7 @@
                                     Dimensions
                                 </div>
                                 <div class="col-6">
-                                    {{ $data->height }}{{ $data->units }} x {{ $data->width }}{{ $data->units }} x {{ $data->length }}{{ $data->units }}
+                                    {{ $data->height }}{{ $data->units }} x {{ $data->width }}{{ $data->units }} x {{ $data->length }} {{ $data->length_unit }}
                                 </div>
                             </div>
                         </div>
@@ -109,7 +118,7 @@
                                     Weight
                                 </div>
                                 <div class="col-6">
-                                    {{ $data->weight }} kg
+                                    {{ $data->weight }} {{ $data->weight_unit }}
                                 </div>
                             </div>
                         </div>
@@ -122,7 +131,11 @@
                         <i class="fas fa-hand-holding-usd"></i> Quotes
                     </div>
                     <div class="card-body">
+                        @if ( $quotes != "" )
                         <div class="alert alert-info">Current lowest quote: {{ $data->lowest_quote }} EUR</div>
+                        @else
+                        <div class="alert alert-warning"><i class="fas fa-exclamation-circle"></i>  No quotes have been placed</div>
+                        @endif
                         {!! $quotes !!}
                     </div>
                 </div>
@@ -140,6 +153,9 @@
                         @endif
                     </div>
                     <div class="card-body">
+                        @if ( $messages == "" )
+                        <div class="alert alert-warning">No questions asked</div>
+                        @endif
                         {!! $messages !!}
                     </div>
                 </div>
@@ -149,6 +165,53 @@
 </div>
 
 <script>
+    $(document).ready( function()
+    {
+        $('[toggleFavs]').click( function() {
+            var i = 0;
+            if ( $(this).hasClass('favourite') )
+            {
+                $(this).removeClass('favourite');
+                $(this).find('i').removeClass('fas');
+                $(this).find('i').addClass('far');
+            }
+            else
+            {
+                i = 1;
+                $(this).addClass('favourite');
+                $(this).find('i').addClass('fas');
+                $(this).find('i').removeClass('far');
+            }
+            $.ajax({
+                type: "POST",
+                url: "MyAccount.toggleFavs",
+                headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                data: {
+                    id: '{{ $data->id_listing }}'
+                },
+                success: function(data)
+                {
+                    var s = jQuery.parseJSON(data);
+                    if ( s.success === 1 )
+                    {
+                        var message = "";
+                        if ( i === 1 )
+                        {
+                            message = "Added to watching list.";
+                        }
+                        else
+                        {
+                            message = "Removed from watching list.";
+                        }
+                        $.notify(message, {
+                            className: "success",
+                            position: "bottom-left"
+                        });
+                    }
+                }
+            });
+        });
+    })
     function askQuestion(id)
     {
         $.ajax({

@@ -96,9 +96,16 @@ class MyListingsController extends BaseController
         $this->cont->body = view('mylistings/quotes_for_listing', array(
             "listing" => $listing,
             "quotes" => $paginated,
+            "declined_quotes" => "<div style='margin: 0 auto;' onclick='getDeclinedQuotes()' class='btn btn-info'>Show declined quotes</div>", 
             "url" => $url
         ));
         return $this->RenderView();
+    }
+
+    public function declinedQuotesAction()
+    {
+        $html = ListingsOU::paginatedQuotes($this->id, 3);
+        return $html;
     }
 
     public function paginatedQuotesAction()

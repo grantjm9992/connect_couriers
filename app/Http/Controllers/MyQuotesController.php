@@ -15,6 +15,8 @@ use \App\LogSesiones;
 use \App\Listings;
 use \App\Quotes;
 
+use \App\Classes\QuotesOU;
+
 class MyQuotesController extends BaseController
 {
 
@@ -90,7 +92,8 @@ class MyQuotesController extends BaseController
         $quotes = Quotes::myUnsuccessfulQuotes();
         foreach ( $quotes as $quote )
         {
-            $listing = Listings::where('id_listing', $id_listing)->first();
+            $listing = Listings::where('id_listing', $quote->id_listing)->first();
+            $listing->amount_current = $quote->amount_current;
             $arr[] = $listing;
         }
         $grid = view('myquotes/unsucc_grid', array(
@@ -169,6 +172,11 @@ class MyQuotesController extends BaseController
         Quotes::updateQuotesForListing( $listing, $quote );
 
         return "OK";
+    }
+
+    public function withdrawAction()
+    {
+        return QuotesOU::withdraw();
     }
 
 }

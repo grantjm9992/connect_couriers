@@ -15,14 +15,24 @@
                                 <div class="row xs-center">
                                     <div class="col-12 mylisting">
                                         <p>
+                                            @if ( new \DateTime($row->expires_on) < new \DateTime() || $row->id_status !== 1 )
                                             <a href="Listings.expiredDetail?id={{ $row->id_listing }}">
                                                 <i class="fas fa-box"></i> {{ $row->str_title }}
                                             </a>
+                                            @else
+                                            <a href="Deliveries.detail?id={{ $row->id_listing }}">
+                                                <i class="fas fa-box"></i> {{ $row->str_title }}
+                                            </a>
+                                            @endif
                                         </p>
                                     </div>
                                     <div class="col-12 col-sm-5 mylisting">
                                         <p>
-                                            <i class="fas fa-hourglass-end"></i> Expired: {{ $row->expires_on }}
+                                            @if ( new \DateTime($row->expires_on) < new \DateTime() || $row->id_status !== 1 )
+                                                <i class="fas fa-hourglass-end"></i> Expired: {{ $row->expires_on }}
+                                            @else
+                                                <i class="fas fa-hourglass-end"></i> Expires: {{ $row->expires_on }}
+                                            @endif
                                         </p>
                                         <p>
                                             <i style="color: green;" class="fas fa-map-marker-alt"></i> {{ $row->collection_postcode }}
@@ -33,7 +43,7 @@
                                     </div>
                                     <div class="col-12 col-sm-7 mylisting">
                                         <p>
-                                            <i class="fas fa-comments"></i> Your lowest quote: {{ $row->amount_current }} {{ $row->code_currency }}
+                                            <i class="fas fa-comments"></i> Your current quote: {{ $row->amount_current }} {{ $row->code_currency }}
                                         </p>
                                         <p>
                                             <i class="far fa-comments"></i> Lowest quote: {{ $row->lowest_quote }}

@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
-use User;
+use App\User;
 
 class Quotes extends Model
 {
@@ -12,13 +12,13 @@ class Quotes extends Model
 
     protected $primaryKey = "id_quote";
 
-    public static function getForListing( $id = null, $limit )
+    public static function getForListing( $id = null, $limit, $status = 1 )
     {
         if ( $id === null )
         {
             $id = $_REQUEST['id'];
         }
-        $quotes = DB::select('SELECT *,
+        $quotes = DB::select("SELECT *,
                             (SELECT COUNT(*) FROM message_listing WHERE id_listing = quotes.id_listing) AS num_questions,
                             (SELECT COUNT(*) FROM user_feedback WHERE user_feedback.id_user = quotes.id_user ) AS user_feedback
 
@@ -26,10 +26,17 @@ class Quotes extends Model
                             LEFT JOIN users ON users.id = quotes.id_user
                             LEFT JOIN vehicles ON vehicles.id_vehicle = quotes.id_vehicle
                             LEFT JOIN time_scales ON time_scales.id_time_scale = quotes.id_time_scale
-                            WHERE id_status = 1 AND id_listing = '.$id.Quotes::makeLimit($limit));
+                            WHERE id_status = $status AND id_listing = ".$id." ".Quotes::makeLimit($limit));
 
         return $quotes;
     }
+
+    public function getCourier()
+    {
+        $courier = User::where('id', $this->id_user)->first();
+        return $courier->str_user;
+    }
+
 
     public static function addQuote()
     {
@@ -55,6 +62,12 @@ class Quotes extends Model
 
         $listing = Listings::where('id_listing', $quote->id_listing)->first();
         Quotes::updateQuotesForListing($listing, $quote);
+
+        $notify = new Notifications;
+        $notify->id_user = $listing->id_user;
+        $notify->bln_notified = 0;
+        $notify->str_message = "Someone has quoted on your listing: $listing->str_title";
+        $notify->save();
     }
 
     /**
@@ -198,7 +211,7 @@ class Quotes extends Model
     public static function myUnsuccessfulQuotes()
     {
         return Quotes::where('id_user', $_SESSION['id'])
-                    ->where('id_status', 3)
+                    ->whereRaw('id_status = 3 OR id_status = 5')
                     ->get();
     }
 
@@ -209,6 +222,7 @@ class Quotes extends Model
         $quotes = DB::select(
             "SELECT * FROM listings LEFT JOIN quotes ON listings.id_listing = quotes.id_listing
             WHERE quotes.id_user = $id
+            AND quotes.id_status = 1
             AND listings.id_status = 1
             AND listings.expires_on >= NOW() "
         );
