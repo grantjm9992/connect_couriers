@@ -140,4 +140,37 @@ class MyAccountController extends BaseController
         return $html;
     }
 
+    public function detailAction()
+    {
+        $user = User::where('id', $_SESSION['id'])->first();
+
+        if ( (int)$_SESSION['id_user_type'] === 1 )
+        {
+            $this->cont->body = view('myaccount/perfil', array(
+                "user" => $user
+            ));
+        }
+        else
+        {
+            $courier = $user->getCourierInfo();
+            $this->cont->body = view('myaccount/courier_perfil', array(
+                "courier" => $courier
+            ));
+        }
+
+        return $this->RenderView();
+    }
+
+    public function editAction()
+    {
+        $user = User::where('id', $_SESSION['id'])->first();
+        $user->str_name = $_REQUEST['str_name'];
+        $user->str_surname = $_REQUEST['str_surname'];
+        $user->str_email = $_REQUEST['str_email'];
+        $user->num_phone = $_REQUEST['num_phone'];
+        if ( isset( $_REQUEST['str_password'] ) && $_REQUEST['str_password'] != "" ) $user->str_password = md5( $_REQUEST['str_password'] );
+        $user->save();
+        return \Redirect::to(url('MyAccount'));
+    }
+
 }

@@ -15,7 +15,9 @@
             <a href="Messages"><i class="fas fa-envelope {{ $message_class }}"></i> </a>
             <a href="MyAccount" class="btn btn-top-right"><i class="far fa-user-circle"></i> My account</a>
             <a href="Login.logout" class="btn btn-top-right"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            @if ( (int)$_SESSION['id_user_type'] === 1 )
             <a href="Listings.new" class="btn btn-top-right-solid">Get Quotes</a>
+            @endif
         </span>
     </div>
 </nav> 

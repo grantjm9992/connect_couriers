@@ -29,6 +29,7 @@
         <script src="{{ asset('/js/notify.min.js')}}"></script>
         <script src="{{ asset('https://js.stripe.com/v3/') }}'"></script>
         <script src="{{ asset('/js/main.js')}}"></script>
+        <script src="{{ asset('https://unpkg.com/sweetalert/dist/sweetalert.min.js')}}"></script>
         <script type="text/javascript" src="{{ asset('https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js')}}"></script>
         {!! $set_menu !!}
         {!! $header !!}
@@ -48,6 +49,88 @@
                     textfield.setCustomValidity('{{ $translator->get("required") }}');
                 }
             });
+
+            
+            $(document).ready( function() {
+                window.swalOptions = Array();
+                window.swalOptions.title = "Error";
+                window.swalOptions.text = "";
+                window.swalOptions.icon = "";
+                window.swalOptions.className = "";
+                window.swalOptions.closeOnClickOutside = true;
+                window.swalOptions.dangerMode = false;
+                window.swalOptions.timer = null;
+                window.swalOptions.thenParameters = null;
+                window.swalOptions.buttons = {
+                    cancel: {
+                        text: "Accept",
+                        value: null,
+                        visible: true,
+                        closeModal: true
+                    }
+                }
+                window.swalOptions.thenFunction = remove;
+
+                window.swalConfirmOptions = Array();
+                window.swalConfirmOptions.title = "Warning";
+                window.swalConfirmOptions.text = "";
+                window.swalConfirmOptions.icon = "warning";
+                window.swalOptions.className = "";
+                window.swalOptions.closeOnClickOutside = true;
+                window.swalOptions.dangerMode = false;
+                window.swalOptions.timer = null;
+                window.swalConfirmOptions.thenParameters = null;
+                window.swalConfirmOptions.buttons = {
+                    confirmar: {
+                        text: "Confirm",
+                        value: 1,
+                        className: "btn-success"
+                    },
+                    cancelar: {
+                        text: "Cancel",
+                        value: null,
+                        className: "btn-danger"
+                    }
+                };
+            })
+            function alert( options, icon = null )
+            {
+                var config = window.swalOptions;
+                if ( typeof options === "string" )
+                {
+                    config.title = options;
+                    config.icon = icon;
+                }
+                else
+                {
+                    if ( options.type && options.type == "confirm" )
+                    {
+                        config = window.swalConfirmOptions;
+                    }
+                    $.extend ( config, options );
+                }
+                swal( 
+                    {
+                        title: config.title,
+                        text: config.text,
+                        icon: config.icon,
+                        buttons: config.buttons,
+                        content: config.content,
+                        className: config.className,
+                        closeOnClickOutside: config.closeOnClickOutside,
+                        dangerMode: config.dangerMode,
+                        timer: config.timer
+                    }
+                 ).then((result) => {
+                    window.result = result;
+                    if (result) {
+                        config.thenFunction(config.thenParameters);
+                    } else {
+
+                    }
+                });
+            }
+
         </script>
     </body>
 </html>
