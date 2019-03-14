@@ -9,7 +9,7 @@ class Conversations extends Model
 {
     protected $table = "conversations";
 
-    public function getMessages()
+    public function getMessages( $is_inbox = true )
     {
         $id = $this->id;
         $messages = DB::select("SELECT *, CONCAT(users.str_name, ' ', users.str_surname) AS sender, messages_sent.id
@@ -23,10 +23,13 @@ class Conversations extends Model
         {
             $msg = MessagesSent::where('id', $message->id)
                                 ->first();
-            if ( !$msg->date_read && $msg->id_sender != $_SESSION['id'] )
+            if ( $is_inbox === true )
             {
-                $msg->date_read = $date->format('Y-m-d H:i:s');
-                $msg->save();
+                if ( !$msg->date_read && $msg->id_sender != $_SESSION['id'] )
+                {
+                    $msg->date_read = $date->format('Y-m-d H:i:s');
+                    $msg->save();
+                }
             }
         }
 

@@ -60,6 +60,6 @@ class ListingsOU
     public static function summary(Listings $listing )
     {
         $AcceptedQuote = $listing->getAcceptedQuote();
-        $Messages = $AcceptedQuote->getMessages();
+        $Messages = $AcceptedQuote->getMessages(false);
     }
 }

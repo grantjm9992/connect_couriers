@@ -61,7 +61,7 @@ class DeliveriesOU
         $msg = "";
         foreach ( $conversations as $convo )
         {
-            $messages = $convo->getMessages();
+            $messages = $convo->getMessages(false);
             $msgs = ( count( $messages ) > 0 ) ? DeliveriesOU::makeConversation( $messages, $listing ) : "" ;
             $msg .= view('deliveries/message_section_card', array(
                 "messages" => $msgs

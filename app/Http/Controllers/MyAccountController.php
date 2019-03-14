@@ -26,13 +26,14 @@ class MyAccountController extends BaseController
     public function defaultAction() {
         if ( isset( $_SESSION['id_user_type'] ) && $_SESSION['id_user_type'] == "2" )
         {
-            list( $active, $outbid, $accepted, $unsuccessful, $completed ) = Quotes::getMySummary();
+            list( $active, $outbid, $accepted, $unsuccessful, $completed, $watching ) = Quotes::getMySummary();
             $this->cont->body = view('myaccount/courier_index', array(
                 "outbid" => $outbid,
                 "active" => $active,
                 "accepted" => $accepted,
                 "unsuccessful" => $unsuccessful,
-                "completed" => $completed
+                "completed" => $completed,
+                "watching" => $watching
             ));
         }
         else

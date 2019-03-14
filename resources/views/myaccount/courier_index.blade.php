@@ -6,13 +6,13 @@
             <div class="list-group">
                 <a href="MyAccount" class="list-group-item list-group-item-action"><i class="fas fa-tachometer-alt"></i> Summary</a>
                 <a href="MyQuotes.myActiveQuotes" class="list-group-item list-group-item-action"><i class="fas fa-box-open"></i> Active Quotes</a>
+                <a href="MyQuotes.myOutbidQuotes" class="list-group-item list-group-item-action"><i class="fas fa-thumbs-down"></i> Outbid Quotes</a>
+                <a href="Watching" class="list-group-item list-group-item-action"><i class="fas fa-eye"></i> Listings I'm watching</a>
                 <a href="MyQuotes.myAcceptedQuotes" class="list-group-item list-group-item-action"><i class="fas fa-check-circle"></i> Accepted Quotes</a>
                 <a href="MyQuotes.myUnsuccessfulQuotes" class="list-group-item list-group-item-action"><i class="fas fa-times-circle"></i> Unsuccessful Quotes</a>
-                <a href="MyQuotes.myOutbidQuotes" class="list-group-item list-group-item-action"><i class="fas fa-thumbs-down"></i> Outbid Quotes</a>
                 <a href="MyQuotes.myCompletedQuotes" class="list-group-item list-group-item-action"><i class="fas fa-handshake"></i> Completed Quotes</a>
                 <a href="Messages" class="list-group-item list-group-item-action"><i class="fas fa-envelope"></i> Messages</a>
                 <a href="MyAccount.detail" class="list-group-item list-group-item-action"><i class="fas fa-user-circle"></i> Account</a>
-                <a href="Login.logout" class="list-group-item list-group-item-action"><i class="fas fa-sign-out-alt"></i> Log Out</a>
             </div>
         </div>
         <div class="col-12 col-md-8 col-lg-9 col-xl-9 account-list">
@@ -56,6 +56,16 @@
                         </p>
                         <p>
                         Unsuccessful quotes
+                        </p>
+                    </a>
+                </div>
+                <div class="col-xs-12 col-sm-4 listing-summary">
+                    <a href="Watching" class="purple">
+                        <p>
+                        {{ $watching }} <i class="fas fa-eye"></i>
+                        </p>
+                        <p>
+                            Listings I'm watching
                         </p>
                     </a>
                 </div>

@@ -184,13 +184,15 @@ class Quotes extends Model
         $completed = Quotes::myCompletedQuotes();
         $accepted = Quotes::myAcceptedQuotes();
         $unsuccessful = Quotes::myUnsuccessfulQuotes();
+        $watching = Watching::where('id_user', $_SESSION['id'])->get();
 
         return array(
             count( $active ),
             count( $outbid ),
             count( $accepted ),
             count( $unsuccessful ),
-            count( $completed )
+            count( $completed ),
+            count( $watching )
         );
     }
 

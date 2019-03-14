@@ -96,7 +96,7 @@ class Listings extends Model
 
     public static function myActiveListings()
     {        
-        $data = DB::select('SELECT *, listing_status.description AS status, (SELECT COUNT(*) FROM quotes WHERE quotes.id_listing = listings.id_listing) AS quotes FROM listings LEFT JOIN listing_status ON listing_status.id = listings.id_status WHERE id_user = '.$_SESSION['id'].' AND id_status = 1 AND expires_on > NOW()' );
+        $data = DB::select('SELECT *, listing_status.description AS status, (SELECT COUNT(*) FROM quotes WHERE quotes.id_listing = listings.id_listing AND quotes.id_status = 1) AS quotes FROM listings LEFT JOIN listing_status ON listing_status.id = listings.id_status WHERE id_user = '.$_SESSION['id'].' AND id_status = 1 AND expires_on > NOW()' );
         return Listings::makeSearchArray( $data );
     }
     public static function myExpiredListings()
@@ -276,9 +276,10 @@ class Listings extends Model
         return $arr;
     }
 
+
     public static function getSearch()
     {
-        $data = DB::select('SELECT *, listing_status.description AS status, (SELECT COUNT(*) FROM quotes WHERE quotes.id_listing = listings.id_listing) AS quotes FROM listings LEFT JOIN listing_status ON listing_status.id = listings.id_status WHERE listings.expires_on > NOW()  '.Listings::makeWhere().Listings::makeOrder());
+        $data = DB::select('SELECT *, listing_status.description AS status, (SELECT COUNT(*) FROM quotes WHERE quotes.id_listing = listings.id_listing AND quotes.id_status = 1) AS quotes FROM listings LEFT JOIN listing_status ON listing_status.id = listings.id_status WHERE listings.expires_on > NOW()  '.Listings::makeWhere().Listings::makeOrder());
         return Listings::makeSearchArray( $data );
     }
 

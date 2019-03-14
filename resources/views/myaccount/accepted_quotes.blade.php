@@ -9,7 +9,6 @@
                 <a href="{{url('/MyAccount.myExpiredListings')}}" class="list-group-item list-group-item-action"><i class="fas fa-clock"></i> Expired Listings</a>
                 <a href="{{url('/Messages')}}" class="list-group-item list-group-item-action"><i class="fas fa-envelope"></i> Messages</a>
                 <a href="{{url('/MyAccount.detail')}}" class="list-group-item list-group-item-action"><i class="fas fa-user-circle"></i> Account</a>
-                <a href="{{url('/Login.logout')}}" class="list-group-item list-group-item-action"><i class="fas fa-sign-out-alt"></i> Log Out</a>
             </div>
         </div>
         <div class="col-12 col-md-6 col-md-8 col-lg-9 col-xl-9 account-list"  id="listings">
