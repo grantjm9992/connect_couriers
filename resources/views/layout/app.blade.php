@@ -15,6 +15,7 @@
         <link rel="stylesheet" href="{{ asset('/css/jquery-ui.min.css')}}"></link>
         <link rel="stylesheet" type="text/css" href="{{ asset('https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.css')}}"/>
         <link rel="stylesheet" href="{{ asset('https://use.fontawesome.com/releases/v5.3.1/css/all.css')}}" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+        <link rel="stylesheet" href="{{ asset('/css/tooltipster.bundle.min.css') }}">
     </head>
     <body>
         <script src="{{ asset('https://code.jquery.com/jquery-3.3.1.min.js')}}" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -27,7 +28,7 @@
         <script src="{{ asset('/js/moxie.min.js')}}"></script>
         <script src="{{ asset('/js/jquery-ui.min.js')}}"></script>
         <script src="{{ asset('/js/notify.min.js')}}"></script>
-        <script src="{{ asset('https://js.stripe.com/v3/') }}'"></script>
+        <script src="{{ asset('/js/tooltipster.bundle.min.js') }}"></script>
         <script src="{{ asset('/js/main.js')}}"></script>
         <script src="{{ asset('https://unpkg.com/sweetalert/dist/sweetalert.min.js')}}"></script>
         <script type="text/javascript" src="{{ asset('https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js')}}"></script>
@@ -39,6 +40,12 @@
         </div>
         {!! $footer !!}
         <script>
+            $(document).ready(function() {
+                $('[tooltip]').tooltipster({
+                    theme: 'coolTip',
+                    arrow: false
+                });
+            });
             $('input').on('change invalid', function() {
                 var textfield = $(this).get(0);
                 
@@ -69,7 +76,7 @@
                         closeModal: true
                     }
                 }
-                window.swalOptions.thenFunction = remove;
+                window.swalOptions.thenFunction = "";
 
                 window.swalConfirmOptions = Array();
                 window.swalConfirmOptions.title = "Warning";

@@ -58,7 +58,7 @@
                                     User
                                 </div>
                                 <div class="col-6">
-                                    <a href="Profiles.detail?id_user={{ $data->id_user }}">{{ $data->str_user }} ({{ $data->feedback_user }})</a>
+                                    <a href="Couriers?id={{ $data->id_user }}">{{ $data->str_user }} ({{ $data->feedback_user }})</a>
                                 </div>
                             </div>
                         </div>

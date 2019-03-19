@@ -17,6 +17,14 @@ class User extends Model
     public function getCourierInfo()
     {
         $courierInfo = Couriers::where('id_user', $this->id)->first();
+        $completedJobs = Quotes::where('id_user', $this->id)->where('id_status', 4)->get();
+
+        $positiveFeedback = UserFeedback::where('id_user', $this->id)->where('value', 'P')->get();
+        $negativeFeedback = UserFeedback::where('id_user', $this->id)->where('value', 'N')->get();
+        $neutralFeedback = UserFeedback::where('id_user', $this->id)->where('value', 'K')->get();
+
+        $feedbackScore = round( ( count( $positiveFeedback) + ( count($neutralFeedback) / 2 ) ) / 100, 2 );
+        $feedbackAmount = count( $positiveFeedback ) + count( $neutralFeedback ) + count( $negativeFeedback );
         $Courier = new \StdClass;
         foreach ( $this->attributes as $key => $value ) 
         {
@@ -29,6 +37,10 @@ class User extends Model
                 $Courier->$key = $value;
             }
         }
+
+        $Courier->completed_jobs = ( count( $completedJobs ) > 0 ) ? count( $completedJobs ) : "0" ;
+        $Courier->feedback_score = ( $feedbackScore != "" ) ? $feedbackScore."%" : "";
+        $Courier->feedback_amount = ( $feedbackAmount != "" ) ? $feedbackAmount : "0";
 
         return $Courier;
     }
