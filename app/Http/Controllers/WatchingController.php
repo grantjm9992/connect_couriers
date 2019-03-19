@@ -29,7 +29,7 @@ class WatchingController extends Controller
     {        
         $pageSize = "20";
         $page = ( isset( $_REQUEST['page'] ) && $_REQUEST['page'] != "" ) ? (int)$_REQUEST['page'] : 1;
-        $watchingListings = Watching::getMyWatching($page, $pageSize);
+        list( $watchingListings, $total ) = Watching::getMyWatching($page, $pageSize);
         $data = "";
         $message = "Your list is empty!";
         foreach ( $watchingListings as $wl )
@@ -42,6 +42,7 @@ class WatchingController extends Controller
         $paginated = view('comun/paginated', array(
             "pageSize" => $pageSize,
             "total" => count( $watchingListings ),
+            "grand_total" => $total,
             "page" => $page,
             "message" => $message,
             "data" => $data

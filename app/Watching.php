@@ -18,7 +18,10 @@ class Watching extends Model
             $listings[] = $listing;
         }
 
-        return $listings;
+        $w = Watching::where('id_user', $_SESSION['id'])->get();
+        $total = count( $w );
+
+        return array($listings, $total);
     }
 
     

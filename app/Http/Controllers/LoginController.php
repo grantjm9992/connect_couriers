@@ -14,6 +14,7 @@ use \App\User;
 use \App\LoginsFallidos;
 use \App\Empresas;
 use \App\LogSesiones;
+use \App\Couriers;
 
 class LoginController extends BaseController
 {
@@ -106,6 +107,10 @@ class LoginController extends BaseController
         $new_user->str_user = $this->createUsername();
         $new_user->id_user_type = 2;
         $new_user->save();
+
+        $courier = new Couriers;
+        $courier->id_user = $new_user->id_user;
+        $courier->save();
 
         $_SESSION['id'] = $new_user->id;
         $_SESSION['id_user_type'] = $new_user->id_user_type;

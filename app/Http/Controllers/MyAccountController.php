@@ -15,6 +15,7 @@ use \App\LogSesiones;
 use \App\Quotes;
 use \App\Watching;
 use \App\Listings;
+use \App\Couriers;
 
 class MyAccountController extends BaseController
 {
@@ -152,16 +153,62 @@ class MyAccountController extends BaseController
         }
         else
         {
+            $categories = \App\Categories::orderBy('str_category', 'ASC')->get();
+            $paymentMethods = \App\TypesPayment::orderBy('str_description', 'ASC')->get();
+            $regions = \App\Regions::orderBy('str_description', 'ASC')->get();
+            $courierTypes = \App\TypesCourier::orderBy('str_description', 'ASC')->get();
+            $companyTypes = \App\TypesCompany::orderBy('str_description', 'ASC')->get();
             $courier = $user->getCourierInfo();
+            $onLoadJS = $this->getCourierJS($courier);
             $this->cont->body = view('myaccount/courier_perfil', array(
-                "courier" => $courier
+                "courier" => $courier,
+                "categories" => $categories,
+                "paymentMethods" => $paymentMethods,
+                "regions" => $regions,
+                "courierTypes" => $courierTypes,
+                "companyTypes" => $companyTypes,
+                "onLoadJS" => $onLoadJS
             ));
         }
 
         return $this->RenderView();
     }
 
-    public function editAction()
+    protected function getCourierJS($courier)
+    {
+        $regionArray = explode('@#', $courier->regions, -1);
+        $categoryArray = explode('@#', $courier->categories, -1);
+        $paymentTypeArray = explode('@#', $courier->payment_types, -1);
+        $js = "";
+        foreach ( $regionArray as $region )
+        {
+            $js .= "$('#region_$region').click();";
+        }
+        foreach ( $paymentTypeArray as $pm )
+        {
+            $js .= "$('#pm_$pm').click();";
+        }
+        foreach ( $categoryArray as $category )
+        {
+            $js .= "$('#category_$category').click();";
+        }
+        if ( (int)$courier->bln_git === 1 )
+        {
+            $js .= "$('#git_check').click();$('.git-check').show(500);";
+        }
+        if ( (int)$courier->bln_cmr === 1 )
+        {
+            $js .= "$('#cmr_check').click();$('.cmr-check').show(500);";
+        }
+        if ( (int)$courier->bln_other === 1 )
+        {
+            $js .= "$('#other_check').click();$('.other-check').show(500);";
+        }
+
+        return $js;
+    }
+
+    public function editAction( $stay = null )
     {
         $user = User::where('id', $_SESSION['id'])->first();
         $user->str_name = $_REQUEST['str_name'];
@@ -170,7 +217,33 @@ class MyAccountController extends BaseController
         $user->num_phone = $_REQUEST['num_phone'];
         if ( isset( $_REQUEST['str_password'] ) && $_REQUEST['str_password'] != "" ) $user->str_password = md5( $_REQUEST['str_password'] );
         $user->save();
+        if ( $stay === null )
+        {
+            return \Redirect::to(url('MyAccount'));
+        }
+        else
+        {
+            return "OK";
+        }
+    }
+
+    public function editCourierAction()
+    {
+        $this->editAction();
+        $request = array_filter($_REQUEST, 'strlen');
+        $courier = Couriers::where('id_user', $_SESSION['id'])->first()->update($request);
+        /*foreach ( $_REQUEST as $key => $value )
+        {            
+            if ( array_key_exists( $key, $courier ) === true )
+            {
+                die ( $key );
+                $courier->$key = $value;
+            }
+        }
+        $courier->save();*/
+
         return \Redirect::to(url('MyAccount'));
+
     }
 
 }

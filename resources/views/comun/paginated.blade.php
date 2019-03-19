@@ -9,7 +9,7 @@
                 document.getElementById('anterior').style.pointerEvents = 'none';
                 $('#anterior').addClass('disabled');
             }
-            @if ( $total < $pageSize )
+            @if ( $total < $pageSize || (int)$total === (int)$grand_total )
                 document.getElementById('siguiente').style.pointerEvents = 'none';
                 $('#siguiente').addClass('disabled');
             @endif            
