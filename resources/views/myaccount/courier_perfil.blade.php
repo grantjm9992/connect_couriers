@@ -28,7 +28,7 @@
                         </div>
                     </div>            
                 </h4>
-                <ul class="nav nav-pills mb-3 small-vertical" id="pills-tab" role="tablist">
+                <ul class="nav nav-pills mb-3 small-vertical width100" id="pills-tab" role="tablist">
                     <li class="nav-item">
                         <a class="nav-link active" id="pills-account-tab" data-toggle="pill" href="#pills-account" role="tab" aria-controls="pills-account" aria-selected="true"><i class="fas fa-user"></i> Account</a>
                     </li>
