@@ -23,7 +23,7 @@ class User extends Model
         $negativeFeedback = UserFeedback::where('id_user', $this->id)->where('value', 'N')->get();
         $neutralFeedback = UserFeedback::where('id_user', $this->id)->where('value', 'K')->get();
 
-        $feedbackScore = round( ( count( $positiveFeedback) + ( count($neutralFeedback) / 2 ) ) / 100, 2 );
+        $feedbackScore = round( ( count( $positiveFeedback) + ( count($neutralFeedback) / 2 ) ) / ( count($positiveFeedback) + count($negativeFeedback) + count($neutralFeedback)), 2 );
         $feedbackAmount = count( $positiveFeedback ) + count( $neutralFeedback ) + count( $negativeFeedback );
         $Courier = new \StdClass;
         foreach ( $this->attributes as $key => $value ) 
