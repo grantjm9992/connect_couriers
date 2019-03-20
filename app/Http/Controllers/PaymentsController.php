@@ -58,25 +58,47 @@ class PaymentsController extends Controller
 
     public function comprobarResponseAction()
     {
-        /*$orderID = $_REQUEST['orderID'];
-        $client = PayPalHttpClient::client();
-        $response = $client->execute(new OrdersGetRequest($orderId));
-
-        $response->result->purchase_units[0]->amount->value
-
-        */
         
+        $date = new \DateTime();
+        $clientId = env("PAYPAL_CLIENT_ID");
+        $clientSecret = env("PAYPAL_SECRET");
+
+        $environment = new SandBoxEnvironment($clientId, $clientSecret);
+        $client = new PayPalHttpClient($environment);
+
+        $orderID = $_REQUEST['orderID'];
+        //$client = PayPalHttpClient::client();
+        $response = $client->execute(new OrdersGetRequest($orderID));
+
+        $response->result->purchase_units[0]->amount->value;
+
+        // Get objects
         $id_listing = base64_decode( $_REQUEST['id_listing'] );
-        $listing = Listings::where('id_listing', $id_listing )->first();
-        $listing->id_status = 2;
-        $listing->save();
-
-        
         $id_quote = base64_decode( $_REQUEST['id_quote'] );
         $quote = Quotes::where('id_quote', $id_quote )->first();
+        $listing = Listings::where('id_listing', $id_listing )->first();
+
+        file_put_contents( public_path( "storage/payments/$id_listing"."_".$date->format('YmdHis').".json"  ), json_encode( $response ) );
+        $isOkay = $this->checkPayment ($response->result->purchase_units[0]
+                                        ->payments->captures[0], $listing, $quote);
+
+        if ( $isOkay != "OK" ) return json_encode(
+            array(
+                "message" => $this->translator->get($isOkay)
+            )
+        );
+
+        // Update quote
         $quote->id_status = 2;
         $quote->save();
+        
+        // Update listing
+        $listing->id_status = 2;
+        $listing->date_closed_on = $date->format('Y-m-d H:i:s');
+        $listing->id_winning_bidder = $quote->id_user;
+        $listing->save();
 
+        // Notify user
         $notification = new Notifications;
         $notification->id_user = $_SESSION['id'];
         $notification->str_message = "Quote accepted successfully";
@@ -90,8 +112,26 @@ class PaymentsController extends Controller
         );
     }
 
+    protected function checkPayment( $paymentObj , $listingObj, $quoteObj )
+    {
+        if ( $paymentObj->status != "COMPLETED" )
+        {
+            return "PAYMENT_ERROR_1";
+        }
+        $expectedPrices = new \App\PriceCalculator( $quoteObj->amount_current );
+
+        if ( (int)$paymentObj->amount->value !== (int)$expectedPrices->comission )
+        {
+            return "PAYMENT_ERROR_2";
+        }
+
+        return "OK";
+    }
+
     public function payWithpaypalAction()
     {
+        // CANNOT SET setPaymentMethod('card')!! Twats.
+        // FORGET THIS PART
         $payer = new Payer();
                 $payer->setPaymentMethod('card');
         $item_1 = new Item();

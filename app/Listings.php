@@ -109,7 +109,7 @@ class Listings extends Model
         return Listings::where('id_user', $_SESSION['id'])->where('id_status', 2)->get();
     }
 
-    public static function addListing()
+    public static function addListing($dontSave = false)
     {
         $dd1 = new \DateTime($_REQUEST['delivery_date']);
         $date = new \DateTime();
@@ -119,7 +119,7 @@ class Listings extends Model
         $listing->str_title = $_REQUEST['str_title'];
         $listing->delivery_postcode = $_REQUEST['delivery_postcode'];
         $listing->collection_postcode = $_REQUEST['collection_postcode'];
-        $listing->id_user = $_SESSION['id'];
+        if ( isset( $_SESSION['id'] ) && $_SESSION['id'] != "" ) $listing->id_user = $_SESSION['id'];
         //$listing->bln_flexible = $_REQUEST['bln_flexible'];
         $listing->delivery_date1 = $dd1->format('Y-m-d');
         $date->modify('+ 1 month');
@@ -128,6 +128,7 @@ class Listings extends Model
         //$url = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=OL139NS&destinations=BL99ST&mode=driving&key=AIzaSyA-5_Xlc2AzrqCECR9hGx210eUTCBuOOZI";
         //$data = file_get_contents($url);
         //$listing->distance = $data->destination_addresses;
+        if ( $dontSave === true ) return $listing;
         $listing->save();
     }
 
@@ -161,6 +162,12 @@ class Listings extends Model
         {
             if ( $user->id_user_type == "1" )
             {
+                if ( $user->str_password != "" )
+                {
+                    $listing = self::AddListing(true);
+                    $_SESSION['listingToAdd'] = $listing;
+                    die (\Redirect::to('Login'));
+                }
                 $_SESSION['id'] = $user->id;
                 $_SESSION['user'] = rtrim($user->str_name).' '.rtrim($user->str_surname);
                 $_SESSION['id_user_type'] = 1;
@@ -276,10 +283,9 @@ class Listings extends Model
         return $arr;
     }
 
-
     public static function getSearch()
     {
-        $data = DB::select('SELECT *, listing_status.description AS status, (SELECT COUNT(*) FROM quotes WHERE quotes.id_listing = listings.id_listing AND quotes.id_status = 1) AS quotes FROM listings LEFT JOIN listing_status ON listing_status.id = listings.id_status WHERE listings.expires_on > NOW()  '.Listings::makeWhere().Listings::makeOrder());
+        $data = DB::select('SELECT *, listing_status.description AS status, (SELECT COUNT(*) FROM quotes WHERE quotes.id_listing = listings.id_listing AND quotes.id_status = 1) AS quotes FROM listings LEFT JOIN listing_status ON listing_status.id = listings.id_status WHERE listings.expires_on > NOW() AND listings.id_status = 1 '.Listings::makeWhere().Listings::makeOrder());
         return Listings::makeSearchArray( $data );
     }
 

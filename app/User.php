@@ -23,7 +23,7 @@ class User extends Model
         $negativeFeedback = UserFeedback::where('id_user', $this->id)->where('value', 'N')->get();
         $neutralFeedback = UserFeedback::where('id_user', $this->id)->where('value', 'K')->get();
 
-        $feedbackScore = round( ( count( $positiveFeedback) + ( count($neutralFeedback) / 2 ) ) / ( count($positiveFeedback) + count($negativeFeedback) + count($neutralFeedback))*100, 2 );
+        $feedbackScore =  ( ( count($positiveFeedback) + count($negativeFeedback) + count($neutralFeedback)) > 0 ) ? round( ( count( $positiveFeedback) + ( count($neutralFeedback) / 2 ) ) / ( count($positiveFeedback) + count($negativeFeedback) + count($neutralFeedback))*100, 2 ) : 0;
         $feedbackAmount = count( $positiveFeedback ) + count( $neutralFeedback ) + count( $negativeFeedback );
         $Courier = new \StdClass;
         foreach ( $this->attributes as $key => $value ) 
@@ -43,5 +43,18 @@ class User extends Model
         $Courier->feedback_amount = ( $feedbackAmount != "" ) ? $feedbackAmount : "0";
 
         return $Courier;
+    }
+
+    public function userWithFeedback()
+    {
+        $positiveFeedback = UserFeedback::where('id_user', $this->id)->where('value', 'P')->get();
+        $negativeFeedback = UserFeedback::where('id_user', $this->id)->where('value', 'N')->get();
+        $neutralFeedback = UserFeedback::where('id_user', $this->id)->where('value', 'K')->get();
+
+        $feedbackScore =  ( ( count($positiveFeedback) + count($negativeFeedback) + count($neutralFeedback)) > 0 ) ? round( ( count( $positiveFeedback) + ( count($neutralFeedback) / 2 ) ) / ( count($positiveFeedback) + count($negativeFeedback) + count($neutralFeedback))*100, 2 ) : 0;
+        $feedbackAmount = count( $positiveFeedback ) + count( $neutralFeedback ) + count( $negativeFeedback );
+
+        $this->feedback_score = $feedbackScore;
+        $this->feedback_amount = $feedbackAmount;
     }
 }

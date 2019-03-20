@@ -638,6 +638,7 @@ body
     border: 1px solid #ccc;
 }
 table td, th {
+    word-break: break-word;
     padding: 10px;
 }
 .lightTable thead > tr {
@@ -738,6 +739,11 @@ table td, th {
   }
   .cmr-check {
       display: none;
+  }
+
+  .error-splash
+  {
+      padding: 40px 0;
   }
 
 /*

@@ -12,7 +12,7 @@
         @endif
         <div class="info">
             <div class="row">
-                <div class="col-12">
+                <div class="col-12" style="max-height: 24px; overflow: hidden;">
                     <a href="Deliveries.detail?id={{ $listing->id_listing }}&title={{ $listing->title_url }}">
                         {{ $listing->str_title }}
                     </a>

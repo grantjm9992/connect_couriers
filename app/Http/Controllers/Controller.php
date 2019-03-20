@@ -162,7 +162,21 @@ class Controller extends BaseController
         return $errors;
     }
 
-    
+    public static function doesntExist()
+    {
+        $items = \App\Listings::take(5)->get();
+        $html = "";
+        foreach ( $items as $item )
+        {
+            $html .= view('comun/listingcarousel', array(
+                "listing" => $item
+            ));
+        }
+
+        return view( 'error/noexist', array(
+            'items' => $html
+        ));
+    }
 
     protected function createTable() {
 

@@ -54,6 +54,15 @@ class LoginController extends BaseController
             $_SESSION['user'] = rtrim($user->str_name).' '.rtrim($user->str_surname);
             $_SESSION['id'] = $user->id;
             $_SESSION['id_user_type'] = $user->id_user_type;
+            if ( isset ( $_SESSION['listingToAdd'] ) && !is_null ($_SESSION['listingToAdd']) ) {
+                $listing = new \App\Listings;
+                foreach ( $_SESSION['listingToAdd']->getAttributes()  as $key => $value )
+                {
+                    $listing->$key = $value;
+                }
+                $listing->id_user = $user->id;
+                $listing->save();
+            }
             return \Redirect::to('MyAccount'); 
         }
         else

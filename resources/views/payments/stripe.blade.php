@@ -17,11 +17,11 @@
                     </h5>
                     <h5>Pay safely with card or PayPal below</h5>
                     <div style="width: 300px; margin: 20px auto;" id="PPButtoncontainer"></div>
-
+<!--
                     <div onclick="test()" class="btn btn-primary">
                         Test button
                     </div>
-                </div>
+-->            </div>
                 <div class="col-12 col-md-4">
                     <h5>Next steps:</h5>
                     <ul style="list-style: none;">
@@ -41,39 +41,14 @@
     </div>
 </div>
 
-<script src="https://www.paypal.com/sdk/js?client-id=AT8RLW_TLQl_-1wfXibo_0ZrV_m-Q4PggBXupdCu-rZ0wS3F96HwbtZPruoDRZ6-NfgYet2vGDPDzeoU&currency=EUR"></script>
+<script src="https://www.paypal.com/sdk/js?client-id=AT8RLW_TLQl_-1wfXibo_0ZrV_m-Q4PggBXupdCu-rZ0wS3F96HwbtZPruoDRZ6-NfgYet2vGDPDzeoU&currency=GBP"></script>
 <script>
-    function test()
-    {
-        $.ajax({
-            type: "POST",
-            url: "Payments.comprobarResponse",
-            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-            data: {
-                id_listing: '{{ base64_encode($quote->id_listing) }}',
-                id_quote: '{{ base64_encode( $quote->id_quote ) }}'
-            },
-            success: function(data)
-            {
-                var s = jQuery.parseJSON(data);
-                if ( s.success === 1 )
-                {
-                    window.location = s.url;
-                }
-                else
-                {
-                    alert( s.message );
-                }
-            }
-        });
-    }
-/*
   paypal.Buttons({
     createOrder: function(data, actions) {
       return actions.order.create({
         purchase_units: [{
           amount: {
-            value: '0.01'
+            value: '{{ $quote->comission }}'
           }
         }]
       });
@@ -85,6 +60,7 @@
             url: "Payments.comprobarResponse",
             headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
             data: {
+                details: details,
                 orderID: data.orderID,
                 id_listing: '{{ base64_encode($quote->id_listing) }}',
                 id_quote: '{{ base64_encode( $quote->id_quote ) }}'
@@ -98,12 +74,13 @@
                 }
                 else
                 {
-                    alert( s.message );
+                    alert( $.trim(s.message), "warning" );
+                    window.location.reload();
                 }
             }
         });
       });
     }
   }).
-render('#PPButtoncontainer');*/
+render('#PPButtoncontainer');
 </script>

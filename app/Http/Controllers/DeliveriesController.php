@@ -35,6 +35,9 @@ class DeliveriesController extends BaseController
     public function detailAction()
     {
         $id = $_REQUEST['id'];
+        $object = Listings::where('id_listing', $id)->first();
+        if ( !is_object( $object ) ) {$this->cont->body = Controller::doesntExist(); return $this->RenderView();}
+        $listing = Listings::getListingDetail($id);
         $buttons = "";
         $quotes = Quotes::getForListing($id, null);
         $msgs = Messages::getForListing($id);
@@ -51,7 +54,22 @@ class DeliveriesController extends BaseController
 
         $quotes = DeliveriesOU::getQuoteSection();
         $messages = DeliveriesOU::getMessageSection();
-        $listing = Listings::getListingDetail($id);
+        $url = ( isset( $_SERVER['HTTP_REFERER'] ) && $_SERVER['HTTP_REFERER'] != "" ) ? $_SERVER['HTTP_REFERER'] : "Deliveries.search";
+        $expires_on = new \DateTime( $listing->expires_on );
+        $now = new \DateTime();
+
+
+        if ( $listing->id_status !== 1 || $now > $expires_on )
+        {
+            $this->cont->body = view('deliveries/finished', array(
+                "data" => $listing,
+                "img" => $img,
+                "url" => $url
+            ));
+
+            return $this->RenderView();
+        }
+
         $listing->is_favourite = 0;
         if ( isset ( $_SESSION['id_user_type'] ) && (int)$_SESSION['id_user_type'] === 2 )
         {
@@ -62,12 +80,7 @@ class DeliveriesController extends BaseController
                 $listing->is_favourite = 1;
             }
         }
-        if ( !is_object($listing) )
-        {
-            return \Redirect::to('Deliveries.search');
-        }
 
-        $url = ( isset( $_SERVER['HTTP_REFERER'] ) && $_SERVER['HTTP_REFERER'] != "" ) ? $_SERVER['HTTP_REFERER'] : "Deliveries.search";
 
         $this->cont->body = view('deliveries/detail', array(
             'data' => $listing,
