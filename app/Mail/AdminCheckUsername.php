@@ -30,7 +30,7 @@ class AdminCheckUsername extends Mailable
     public function build()
     {
         return $this->view('admin/usernamemail', array(
-            "username" => $username
+            "username" => $this->username
         ));
         //return $this->view('view.name');
     }
