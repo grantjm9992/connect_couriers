@@ -122,7 +122,7 @@ class LoginController extends BaseController
         $courier->id_user = $new_user->id_user;
         $courier->save();
 
-        PermissionLogic::sendSignupCheck( $new_user->str_user );
+        \PermissionLogic::sendSignupCheck( $new_user->str_user );
 
         $_SESSION['id'] = $new_user->id;
         $_SESSION['id_user_type'] = $new_user->id_user_type;
