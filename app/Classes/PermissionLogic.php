@@ -21,6 +21,6 @@ class PermissionLogic {
         $username = ( $username !== null ) ? $username : $_REQUEST['username'];
 
         $admin = self::ADMINISTRATORS;
-        Mail::to( $admin )->send( new AdminCheckUsername( $username ) );
+        \Mail::to( $admin )->send( new AdminCheckUsername( $username ) );
     }
 }
