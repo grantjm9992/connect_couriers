@@ -188,12 +188,8 @@ class Listings extends Model
             $user->date_created = $date->format('Y-m-d H:i:s');
             $user->date_last_access = $date->format('Y-m-d H:i:s');
             
-            $iName = random_int( 1, strlen($str_email) - 1 );
-            $iSurname = random_int( 1, strlen( $str_email) - 1);
-
-            $str_user = \substr($str_email, 0, strlen($str_email) - $iName );
-            $str_user .= \substr($str_email, 0, strlen($str_email) . $iSurname );
-            $str_user .= chr(rand(65,90)).chr(rand(65,90));
+            // Call from LoginController
+            $str_user = \App\Controllers\LoginController::createUsername( $user->str_email );
             $user->str_user = $str_user;
             $user->id_user_type = 1;
 

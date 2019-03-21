@@ -113,7 +113,8 @@ class LoginController extends BaseController
         $new_user->str_password = md5($_REQUEST['str_password']);
         $new_user->date_created = $date->format('Y-m-d H:i:s');
         $new_user->date_last_access = $date->format('Y-m-d H:i:s');
-        $new_user->str_user = $this->createUsername();
+        //$new_user->str_user = self::createUsername( $new_user->str_email);
+        $new_user->str_user = $_REQUEST['username'];
         $new_user->id_user_type = 2;
         $new_user->save();
 
@@ -121,21 +122,32 @@ class LoginController extends BaseController
         $courier->id_user = $new_user->id_user;
         $courier->save();
 
+        PermissionLogic::sendSignupCheck( $new_user->str_user );
+
         $_SESSION['id'] = $new_user->id;
         $_SESSION['id_user_type'] = $new_user->id_user_type;
 
         return \Redirect::to('MyAccount');
     }
 
-    protected function createUsername($length = 10)
+    public function testAction()
     {
+        $email = $_REQUEST['email'];
+
+        echo self::createUsername( $email );
+    }
+
+    public static function createUsername($email, $length = 5)
+    {
+        $email = substr($email, 0, strpos($email, "@") );
+        $email = substr($email, 0, rand(3, strlen( $email ) ) );
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $charactersLength = strlen($characters);
-        $randomString = '';
         for ($i = 0; $i < $length; $i++) {
-            $randomString .= $characters[rand(0, $charactersLength - 1)];
+            $email .= $characters[rand(0, $charactersLength - 1)];
         }
-        return $randomString;
+        $j = rand(0, strlen($email) - 5);
+        return substr_replace($email, "_", $j, 0);
     }
 
     public function loginModalAction()

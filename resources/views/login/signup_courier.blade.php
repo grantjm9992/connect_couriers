@@ -16,6 +16,10 @@
                     <input type="text" class="form-control" name="str_email">
                 </div>
                 <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" name="username" class="form-control">
+                </div>
+                <div class="form-group">
                     <label for="str_password">Password</label>
                     <input type="password" class="form-control" name="str_password">
                 </div>
