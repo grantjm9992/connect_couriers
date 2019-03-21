@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use \App\User;
 
 use \Exception;
+use \App\Mail\AdminCheckUsername;
 
 class PermissionLogic {
 
