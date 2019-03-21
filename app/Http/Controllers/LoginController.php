@@ -119,7 +119,7 @@ class LoginController extends BaseController
         $new_user->save();
 
         $courier = new Couriers;
-        $courier->id_user = $new_user->id_user;
+        $courier->id_user = $new_user->id;
         $courier->save();
 
         \PermissionLogic::sendSignupCheck( $new_user->str_user );
