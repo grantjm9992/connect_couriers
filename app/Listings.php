@@ -189,7 +189,7 @@ class Listings extends Model
             $user->date_last_access = $date->format('Y-m-d H:i:s');
             
             // Call from LoginController
-            $str_user = \App\Controllers\LoginController::createUsername( $user->str_email );
+            $str_user = \App\Http\Controllers\LoginController::createUsername( $user->str_email );
             $user->str_user = $str_user;
             $user->id_user_type = 1;
 

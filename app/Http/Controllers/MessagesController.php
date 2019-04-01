@@ -53,6 +53,9 @@ class MessagesController extends BaseController
         $notify->bln_notified = 0;
         $notify->str_message = "Someone has messaged you about your listing: $listing->str_title";
         $notify->save();
+        
+        $user = User::where('id', $message->id_receiver )->first();
+        \NotificationLogic::gotMessage( $user, $listing );
 
         return \Redirect::to($_REQUEST['url']);
     }
@@ -82,6 +85,10 @@ class MessagesController extends BaseController
         $notify->bln_notified = 0;
         $notify->str_message = "You have a new message";
         $notify->save();
+
+        $user = User::where('id', $message->id_receiver )->first();
+        $listing = Listings::where('id_listing', $conversation->id_listing)->first();
+        \NotificationLogic::gotMessage( $user, $listing );
         
         return $response;
     }

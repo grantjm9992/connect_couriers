@@ -53,6 +53,9 @@ class QuoteController extends BaseController
         {
             Quotes::addQuote();
         }
+        $listing = Listings::where('id_listing', $_REQUEST['id_listing'])->first();
+        $user = User::where('id', $listing->id_user )->first();
+        \NotificationLogic::gotQuote( $user, $listing );
         return \Redirect::to($_REQUEST['url']);
     }
 

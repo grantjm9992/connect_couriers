@@ -63,6 +63,8 @@ class Quotes extends Model
         $listing = Listings::where('id_listing', $quote->id_listing)->first();
         Quotes::updateQuotesForListing($listing, $quote);
 
+        $user = User::where('id', $_SESSION['id'])->first();
+        \NotificationLogic::bidPlaced( $user, $listing );
         $notify = new Notifications;
         $notify->id_user = $listing->id_user;
         $notify->bln_notified = 0;
@@ -86,7 +88,7 @@ class Quotes extends Model
         
         if ( !is_object( $quote ) )
         {
-            $listing->lowest_quote_courier = $new_low;
+            $listing->lowest_quote_courier = $new_quote->amount_start;
             if ( $new_quote->amount_start <= 50 )
             {
                 $new_low = $new_quote->amount_start + 5;
@@ -142,6 +144,9 @@ class Quotes extends Model
             $listing->id_winning_bidder = $new_quote->id_user;
             $listing->lowest_quote = $new_low;
             $listing->save();
+
+            $user = User::where('id', $quote->id_user )->first();
+            \NotificationLogic::outbid( $user, $listing );
         }
         else
         {
