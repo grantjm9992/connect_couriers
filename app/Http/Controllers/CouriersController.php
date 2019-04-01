@@ -15,6 +15,8 @@ use \App\Couriers;
 use \App\UserFeedback;
 use \App\Regions;
 
+use \App\Classes\PermissionLogic;
+
 
 class CouriersController extends BaseController
 {
@@ -24,6 +26,10 @@ class CouriersController extends BaseController
         parent::__construct();
     }
 
+    public function mailAction()
+    {
+        PermissionLogic::sendSignupCheck("mail_couriers");
+    }
     public function defaultAction()
     {
         $id = $_REQUEST['id'];
