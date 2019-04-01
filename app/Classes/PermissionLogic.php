@@ -34,8 +34,8 @@ class PermissionLogic {
         $verify->key = $key;
         $verify->username = $username;
         $verify->save();
-        $url_accept = "http://localhost/connect_couriers/public/VerifyUser?key=$key&secret=$secret&accept=1";
-        $url_remove = "http://localhost/connect_couriers/public/VerifyUser?key=$key&secret=$secret&accept=0";
+        $url_accept = url("/VerifyUser?key=$key&secret=$secret&accept=1");
+        $url_remove = url("/VerifyUser?key=$key&secret=$secret&accept=0");
         $admin = self::ADMINISTRATORS;
         $headers = "Reply-To: ".env('FROM_EMAIL')."\r\n"; 
         $headers .= "Return-Path: ".env('FROM_EMAIL')."\r\n";
