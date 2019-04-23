@@ -25,7 +25,7 @@ class SecurePage {
         }
         else
         {
-            die( header('Location: MyAccount') );
+            \Redirect::to('MyAccount')->send();
         }
     }
 

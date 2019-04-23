@@ -99,7 +99,7 @@ class LoginController extends BaseController
 
     public function checkCourierAction()
     {
-        $user = User::where('str_email', $_REQUEST['str_email'])->first();
+        $user = User::where('str_email', $_REQUEST['str_email'])->orWhere('str_user', $_REQUEST['username'])->first();
         if ( is_object( $user ) )
         {
             $_SESSION['errors'] = $this->translator->get("user_already_exists")."@#";
@@ -123,6 +123,7 @@ class LoginController extends BaseController
         $courier->save();
 
         \PermissionLogic::sendSignupCheck( $new_user->str_user );
+        \NotificationLogic::userSignedUp( $new_user );
 
         $_SESSION['id'] = $new_user->id;
         $_SESSION['id_user_type'] = $new_user->id_user_type;
@@ -137,10 +138,9 @@ class LoginController extends BaseController
         echo self::createUsername( $email );
     }
 
-    public static function createUsername($email, $length = 5)
+    public static function createUsername($email, $length = 4)
     {
         $email = substr($email, 0, strpos($email, "@") );
-        $email = substr($email, 0, rand(3, strlen( $email ) ) );
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $charactersLength = strlen($characters);
         for ($i = 0; $i < $length; $i++) {

@@ -26,6 +26,8 @@ class Controller extends BaseController
     protected $cont;
     // titulo que sale en la pestaña.
     protected $title;
+    protected $keywords;
+    protected $description;
     // Si hay que construir una tabla
     protected $campos;
     protected $gridId;
@@ -59,7 +61,9 @@ class Controller extends BaseController
         parent::__construct();
         $this->cont = new \ArrayObject();
         $this->campos = array();
-        $this->title = "Connect Couriers";
+        $this->title = "Couriers Connect";
+        $this->description = "";
+        $this->keywords = "";
         $this->pageTitle = "";
         $this->botonera = "";
         $this->iconClass = "";
@@ -87,7 +91,7 @@ class Controller extends BaseController
         
         if ( $this->secure !== 1 && !isset( $_SESSION['id'] ) )
         {
-            die(header('Location: Login'));
+            \Redirect::to('Login')->send();
         }
     }
 
@@ -137,6 +141,8 @@ class Controller extends BaseController
         $_SESSION['errors'] = "";
         $template = ( $this->secure !== 1 ) ? "layout/profile_app" : "layout/app";
         return view($template, array(
+            'keywords' => $this->keywords,
+            'description' => $this->description,
             'title' => $this->title,
             'errors' => $this->errors,
             'header' => $this->cont->header,
@@ -271,8 +277,8 @@ class Controller extends BaseController
         if ( $violations > 0 )
         {
             $url = $_SERVER['HTTP_REFERER'];
-            $_SESSION['errors'] = "Message rule violated. Don't try and be a sneaky cunt@#";
-            die( \Redirect::to($url) );
+            $_SESSION['errors'] = "Message rule violated.@#";
+            \Redirect::to($url)->send();
         }
     }
 }

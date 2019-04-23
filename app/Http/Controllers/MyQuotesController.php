@@ -21,6 +21,7 @@ class MyQuotesController extends BaseController
 {
 
     public function __construct() {
+        if ( (int)$_SESSION['id_user_type'] === 1 ) return \Redirect::to('MyAccount')->send();
         parent::__construct();
     }
 

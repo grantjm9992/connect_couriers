@@ -207,6 +207,48 @@ a:hover {
     filter: grayscale(0)
 }
 
+.responsive-box
+{
+    padding: 10px 15px;
+    text-align: center;
+    -webkit-box-shadow: 0 0 0 0 #ffffff;
+    box-shadow: 0 0 0 0 #ffffff;
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+    border-radius: 5px;
+    -webkit-transform: translateY(0);
+    transform: translateY(0)
+}
+.responsive-box:hover {
+    -webkit-box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    -webkit-transform: translateY(-5px);
+    transform: translateY(-5px)
+}
+
+.responsive-box h4 {
+    text-transform: uppercase;
+}
+
+.responsive-box .box-icon {
+    height: 60px;
+    margin-bottom: 20px;
+}
+
+.responsive-box .box-icon img {
+    height: 60px;
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+}
+
+.responsive-box:hover .box-icon img {
+    -webkit-filter: grayscale(0);
+    filter: grayscale(0)
+}
+
 .first {
     width: 86%;
     padding: 20px 0;
@@ -709,6 +751,18 @@ table td, th {
     transition: .4s;
   }
   
+  .fa-facebook-square:hover {
+      color: #3C5A99;
+  }
+
+
+  .fa-twitter-square:hover {
+      color: #38A1F3;
+  }
+
+  .fa-linkedin:hover {
+      color: #0077B5;
+  }
   input:checked + .slider {
     background-color: #86fc8e;
   }

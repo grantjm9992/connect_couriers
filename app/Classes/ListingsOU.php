@@ -11,7 +11,7 @@ use \App\Quotes;
 
 use \Exception;
 
-class ListingsOU
+class ListingsOU extends ClassOU
 {
 
 
@@ -57,9 +57,40 @@ class ListingsOU
         ));
     }
 
-    public static function summary(Listings $listing )
+    public static function summary(Listings $listing = null )
     {
+        $listing = ( is_null( $listing ) ) ? Listings::where('id_listing', base64_decode( $_REQUEST['id'] ) )->first() : $listing;
         $AcceptedQuote = $listing->getAcceptedQuote();
-        $Messages = $AcceptedQuote->getMessages(false);
+        $Messages = $AcceptedQuote->getMessages( $AcceptedQuote );
+
+        $messages = "";
+        if( !is_null ( $Messages ) )
+        {
+            foreach ( $Messages as $message )
+            {
+                $messages .= self::addMessage( $message );
+            }
+        }
+
+        $conversation = view('mylistings/conversation', array(
+            "messages" => $messages
+        ));
+
+        $url = ( isset( $_SERVER['HTTP_REFERER'] ) && $_SERVER['HTTP_REFERER'] != "" ) ? $_SERVER['HTTP_REFERER'] : url("MyAccount.myAcceptedQuotes");
+
+        $content = view('mylistings/summary', array(
+            "conversation" => $conversation,
+            "url" => $url
+        ));
+
+        return $content;
+    }
+
+    public static function addMessage( $message )
+    {
+        view('mylistings/message', array(
+            "message" => $message,
+            "user" => self::getUserById()
+        ));
     }
 }

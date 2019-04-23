@@ -199,6 +199,7 @@ class Listings extends Model
             $_SESSION['user'] = rtrim($user->str_name).' '.rtrim($user->str_surname);
             $_SESSION['id_user_type'] = 1;
 
+            \NotificationLogic::userSignedUp( $user );
             Listings::addListing();
         }
     }
@@ -226,6 +227,13 @@ class Listings extends Model
             }
         }
         return $listing_array[0];
+    }
+
+    public function getAcceptedQuote()
+    {
+        $quote = \App\Quotes::where('id_status', 2)->where('id_listing', $this->id_listing)->first();
+        //die( var_dump ( $quote ) );
+        return $quote;
     }
 
     public static function myListingCards()

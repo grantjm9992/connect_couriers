@@ -14,6 +14,10 @@ use \App\Mail\QuoteReceived;
 use \App\Mail\Outbid;
 use \App\Mail\BidPlaced;
 use \App\Mail\ActionRequired;
+use \App\Mail\WelcomeUser;
+use \App\Mail\QuoteAccepted;
+use \App\Mail\QuoteDeclined;
+use \App\Mail\QuoteWithdrawn;
 
 use \Exception;
 
@@ -30,6 +34,10 @@ class NotificationLogic {
         "Outbid" => "O",
         "Bid placed" => "BP",
         "Action required" => "A",
+        "New User" => "N",
+        "Quote accepted" => "QA",
+        "Quote declined" => "QD",
+        "Quote withdrawn" => "QW",
     );
     
     /**
@@ -99,6 +107,58 @@ class NotificationLogic {
         $date = new \DateTime();
         $mailSent = new MailSent;
         $mailSent->type = "A";
+        $mailSent->user = $user->id;
+        $mailSent->user_email = $user->str_email;
+        $mailSent->date_sent = $date->format('Y-m-d H:i:s');
+        $mailSent->save();
+    }
+
+    public static function userSignedUp( $user )
+    {
+        \Mail::to ( $user->str_email )->send( new WelcomeUser( $user ) );
+
+        $date = new \DateTime();
+        $mailSent = new MailSent;
+        $mailSent->type = "N";
+        $mailSent->user = $user->id;
+        $mailSent->user_email = $user->str_email;
+        $mailSent->date_sent = $date->format('Y-m-d H:i:s');
+        $mailSent->save();
+    }
+
+    public static function quoteAccepted( $user, $listing )
+    {
+        \Mail::to ( $user->str_email )->send ( new QuoteAccepted( $user, $listing ) );
+        
+        $date = new \DateTime();
+        $mailSent = new MailSent;
+        $mailSent->type = "QA";
+        $mailSent->user = $user->id;
+        $mailSent->user_email = $user->str_email;
+        $mailSent->date_sent = $date->format('Y-m-d H:i:s');
+        $mailSent->save();
+    }
+
+    public static function quoteDeclined( $user, $listing )
+    {
+        \Mail::to ( $user->str_email )->send ( new QuoteDeclined( $user, $listing ) );
+        
+        $date = new \DateTime();
+        $mailSent = new MailSent;
+        $mailSent->type = "QD";
+        $mailSent->user = $user->id;
+        $mailSent->user_email = $user->str_email;
+        $mailSent->date_sent = $date->format('Y-m-d H:i:s');
+        $mailSent->save();
+    }
+
+    public static function quoteWithdrawn( $user, $listing )
+    {
+        \Mail::to ( $user->str_email )->send ( new QuoteWithdrawn( $user, $listing ) );
+        
+        $date = new \DateTime();
+        $mailSent = new MailSent;
+        $mailSent->type = "QW";
         $mailSent->user = $user->id;
         $mailSent->user_email = $user->str_email;
         $mailSent->date_sent = $date->format('Y-m-d H:i:s');

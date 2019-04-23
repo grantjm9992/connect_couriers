@@ -31,6 +31,7 @@ class MyListingsController extends BaseController
             $this->id = $_REQUEST['id'];
             $this->listing = Listings::where('id_listing', $this->id)->first();
         }
+        if ( (int)$_SESSION['id_user_type'] === 2 ) return \Redirect::to('MyAccount')->send();
     }
 
     public function defaultAction() {
@@ -115,6 +116,8 @@ class MyListingsController extends BaseController
 
     public function summaryAction()
     {
-        ListingsOU::summary();
+        $this->cont->body = ListingsOU::summary();
+
+        return $this->RenderView();
     }
 }

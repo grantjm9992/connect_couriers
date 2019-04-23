@@ -24,8 +24,9 @@ class ManAndVanController extends BaseController
     public function defaultAction()
     {
         $categories = Categories::get();
-        $this->cont->body = view('home/index', array(
-            'categories' => $categories
+        $this->cont->body = view('home/manandvan', array(
+            'categories' => $categories,
+            "image" => url('archivos/img/man-and-van.jpg')
         ));
         return $this->RenderView();
     }

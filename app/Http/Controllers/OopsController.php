@@ -8,27 +8,18 @@ use App\Http\Controllers\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
-use \App\Providers\TranslationProvider;
 use Illuminate\Http\Request;
 
-use \App\Categories;
-
-class EbayGoodsController extends BaseController
+class OopsController extends Controller
 {
-
-    public function __construct() {
+    public function __construct()
+    {
         $this->secure = 1;
         parent::__construct();
-        $this->set_menu = view('js/scroll_menu');
     }
 
     public function defaultAction()
     {
-        $categories = Categories::get();
-        $this->cont->body = view('home/index', array(
-            'categories' => $categories
-        ));
-        return $this->RenderView();
+        return view('error/page_not_found');
     }
-
 }

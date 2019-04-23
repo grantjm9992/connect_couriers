@@ -37,7 +37,7 @@
                                             </div>
                                         </div>
                                         <div class="col-6">
-                                            <a href="MyListings.detail?id={{ $row->id_listing }}" class="btn btn-outline-success">View summary</a>
+                                            <a href="MyListings.summary?id={{ base64_encode($row->id_listing) }}" class="btn btn-outline-success">View summary</a>
                                         </div>
                                     </div>
                             </div>

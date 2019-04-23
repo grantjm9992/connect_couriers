@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Routing\Route;
 use App\Http\Controllers\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -20,8 +21,41 @@ use \App\Couriers;
 class MyAccountController extends BaseController
 {
 
+    const USER_ACTIONS = array(
+        "myActiveListings", "myAcceptedQuotes", "myExpiredListings", "edit"
+    );
+
+    const COURIER_ACTIONS = array(
+        "toggleFavs", "editCourier"
+    );
+
+    protected function compareAction()
+    {
+        
+        $response = true;
+        $url = url('');
+        $current = url()->current();
+        $current = str_replace($url, '', $current);
+        $current = substr( $current, strpos($current, '.') + 1 );
+
+        if ( (int)$_SESSION['id_user_type'] === 1 )
+        {
+            $response = ( in_array($current, self::COURIER_ACTIONS ) ) ? false : true;
+        }
+        if ( (int)$_SESSION['id_user_type'] === 2 )
+        {
+            $response = ( in_array($current, self::USER_ACTIONS ) ) ? false : true;
+        }
+        return $response;
+    }
+
     public function __construct() {
         parent::__construct();
+        if ( $this->compareAction() === false ) 
+        {
+            $url = url()->previous();
+            return \Redirect::to($url)->send();
+        }
     }
 
     public function defaultAction() {

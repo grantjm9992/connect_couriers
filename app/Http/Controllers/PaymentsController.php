@@ -104,6 +104,9 @@ class PaymentsController extends Controller
         $notification->str_message = "Quote accepted successfully";
         $notification->bln_notified = 0;
         $notification->save();
+
+        $quoter = User::where('id', $quote->id_user )->first();
+        \NotificationLogic::quoteAccepted( $quoter, $listing );
         return json_encode(
             array(
                 "success" => 1,
