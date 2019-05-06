@@ -42,7 +42,9 @@
                         <i class="fas fa-file-image"></i> Images
                     </div>
                     <div class="card-body row">
-                        {!! $img !!}
+                        <div class="col-9 mx-auto" id="images">
+                            {!! $img !!}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -255,4 +257,14 @@
             }
         })
     }
+    $(document).ready( function() {
+        $('#images').slick({
+            dots: true,
+            infinite: true,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            nextArrow: "<div class='navSlick right'><i class='fas fa-arrow-right'></i></div>",
+            prevArrow: "<div class='navSlick left'><i class='fas fa-arrow-left'></i></div>"
+        });
+    });
 </script>

@@ -48,7 +48,7 @@ class DeliveriesController extends BaseController
         $img = "";
         foreach( $images as $image )
         {
-            $url = "data/listings/$image->id_listing/$image->file_name";
+            $url = $image->file_name;
             $img .= "<div class='col-4' style='line-height: 100px;'><img style='max-width: 100%; max-height: 100%;' src='$url'/></div>";
         }
 
@@ -96,10 +96,12 @@ class DeliveriesController extends BaseController
 
     public function searchAction()
     {
+        $categories = \App\Categories::orderBy('str_category', 'ASC')->get();
         $html = $this->getListingCards();
 
         $this->cont->body = view('deliveries/search', array(
-            'listings' => $html
+            'listings' => $html,
+            "categories" => $categories
         ));
 
         return $this->RenderView();

@@ -12,7 +12,13 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-12 col-md-6 md-inline-flex sm-block" style="">
-                            <div style="min-width: 150px; text-align: center;">
+                            <div style="min-width: 150px; margin: 0 15px 0 0; text-align: center; height: fit-content; position: relative;">
+                                @if ( $userStatus['status'] == "online" )
+                                <div style="height: 13px; width: 100%; font-size: 13px;line-height: 13px; background-color: rgba(255,255,255,0.8); position: absolute; left: 0; bottom: 10px;">Online <span style="float: right; height: 13px; width: 13px; background-color: green; border-radius: 50%;"></span>
+                                </div>
+                                @else
+                                <div data-tooltip-content="#status_tooltip" tooltip style="height: 13px; width: 13px; border-radius: 50%; background-color: grey; position: absolute; right: 10px; bottom: 10px;"></div>
+                                @endif
                                 <img src="archivos/img/avatar.png" style="max-width: 128px; max-height: 128px; border-radius: 50%;">
                             </div>
                             <div class="public-profile">
@@ -298,4 +304,18 @@
         </tbody>
     </table>
     @endif
+
+    <table class="width100" id="status_tooltip">
+        <tbody>
+            <tr>
+                <td>
+                    @if( $userStatus['status'] != "online" )
+                        {{ $userStatus['message'] }}
+                    @else
+                        {{ $userStatus['status'] }}
+                    @endif
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </div>

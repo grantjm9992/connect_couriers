@@ -24,16 +24,13 @@
                                     <div class="title">
                                         {{ $row->str_title }}
                                     </div>
-                                    <div class="detail row" style="margin: 0;">
-                                        <div class="col-6">
+                                    <div class="row" style="margin: 0;">
+                                        <div class="col-6" style="font-size: 14px; font-style: unset;">
                                             <div class="row">
-                                                {{ $row->str_description }}
+                                                <i class="fas fa-map-marker-alt green"></i>&nbsp;&nbsp;&nbsp;Collection: {{ $row->collection_postcode }}
                                             </div>
                                             <div class="row">
-                                                Quotes: 
-                                            </div>
-                                            <div class="row">
-                                                Date listed: 
+                                                <i class="fas fa-map-marker-alt red"></i>&nbsp;&nbsp;&nbsp;Delivery: {{ $row->delivery_postcode }}
                                             </div>
                                         </div>
                                         <div class="col-6">

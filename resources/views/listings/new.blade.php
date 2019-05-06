@@ -1,4 +1,5 @@
 @inject('translator', 'App\Providers\TranslationProvider')
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAAs6KdmD9OYa2BHZb734w7dmA0QWWa5Dk&libraries=places"></script>
 <div class="section">
     <form action="Listings.add">
         <div class="row">
@@ -50,6 +51,10 @@
                 $('[name="bln_flexible"]').val(0);
                 $('.e-datewidget').show(500);
             }
-        })
+        });
+        var inputFrom = document.getElementById('collection_postcode');
+        var inputTo = document.getElementById('delivery_postcode');
+        autocompleteFrom = new google.maps.places.Autocomplete(inputFrom, null);
+        autocompleteTo = new google.maps.places.Autocomplete(inputTo, null);
     });
 </script>

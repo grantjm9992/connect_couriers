@@ -17,6 +17,10 @@ class Listings extends Model
     protected $table = "listings";
     protected $primaryKey = "id_listing";
 
+    protected $fillable = [
+        "str_title", "id_category", "str_description", "height", "width", "length", "weight", "weight_unit", "length_unit", "collection_postcode", "delivery_postcode", "distance"
+    ];
+
     public static function getListingWithUser($id)
     {
         $data = DB::select('SELECT * FROM listings LEFT JOIN users ON users.id = listings.id_user WHERE id_listing = '.$id);
@@ -34,22 +38,38 @@ class Listings extends Model
 
     public function updateFromForm()
     {
-        $this->str_title = $_REQUEST['str_title'];
-        $this->id_category = $_REQUEST['id_category'];
-        $this->str_description = $_REQUEST['str_description'];
-        $this->height = $_REQUEST['height'];
-        $this->width = $_REQUEST['width'];
-        $this->length = $_REQUEST['length'];
-        $this->weight = $_REQUEST['weight'];
-        $this->weight_unit = $_REQUEST['weight_unit'];
-        $this->length_unit = $_REQUEST['length_unit'];
-        $this->collection_postcode = $_REQUEST['collection_postcode'];
-        $this->delivery_postcode = $_REQUEST['delivery_postcode'];
+        $this->update($_REQUEST);
+        $this->updateItems();
         if ( $_REQUEST['collection_postcode'] != $_REQUEST['original_cpo'] || $_REQUEST['delivery_postcode'] != $_REQUEST['original_dpo'] )
         {
-            $this->distance = $this->getDistance($_REQUEST['collection_postcode'], $_REQUEST['delivery_postcode']);
+            $origin = urlencode($this->collection_postcode);
+            $destination = urlencode($this->delivery_postcode);
+            $url = "https://maps.googleapis.com/maps/api/distancematrix/json?&origins=$origin&destinations=$destination&key=AIzaSyAAs6KdmD9OYa2BHZb734w7dmA0QWWa5Dk";
+            $data = json_decode( file_get_contents ( $url ) );
+            $this->distance = $data->rows[0]->elements[0]->distance->text;
         }
         $this->save();
+    }
+
+    public function getItems()
+    {
+        return Items::where('id_listing', $this->id_listing)->get();
+    }
+
+    public function updateItems()
+    {
+        $items = Items::where('id_listing', $this->id_listing)->get();
+        foreach ( $items as $item )
+        {
+            if ( isset ( $_REQUEST["str_description_$item->id"] ) && $_REQUEST["str_description_$item->id"] != "" ) $item->str_description = $_REQUEST["str_description_$item->id"];
+            if ( isset ( $_REQUEST["length_$item->id"] ) && $_REQUEST["length_$item->id"] != "" ) $item->length = $_REQUEST["length_$item->id"];
+            if ( isset ( $_REQUEST["width_$item->id"] ) && $_REQUEST["width_$item->id"] != "" ) $item->width = $_REQUEST["width_$item->id"];
+            if ( isset ( $_REQUEST["height_$item->id"] ) && $_REQUEST["height_$item->id"] != "" ) $item->height = $_REQUEST["height_$item->id"];
+            if ( isset ( $_REQUEST["length_unit_$item->id"] ) && $_REQUEST["length_unit_$item->id"] != "" ) $item->length_unit = $_REQUEST["length_unit_$item->id"];
+            if ( isset ( $_REQUEST["weight_$item->id"] ) && $_REQUEST["weight_$item->id"] != "" ) $item->weight = $_REQUEST["weight_$item->id"];
+            if ( isset ( $_REQUEST["weight_unit_$item->id"] ) && $_REQUEST["weight_unit_$item->id"] != "" ) $item->weight_unit = $_REQUEST["weight_unit_$item->id"];
+            $item->save();
+        }
     }
 
     protected function getDistance($cpc, $dpc)
@@ -63,13 +83,19 @@ class Listings extends Model
         $date = new \DateTime();
         $original = Listings::where('id_listing', $id)->first();
         $new = new Listings;
+        /*
+        $new = Listings::create( $original->getAttributes() );
+        */
+        $new->date_listed = $date->format('Y-m-d H:i:s');
+        $new->id_status = "1";
+        $date->modify('+ 1 month');
+        $new->expires_on = $date->format('Y-m-d H:i:s');
+
         $new->str_title = $original->str_title;
         $new->str_description = $original->str_description;
         $new->id_user = $original->id_user;
         $new->id_category = $original->id_category;
-        $new->id_status = "1";
         $new->id_priority = $original->id_priority;
-        $new->date_listed = $date->format('Y-m-d H:i:s');
         $new->collection_postcode = $original->collection_postcode;
         $new->delivery_postcode = $original->delivery_postcode;
         $new->height = $original->height;
@@ -78,8 +104,6 @@ class Listings extends Model
         $new->units = $original->units;
         $new->weight = $original->weight;
         $new->distance = $original->distance;
-        $date->modify('+ 1 month');
-        $new->expires_on = $date->format('Y-m-d H:i:s');
         $new->save();
 
         $listing_images = ImagesListings::where('id_listing', $id)->get();
@@ -120,14 +144,16 @@ class Listings extends Model
         $listing->delivery_postcode = $_REQUEST['delivery_postcode'];
         $listing->collection_postcode = $_REQUEST['collection_postcode'];
         if ( isset( $_SESSION['id'] ) && $_SESSION['id'] != "" ) $listing->id_user = $_SESSION['id'];
-        //$listing->bln_flexible = $_REQUEST['bln_flexible'];
+        //if ( isset( $_REQUEST['bln_flexible'] ) && $_REQUEST['bln_flexible'] != "" ) $listing->bln_flexible = $_REQUEST['bln_flexible'];
         $listing->delivery_date1 = $dd1->format('Y-m-d');
         $date->modify('+ 1 month');
         $listing->expires_on = $date->format('Y-m-d H:i:s');
         
-        //$url = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=OL139NS&destinations=BL99ST&mode=driving&key=AIzaSyA-5_Xlc2AzrqCECR9hGx210eUTCBuOOZI";
-        //$data = file_get_contents($url);
-        //$listing->distance = $data->destination_addresses;
+        $origin = urlencode($listing->collection_postcode);
+        $destination = urlencode($listing->delivery_postcode);
+        $url = "https://maps.googleapis.com/maps/api/distancematrix/json?&origins=$origin&destinations=$destination&key=AIzaSyAAs6KdmD9OYa2BHZb734w7dmA0QWWa5Dk";
+        $data = json_decode( file_get_contents ( $url ) );
+        $listing->distance = $data->rows[0]->elements[0]->distance->text;
         if ( $dontSave === true ) return $listing;
         $listing->save();
     }
@@ -166,7 +192,7 @@ class Listings extends Model
                 {
                     $listing = self::AddListing(true);
                     $_SESSION['listingToAdd'] = $listing;
-                    die (\Redirect::to('Login'));
+                    \Redirect::to('Login')->send();
                 }
                 $_SESSION['id'] = $user->id;
                 $_SESSION['user'] = rtrim($user->str_name).' '.rtrim($user->str_surname);
@@ -410,6 +436,8 @@ class Listings extends Model
         {
             $where .= " AND (SELECT COUNT(*) FROM quotes WHERE quotes.id_listing = listings.id_listing) = 0 ";
         }
+
+        if( isset( $_REQUEST['id_category'] ) && $_REQUEST['id_category'] != "" ) $where .= " AND listings.id_category = ".$_REQUEST['id_category']." ";
 
         return $where;
     }

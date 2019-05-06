@@ -44,6 +44,7 @@ class CouriersController extends BaseController
         }
         $courier->regions = substr($regions, 0, strlen($regions) - 1);
         $feedback = UserFeedback::getProfileArray($id);
+        $userStatus = \UserLogic::_getUserStatus( $user );
 
         $feedback_table = $this->feedbackPaginated();
         // Algo de pagination con eso ^^ //
@@ -59,7 +60,8 @@ class CouriersController extends BaseController
         $this->cont->body = view('couriers/publicprofile', array(
             "courier" => $courier,
             "feedback" => $feedback,
-            "feedback_table" => $feedback_table
+            "feedback_table" => $feedback_table,
+            "userStatus" => $userStatus
         ));
 
         return $this->RenderView();

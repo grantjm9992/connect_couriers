@@ -122,3 +122,38 @@ function checkNotifications()
         }
     });
 }
+
+function setUser()
+{
+    $.ajax({
+        type: "POST",
+        url: "VerifyUser.setUser",
+        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+        success: function(data)
+        {
+        }
+    });
+}
+
+$('.detail-image > span').on("click", function() {
+    var dataId = $(this).data('id');
+});
+
+function removeImage(id)
+{
+    $.ajax({
+        type: "POST",
+        url: "MyListings.removeImage",
+        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+        data: {
+            id: id
+        },
+        success: function(data)
+        {
+            if ( data == "OK" )
+            {
+                $('[data-id="'+id+'"]').remove();
+            }
+        }
+    });
+}

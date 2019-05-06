@@ -552,6 +552,10 @@ body {
     color: #fff;
 }
 
+.mylisting {
+    min-height: 30px;
+    font-size: 16px !important;
+}
 
 .mylisting > p {
     padding: 4px 0;
@@ -609,6 +613,36 @@ body {
     cursor: pointer;   
 }
 
+.item-section
+{
+    border-top: 0.5px solid rgba(0,0,0,0.2);
+    border-bottom: 0.5px solid rgba(0,0,0,0.2);
+    padding: 10px 0;
+}
+
+.item-section > div {
+    padding: 5px 0;
+}
+
+.navSlick {
+    position: absolute;
+    top: calc( 50% - 38px );
+    cursor: pointer;
+    padding: 7px;
+    z-index: 10;
+    border-radius: 4px;
+    background: #e1e1e1;
+    color: black;
+}
+
+.right {
+    right: 0;
+}
+
+.left {
+    left: 0;
+}
+
 .quote-section > div
 {
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
@@ -618,8 +652,31 @@ body {
     border-bottom: none;
 }
 
+.detail-image {
+    display: inline-block;
+    height: 220px;
+    width: 154px;
+    padding: 9px 10px;
+}
+
+.detail-image > div {
+    height: 160px;
+    line-height: 160px;
+}
+
+.detail-image > div > img {
+    max-height: 160px;
+    width: 132px;
+}
+
+.detail-image > span {
+    cursor: pointer;
+    font-size: 16px;
+}
+
 .card
 {
+    margin: 10px 0;
     border-color: #6D5959;
 }
 .card-header
@@ -890,6 +947,12 @@ table td, th {
     {
         font-size: 11px;
         overflow: hidden;
+    }
+    .mylistingtitle {
+        margin-top: 12px;
+    }
+    .mylisting {
+        text-align: center;
     }
 }
 

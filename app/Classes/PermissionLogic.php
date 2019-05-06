@@ -13,7 +13,7 @@ use \App\Mail\AdminCheckUsername;
 
 class PermissionLogic {
 
-    const ADMINISTRATORS = array("phisoluciones.es@gmail.com","gary@gmacd.co.uk");
+    const ADMINISTRATORS = array("phisoluciones.es@gmail.com","gary@gmacd.co.uk", "info@couriersconnect.com");
     public static function sendSignupCheck($username = null)
     {
         $username = ( $username !== null ) ? $username : $_REQUEST['username'];

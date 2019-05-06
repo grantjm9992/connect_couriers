@@ -121,9 +121,6 @@
 
 .slick-dots
 {
-    position: absolute;
-    bottom: -25px;
-
     display: block;
 
     width: 100%;
@@ -154,14 +151,14 @@
 
     display: block;
 
-    width: 20px;
-    height: 20px;
-    padding: 5px;
+    width: 13px;
+    height: 13px;
 
     cursor: pointer;
 
     color: transparent;
     border: 0;
+    border-radius: 50%;
     outline: none;
     background: transparent;
 }
@@ -184,15 +181,16 @@
     position: absolute;
     top: 0;
     left: 0;
+    border-radius: 50%;
 
-    width: 20px;
-    height: 20px;
+    width: 13px;
+    height: 13px;
 
     content: '•';
     text-align: center;
 
-    opacity: .25;
-    color: black;
+    opacity: .55;
+    background-color: black;
 
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -201,6 +199,7 @@
 {
     opacity: .75;
     color: black;
+    background-color: black;
 }
 
 a:hover {

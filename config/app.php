@@ -225,6 +225,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'PermissionLogic' => App\Classes\PermissionLogic::class,
         'NotificationLogic' => App\Classes\NotificationLogic::class,
+        'UserLogic' => \App\Classes\UserLogic::class,
 
     ],
 

@@ -13,6 +13,15 @@
                             <input type="text" name="query" class="form-control">
                         </div>
                         <div class="form-row form-group">
+                            <label for="id_category">Category</label>
+                            <select name="id_category" id="id_category" class="form-control">
+                                <option value="">All</option>
+                                @foreach ( $categories as $category )
+                                    <option value="{{ $category->id_category }}">{{ $category->str_category }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-row form-group">
                             <label for="order">{{ $translator->get("order") }}</label>
                             <select name="order" id="order" class="form-control">
                                 <option value="date_listed, DESC">{{ $translator->get("newest_first") }}</option>

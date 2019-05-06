@@ -60,30 +60,38 @@ class ListingsOU extends ClassOU
     public static function summary(Listings $listing = null )
     {
         $listing = ( is_null( $listing ) ) ? Listings::where('id_listing', base64_decode( $_REQUEST['id'] ) )->first() : $listing;
+
         $AcceptedQuote = $listing->getAcceptedQuote();
-        $Messages = $AcceptedQuote->getMessages( $AcceptedQuote );
 
-        $messages = "";
-        if( !is_null ( $Messages ) )
-        {
-            foreach ( $Messages as $message )
-            {
-                $messages .= self::addMessage( $message );
-            }
-        }
-
-        $conversation = view('mylistings/conversation', array(
-            "messages" => $messages
+        $allMessages = \App\Messages::getAllForSummary( $AcceptedQuote );
+        $conversation = view("mylistings/summary_card", array(
+            "listing" => $listing
         ));
+        foreach ( $allMessages as $row )
+        {
+            $conversation .= view("mylistings/message", array(
+                "user" => self::getUserById(),
+                "message" => $row
+            ));
+        }
 
         $url = ( isset( $_SERVER['HTTP_REFERER'] ) && $_SERVER['HTTP_REFERER'] != "" ) ? $_SERVER['HTTP_REFERER'] : url("MyAccount.myAcceptedQuotes");
 
         $content = view('mylistings/summary', array(
+            "listing" => $listing,
+            "accepted_quote" => $AcceptedQuote,
             "conversation" => $conversation,
             "url" => $url
         ));
 
         return $content;
+    }
+
+    public static function getExtraItemForm( $item )
+    {
+        return view('mylistings/extra_item_form', array(
+            "item" => $item
+        ));
     }
 
     public static function addMessage( $message )
@@ -92,5 +100,38 @@ class ListingsOU extends ClassOU
             "message" => $message,
             "user" => self::getUserById()
         ));
+    }
+
+    public static function uploadImage()
+    {
+        if (!empty($_FILES)) {
+            
+            $tempFile = $_FILES['file']['tmp_name'];
+            
+            $img = new \App\ImagesListings;
+            $img->id_listing = $_REQUEST['id'];
+            $img->save();
+
+            $targetDir = "data/listings/$img->id_listing/img/";
+            if (!is_dir( $targetDir ) )
+            {
+                mkdir( $targetDir, 0777, true );
+            }
+            $path = $_FILES['file']['name'];
+            $ext = pathinfo($path, PATHINFO_EXTENSION);
+            
+            $targetFile = "$targetDir.$img->id.".$ext;
+            $img->file_name = $targetFile;
+            $img->save();
+            move_uploaded_file($tempFile , $targetFile);
+        }
+    }
+
+    public static function removeImage()
+    {
+        $image = \App\ImagesListings::where('id', $_REQUEST['id'])->first();
+        if ( file_exists($image->file_name ) ) unlink ( $image->file_name );
+        $image->delete();
+        return "OK";
     }
 }

@@ -26,11 +26,14 @@ class UsersController extends Controller
         $user->userWithFeedback();
         $feedback = \App\UserFeedback::getProfileArray($id);
         $feedback_table = $this->feedbackPaginatedAction();
+        
+        $userStatus = \UserLogic::_getUserStatus( $user );
 
         $this->cont->body = view('users/publicprofile', array(
             "user" => $user,
             "feedback" => $feedback,
-            "feedback_table" => $feedback_table
+            "feedback_table" => $feedback_table,
+            "userStatus" => $userStatus
         ));
 
         return $this->RenderView();

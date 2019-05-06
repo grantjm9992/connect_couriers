@@ -21,3 +21,12 @@
         </span>
     </div>
 </nav> 
+
+<script>
+    $(document).ready( function() {
+        setUser();
+        setInterval(function() {
+            setUser();
+        }, 300000);
+    });
+</script>

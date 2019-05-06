@@ -114,6 +114,7 @@ class Controller extends BaseController
         $this->cont->footer = view('layout/footer_home');
         if ( isset( $_SESSION['id'] ) )
         {
+            \UserLogic::updateUserStatus();
             if ( isset ( $_SESSION['admin'] ) )
             {
                 $this->cont->header = view('layout/header_admin');

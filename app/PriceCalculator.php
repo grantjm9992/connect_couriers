@@ -4,6 +4,13 @@ namespace App;
 
 class PriceCalculator
 {
+
+    const PRICEARRAY = array(
+        "minimum" => 5,
+        "comission_ratio" => 0.11,
+        "price_with_comission" => 1.11
+    );
+
     public $publicPrice;
     public $courierPrice;
     public $commission;
@@ -23,15 +30,15 @@ class PriceCalculator
 
     public function fromBase()
     {
-        if ( $this->courierPrice <= 50 )
+        if ( (int) ($this->courierPrice * self::PRICEARRAY['comission_ratio'] ) <= (int)(self::PRICEARRAY['minimum']) )
         {
-            $this->publicPrice = $this->courierPrice + 5;
-            $this->comission = 5;
+            $this->publicPrice = $this->courierPrice + self::PRICEARRAY['minimum'];
+            $this->comission = self::PRICEARRAY['minimum'];
         }
         else
         {
-            $this->publicPrice = floor($this->courierPrice * 1.11);
-            $this->comission = floor($this->courierPrice * 0.11 );
+            $this->publicPrice = floor($this->courierPrice * self::PRICEARRAY['price_with_comission']);
+            $this->comission = floor($this->courierPrice * self::PRICEARRAY['comission_ratio'] );
         }
     }
 }

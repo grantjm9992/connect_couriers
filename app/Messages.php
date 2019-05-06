@@ -45,4 +45,15 @@ class Messages extends Model
 
         return $message[0];        
     }
+
+    public static function getAllForSummary( $quote  )
+    {
+        $data = DB::select("SELECT * FROM messages_sent
+                            LEFT JOIN conversations ON conversations.id = messages_sent.id_conversation
+                            WHERE conversations.id_listing = $quote->id_listing
+                            AND conversations.id_courier = $quote->id_user
+                            ORDER BY messages_sent.date_sent ASC ");
+
+        return $data;
+    }
 }

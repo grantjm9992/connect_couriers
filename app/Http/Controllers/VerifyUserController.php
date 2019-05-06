@@ -22,6 +22,11 @@ class VerifyUserController extends Controller
 
     }
 
+    public function setUserAction()
+    {
+        \UserLogic::updateUserStatus();
+    }
+
     public function defaultAction()
     {
         if ( isset( $_REQUEST['key'] ) && $_REQUEST['key'] != "" && isset( $_REQUEST['secret'] ) && $_REQUEST['secret'] != "" )

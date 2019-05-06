@@ -44,14 +44,56 @@ class MyListingsController extends BaseController
         $listing = Listings::where('id_listing', $this->id)->first();
         $categories = Categories::get();
 
+        $extraItems = "";
+        foreach ( $listing->getItems() as $item )
+        {
+            $extraItems .= ListingsOU::getExtraItemForm( $item );
+        }
+
+        $imagesListing = \App\ImagesListings::where('id_listing', $this->id)->get();
+
+        $images = "";
+        foreach ( $imagesListing as $row )
+        {
+            if ( file_exists( $row->file_name ) )
+            {
+                $images .= "<div data-id='$row->id' class='detail-image'><div><img src='$row->file_name' /></div><span onclick='removeImage($row->id)'><i class='fas fa-minus-circle red'></i> Delete </span></div>";
+            }
+            else
+            {
+                $row->delete();
+            }
+        }
+
         $this->cont->body = view('mylistings/detail', array(
             'listing' => $listing,
             "categories" => $categories,
-            "returnURL" => $url
+            "returnURL" => $url,
+            "images" => $images,
+            "extraItems" => $extraItems
         ));
 
         return $this->RenderView();
 
+    }
+
+    public function newItemAction() 
+    {
+        $item = \App\Items::create();
+        $item->id_listing = $_REQUEST['id_listing'];
+        $item->save();
+        return ListingsOU::getExtraItemForm( $item );
+    }
+
+    public function removeItemAction()
+    {
+        $item = \App\Items::where('id', $_REQUEST['id'])->first();
+        $item->delete();
+        return json_encode(
+            array(
+                "success" => 1
+            )
+        );
     }
 
     public function relistAction()
@@ -119,5 +161,15 @@ class MyListingsController extends BaseController
         $this->cont->body = ListingsOU::summary();
 
         return $this->RenderView();
+    }
+
+    public function uploadImageAction()
+    {
+        return ListingsOU::uploadImage();
+    }
+
+    public function removeImageAction()
+    {
+        return ListingsOU::removeImage();
     }
 }

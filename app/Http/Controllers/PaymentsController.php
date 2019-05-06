@@ -78,6 +78,12 @@ class PaymentsController extends Controller
         $quote = Quotes::where('id_quote', $id_quote )->first();
         $listing = Listings::where('id_listing', $id_listing )->first();
 
+        $payment = new \App\Payments;
+        $payment->id_listing = $listing->id_listing;
+        $payment->id_payment = $response->result->id;
+        $payment->file = "storage/payments/$id_listing"."_".$date->format('YmdHis').".json";
+        $payment->save();
+
         file_put_contents( public_path( "storage/payments/$id_listing"."_".$date->format('YmdHis').".json"  ), json_encode( $response ) );
         $isOkay = $this->checkPayment ($response->result->purchase_units[0]
                                         ->payments->captures[0], $listing, $quote);
