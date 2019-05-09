@@ -60,17 +60,8 @@ class PaymentsController extends Controller
     {
         
         $date = new \DateTime();
-        $clientId = env("PAYPAL_CLIENT_ID");
-        $clientSecret = env("PAYPAL_SECRET");
 
-        $environment = new SandBoxEnvironment($clientId, $clientSecret);
-        $client = new PayPalHttpClient($environment);
-
-        $orderID = $_REQUEST['orderID'];
-        //$client = PayPalHttpClient::client();
-        $response = $client->execute(new OrdersGetRequest($orderID));
-
-        $response->result->purchase_units[0]->amount->value;
+        $response = $_REQUEST['details'];
 
         // Get objects
         $id_listing = base64_decode( $_REQUEST['id_listing'] );
