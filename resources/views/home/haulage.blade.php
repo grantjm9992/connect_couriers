@@ -1,11 +1,11 @@
 @inject('translator', 'App\Providers\TranslationProvider')
 
-<div class="home-splash">
+<div class="home-splash" alt="Courier Haulage Service Shiply" style="background-image: url('couriers-service-quote/haulage-courier-service.jpg');">
     <div class="splash-container">
-        <div class="title">
+        <div class="title" style="text-shadow: 2px 2px 2px #454545;">
             <h1>Get Haulage Quotes with Couriers Connect</h1>
         </div>
-        <div class="tag-line">
+        <div class="tag-line" style="text-shadow: 2px 2px 2px #454545;">
             <h4>Courier quote comparison made easy</h4>
         </div>
         <form action="Listings.new">

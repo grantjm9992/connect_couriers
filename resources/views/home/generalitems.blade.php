@@ -1,9 +1,11 @@
 @inject('translator', 'App\Providers\TranslationProvider')
 
-<div class="home-splash" style="background-image: url('{{ $image }}');">
+<div class="home-splash" style="background-image: url('couriers-service-quote/courier-quote-compare.jpg');">
     <div class="splash-container">
         <div class="title" style="text-shadow: 2px 2px 2px #454545;">
-            <h1>Get Pets and Livestpck Delivery Quotes with Couriers Connect</h1>
+            <h1>
+                Get Delivery Quotes with Couriers Connect
+            </h1>
         </div>
         <div class="tag-line" style="text-shadow: 2px 2px 2px #454545;">
             <h4>Courier quote comparison made easy</h4>
@@ -31,34 +33,38 @@
 <div class="row">
 <div class="col-12 col-lg-9">
     <h1>
-    Courier Service Quotes for Livestock, Pets and Equestrian:
+    Courier Comparison Quote Site for all general goods and vehicles
     </h1>
     <p>
-    Quickly be in contact with thousands of possible couriers and haulage companies to ship all your loved and valuable pets and livestock. We have couriers specialising in the transportation of live stock and all living animals. They are waiting to offer you the best competitive courier quotes. Our carriers can move almost any animal anywhere including: Cats, Dogs, Fish, Small mammals, Birds, Reptiles, Rabbits, Amphibians, Horses, Equine, Chickens, Cows, Donkeys, Ducks, Ferrets, Goats, Hamsters, Lizards, Pigs and Hogs, Ponies, Pig, Sheep, Snakes and much more.
+    Couriers connect help you to connect to couriers and haulage companies to ship anything you may need delivering. Our trusted couriers can help you to move anything including: FURNITURE, MOTORBIKES, PUSHBIKES, GOKARTS, RIDEONS, CARS, BAY GOODS, FRAGILE ITEMS, BOATS, REMOVALS, GENERAL ITEMS, BOXES, OTHER VEHICLES, VEHICLE PARTS, MOVING HOME, HAULAGE, PALLETS, PIANOS, PETS & LIVESTOCK, WHITE GOODS, GARDEN EQUIPMENT, KITCHENS, BATHROOMS, FOOD , OFFICE FURNITURE, GENERATORS, ENGINES and just about anything else.
     </p>
     <p>
-    It's easy, simple and it’s much cheaper than going to a carrier directly for a specialised animal courier service. Just fill in our easy form to explain what live-stock and animals you require moving and the couriers and freight shipping companies will quote you with an unbelievable cheap price.
+    Just fill in our short form to explain what goods you need to move and wait for the couriers, freight companies and even a man with a van will contact you with an unbelievable cheap quality quote. It's easy, simple and most of all its much cheaper than going direct to a carrier for a dedicated courier service.
     </p>
     <p>
-    Although livestock transportation is a very specialised courier service if a courier is driving to deliver animals to Manchester from Devon etc. and the cargo doesn't fill the van or truck or it could even be a family going to Spain with a spare seat. There could be space on the trip or return trip for more animals or pets. They could collect your beloved pets or valuable live-stock for you. This gets the best price for you and the courier, it also saves money and helps to save the environment. The courier service you needed could be within the UK, Europe or even World Wide.
+    If a courier is driving to deliver a consignment in Birmingham to be delivered to Manchester and the cargo doesn't fill the van there could be space on the return trip for more goods. They could collect your parcels goods or any freight you may have. This gets you the best price and the courier company also saves money and helps to save the environment. The delivery service could be within the UK, Europe or any where in the World.
     </p>
     <p>
-    You are more likely to obtain the cheapest competitive quote from a courier if you send photographs with dimensions and weights if possible. After you have completed the quote comparison form just sit back and wait for the carrier quotes to roll in and give you the best cheapest prices possible. The more information you can give will get you the most quotes and you can then compare all the services available.
+    If you send photographs with dimensions and consignment weight you are more likely to obtain a cheap competitive quote. After you have filled out the quote comparison form just sit back and wait for the carrier quotes to roll in to give you the best possible price. The more information you can give will get you more quotes to compare as the couriers compete for your business.
     </p>
     <p>
-    Quotes will come in minutes but you can wait 24 hours or more to allow all the couriers to competitively quote. In the mean time you can ask any questions and even negotiate with hundreds of national or international freight shipping delivery services. You can compare the carrier's feedback for the service quality and price. You can then also leave feedback to help build a reliable courier service community.
+    Quotes can come in minutes, however it's best to wait 24 hours to allow all the couriers to quote. In the mean time you can ask questions and negotiate with the couriers that have quoted. You can also compare the carrier's feedback and you can then leave feedback yourself to help build a reliable and honest courier service community.
     </p>
     <p>
     We also recommend that you:
     <ul>
         <li>
-        Check insurance with the carrier as some couriers can offer increased insurance levels and it's important to know. As this is a specialised service you will need to add all relevant details for the animal and service that you think is important.
+        Check insurance levels with the carrier because some couriers can offer increased insurance levels and some can be very low. It's important to know and it's always a good idea to take photos before and after packaging in case an insurance claim is required. 
         </li>
         <li>
-        If your collection or delivery service needs to be made within a time window you should mention this on your quote compare listing, it could reduce quotes but if you need it you need it.
+        Check if there is a packaging service included for larger items or you may need to package these items yourself.
+        </li>
+        <li>
+        If you have a window of time for collection or delivery you should mention this on your quote compare listing for the couriers, it could reduce quotes but it is an option.
         </li>
     </ul>
-    Don't forget to check you animals when you receive them and to leave feedback so we can make the Couriers Connect experience a positive one for all.    </p>
+    Don't forget to leave feedback and to check you delivery when you receive it so we can make the Couriers Connect experience a positive one for all.
+    </p>
 </div>
 <div class="col-12 col-lg-3" style="padding: 5px 15px; background: #eee;">
     <h4 style="padding-bottom: 10px;">Why use us?</h4>

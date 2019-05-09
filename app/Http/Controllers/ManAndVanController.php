@@ -19,6 +19,9 @@ class ManAndVanController extends BaseController
     public function __construct() {
         $this->secure = 1;
         parent::__construct();
+        $this->title = "";
+        $this->description = "";
+        $this->keywords = "";
     }
 
     public function defaultAction()

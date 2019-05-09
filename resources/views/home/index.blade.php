@@ -166,6 +166,54 @@
                 </div>
             </a>
         </div>
+        <div class="col-12 col-sm-6 col-md-3 d-none d-md-block">
+            <a href="Haulage">
+                <div class="service-box">
+                    <div class="service-icon">
+                        <i class="fas fa-truck-loading"></i>
+                    </div>
+                    <div class="service-title">
+                        Haulage
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-12 col-sm-6 col-md-3 d-none d-md-block">
+            <a href="Pets-And-Livestock">
+                <div class="service-box">
+                    <div class="service-icon">
+                        <i class="fas fa-paw"></i>
+                    </div>
+                    <div class="service-title">
+                        Pets and Livestock
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-12 col-sm-6 col-md-3 d-none d-md-block">
+            <a href="Boats">
+                <div class="service-box">
+                    <div class="service-icon">
+                        <i class="fas fa-ship"></i>
+                    </div>
+                    <div class="service-title">
+                        Boats
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-12 col-sm-6 col-md-3 d-none d-md-block">
+            <a href="Other-Items">
+                <div class="service-box">
+                    <div class="service-icon">
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <div class="service-title">
+                        Other Items
+                    </div>
+                </div>
+            </a>
+        </div>
     </div>
 </div>
 <div class="section bkg-white" id="how">

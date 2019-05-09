@@ -1,9 +1,9 @@
 @inject('translator', 'App\Providers\TranslationProvider')
 
-<div class="home-splash" style="background-image: url('{{ $image }}');">
+<div class="home-splash" alt="Courier Haulage Service Shiply" style="background-image: url('couriers-service-quote/ebay-courier-service.jpeg');">
     <div class="splash-container">
         <div class="title" style="text-shadow: 2px 2px 2px #454545;">
-            <h1>Get Pets and Livestpck Delivery Quotes with Couriers Connect</h1>
+            <h1>Get Ebay Delivery Quotes with Couriers Connect</h1>
         </div>
         <div class="tag-line" style="text-shadow: 2px 2px 2px #454545;">
             <h4>Courier quote comparison made easy</h4>
@@ -17,7 +17,7 @@
                 </select>
                 <script>
                     $(document).ready( function() {
-                        $('#id_category').val(1);
+                        $('#id_category').val(9);
                     });
                 </script>
                 <div class="input-group-append">
@@ -31,34 +31,38 @@
 <div class="row">
 <div class="col-12 col-lg-9">
     <h1>
-    Courier Service Quotes for Livestock, Pets and Equestrian:
+    Compare Competitive Quotes for all your eBay Goods:
     </h1>
     <p>
-    Quickly be in contact with thousands of possible couriers and haulage companies to ship all your loved and valuable pets and livestock. We have couriers specialising in the transportation of live stock and all living animals. They are waiting to offer you the best competitive courier quotes. Our carriers can move almost any animal anywhere including: Cats, Dogs, Fish, Small mammals, Birds, Reptiles, Rabbits, Amphibians, Horses, Equine, Chickens, Cows, Donkeys, Ducks, Ferrets, Goats, Hamsters, Lizards, Pigs and Hogs, Ponies, Pig, Sheep, Snakes and much more.
+    Couriers connect will contact with thousands of possible couriers and haulage companies to ship all your eBay purchases and sales.
     </p>
     <p>
-    It's easy, simple and it’s much cheaper than going to a carrier directly for a specialised animal courier service. Just fill in our easy form to explain what live-stock and animals you require moving and the couriers and freight shipping companies will quote you with an unbelievable cheap price.
+    It's easy, simple and most of all it’s much cheaper than going direct to a carrier for a dedicated courier service. Just fill in our short form to explain what eBay goods you need to move and include a link or an eBay item number and wait for couriers, freight companies and even a man with a van to contact you with an unbelievably cheap quality quote for just about anything you buy on eBay.
     </p>
     <p>
-    Although livestock transportation is a very specialised courier service if a courier is driving to deliver animals to Manchester from Devon etc. and the cargo doesn't fill the van or truck or it could even be a family going to Spain with a spare seat. There could be space on the trip or return trip for more animals or pets. They could collect your beloved pets or valuable live-stock for you. This gets the best price for you and the courier, it also saves money and helps to save the environment. The courier service you needed could be within the UK, Europe or even World Wide.
+    For example if a courier is driving to deliver furniture or a car in Manchester from Birmingham and the cargo doesn't fill the van there could be space on the return trip or the outgoing journey for items you have purchased via eBay. They could collect your eBay items and deliver them directly to your home or place of work. You will get a very good courier price for your eBay purchase or sale and the courier company also saves money on empty trips or part loads. It also helps to save the environment. The courier service could collect and deliver your eBay goods within the UK, Europe or World Wide, you just need to ask.
     </p>
     <p>
-    You are more likely to obtain the cheapest competitive quote from a courier if you send photographs with dimensions and weights if possible. After you have completed the quote comparison form just sit back and wait for the carrier quotes to roll in and give you the best cheapest prices possible. The more information you can give will get you the most quotes and you can then compare all the services available.
+    You are more likely to obtain a cheaper competitive comparison quote for your eBay parcels from a courier company if you send the item number or a link. After you have filled out the quote comparison form for the eBay delivery just sit back and wait for the carrier quotes to roll in and give you the best price possible. The more information you can give will get you more quotes to compare as the couriers compete and this also drives down the price for any eBay deliveries.
     </p>
     <p>
-    Quotes will come in minutes but you can wait 24 hours or more to allow all the couriers to competitively quote. In the mean time you can ask any questions and even negotiate with hundreds of national or international freight shipping delivery services. You can compare the carrier's feedback for the service quality and price. You can then also leave feedback to help build a reliable courier service community.
+    Quotes can come in minutes, however it's best to wait 24 hours to allow all the couriers to quote. Whilst you are waiting you can ask questions and negotiate with hundreds of national or international delivery courier services for all your eBay items. You can also compare the carrier's feedback and you can then also leave feedback yourself to help build a reliable and honest courier service community.
     </p>
     <p>
     We also recommend that you:
     <ul>
         <li>
-        Check insurance with the carrier as some couriers can offer increased insurance levels and it's important to know. As this is a specialised service you will need to add all relevant details for the animal and service that you think is important.
+        Check insurance with the carrier as some couriers can offer increased insurance levels and it's important to know the levels. It's also a good idea to take a photo before and after packaging in-case in the event that an insurance claim. 
         </li>
         <li>
-        If your collection or delivery service needs to be made within a time window you should mention this on your quote compare listing, it could reduce quotes but if you need it you need it.
+        Check if there is a packaging service included for the eBay parcels or you may need to package yourself.
+        </li>
+        <li>
+        If your eBay collection or delivery service needs to be made at a certain time you should mention this on your quote compare listing, it can reduce quotes but if you need to don't hesitate to mention it.
         </li>
     </ul>
-    Don't forget to check you animals when you receive them and to leave feedback so we can make the Couriers Connect experience a positive one for all.    </p>
+    Don't forget to check your delivery when you have received it and to leave feedback so we can make the Couriers Connect experience a positive one for all.
+    </p>
 </div>
 <div class="col-12 col-lg-3" style="padding: 5px 15px; background: #eee;">
     <h4 style="padding-bottom: 10px;">Why use us?</h4>
