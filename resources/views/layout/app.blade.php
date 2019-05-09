@@ -8,8 +8,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="{!! $description !!}">
         <meta name="keywords" content="{!! $keywords !!}"> 
+        <link rel="icon" type="image/vnd.microsoft.icon" href="couriers-service-quote/courier-quote-compare.ico" sizes="16x16">
         <link rel="stylesheet" href="{{ asset('https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css' ) }}" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="{{ asset('/css/main.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('/css/main.css?version=1.1')}}">
         <link type="text/css" rel="stylesheet" href="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.css')}}" />
         <link type="text/css" rel="stylesheet" href="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid-theme.min.css')}}" />
         <link rel="stylesheet" href="{{ asset('/css/jquery-ui.min.css')}}"></link>

@@ -368,7 +368,7 @@ textarea {
 
 .social-media {
     width: 100%;
-    padding: 0 15% 15px 15%;
+    padding: 0 15% 0 15%;
     display: inline-flex;
     justify-content: space-between;
 }
@@ -611,6 +611,30 @@ body {
 .text-button
 {
     cursor: pointer;   
+}
+
+.small-h4
+{
+    font-size: 12px;
+    font-weight: 300;
+}
+
+.small-h3
+{
+    font-size: 15px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.6);
+}
+
+.small-h3 > a:hover
+{
+    text-decoration: none;
+}
+
+.bg-darkGrey
+{
+    background-color: rgba(69,69,69, 0.2);
+    color: rgba(69,69,69,0.6);
 }
 
 .item-section

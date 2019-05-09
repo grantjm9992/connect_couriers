@@ -7,9 +7,9 @@
             <div>Compare quotes</div>
             <div>Save money</div>
         </div>
-        <div class="tag-line">
+        <h1 class="tag-line">
             Courier quote comparison made easy
-        </div>
+        </h1>
         <form action="Listings.new">
             <div class="input-group mb-3">
                 <select name="id_category" id="id_category" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2">
@@ -260,3 +260,25 @@
         </div>
     </div>
 </div>
+<section style="text-align: left;" class="section bg-darkGrey">
+    <div class="row">
+        <div class="col-12">
+            <h5>About Us</h5>
+            <p>
+                <h4 class="small-h4">Courier quote comparisons are made easy at Couriers Connect. Simply connect to couriers via our short quote comparison form and then receive emails and dashboard responses from trustworthy carriers, freight companies, haulage companies and even a "Man With A Van". You will receive competitive quotes from trusted and rated delivery service business within the logistics industry and you can also see their feedback and ratings. The quotes can be very competitive because many of our carriers are returning from deliveries with an empty or part empty van or truck or even delivering to an area with a part load so they have spare space. We also have haulage shipping companies who are specialists in certain logistical areas and they are waiting to compete against each other with a quote on your listing.</h4 class="small-h4">
+            </p>
+            <p>
+                <h4 class="small-h4">Couriers Connect have been in the courier and freight shipping industry for over 12 years and we have seen the needless transportation of part loads and empty trucks and vans returning empty when there are customers requiring their services. It's not just regular freight, you can also ask for a quote on international courier services, a chilled truck freight service, full home removals, car, motorbike, any vehicle deliveries or even a livestock delivery. If a suitable carrier isn’t on our system to quote we will actively search for a freight company and ask them to quote so you will always receive the best price.</h4 class="small-h4">
+            </p>
+            <p>
+                <h4 class="small-h4">eBay buyers and sellers also use Couriers Connect for their eBay courier delivery services. You just need to add the eBay number with the collection and delivery postcodes and we do the rest.</h4 class="small-h4">
+            </p>
+            <p>
+                <h4 class="small-h4">If you need an easy, smooth and cheap courier service or you need to ship something a bit more specialised we are here to help and we can answer any questions or concerns you may have.</h4 class="small-h4">
+            </p>
+            <p>
+                The Couriers Connect team
+            </p>
+        </div>
+    </div>
+</section>

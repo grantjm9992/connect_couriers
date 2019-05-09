@@ -1,10 +1,41 @@
 @inject('translator', 'App\Providers\TranslationProvider')
 <footer>
-    <div class="row">
-        <div class="col-12 col-sm-6" style="margin: 0 auto;">
-            <div class="row" style="padding: 15px 0 5px 0; text-align: center;">
-                <div class="col-12"><h4>Contact Us</h4></div>
+        <div class="row">
+            <div class="col-12 col-md-6 col-lg-4">
+                <h3 class="small-h3">
+                    <a href="Boxes">Box delivery quotes compare</a>
+                </h3>
+                <h3 class="small-h3">
+                    <a href="Vehicle-Parts">Vehicle parts courier compare</a>
+                </h3>
+                <h3 class="small-h3">
+                    <a href="Home-And-Garden">Home and Garden delivery compare</a>
+                </h3>
             </div>
+            <div class="col-12 col-md-6 col-lg-4">
+                <h3 class="small-h3">
+                    <a href="Cars">Car transportation comparison</a>
+                </h3>
+                <h3 class="small-h3">
+                    <a href="Man-And-Van">Man and van compare</a>
+                </h3>
+                <h3 class="small-h3">
+                    <a href="Moving-Home">Home removals delivery</a>
+                </h3>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4">
+                <h3 class="small-h3">
+                    <a href="Ebay-Goods">eBay goods delivery compare</a>
+                </h3>
+                <h3 class="small-h3">
+                    <a href="Haulage">Haulage price comparison</a>
+                </h3>
+                <h3 class="small-h3">
+                    <a href="Pets-And-Livestock">Pets and livestock transportation</a>
+                </h3>
+            </div>
+        </div>
+        <div class="col-12" style="margin: 20px auto;">
             <div class="social-media">
                 <a href="https://www.facebook.com/couriers.connect.9" target="_blank">
                     <i class="fab fa-facebook-square"></i>
@@ -16,30 +47,7 @@
                     <i class="fab fa-linkedin"></i>
                 </a>
             </div>
-            <form style="width: 100%;" id="mail_form">
-                <div class="row">
-                    <div class="col-12 form-group">
-                        <input type="text" class="form-control" id="name" placeholder="Your Name">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12 form-group">
-                        <input type="text" class="form-control" id="email" placeholder="Your Email">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12 form-group">
-                        <textarea type="text" class="form-control" id="message" placeholder="Your Message"></textarea>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12 form-group">
-                        <div class="btn btn-success-outline" onclick="sendMail()">Send</div>
-                    </div>
-                </div>
-            </form>
         </div>
-    </div>
 </footer>
 
 <script>
