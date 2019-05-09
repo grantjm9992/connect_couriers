@@ -37,7 +37,6 @@
         <script src="{{ asset('/js/slick.min.js')}}"></script>
         <script src="{{ asset('/js/tooltipster.bundle.min.js') }}"></script>
         <script src="{{ asset('/js/main.js')}}"></script>
-        <script src="{{ asset('https://unpkg.com/sweetalert/dist/sweetalert.min.js')}}"></script>
         {!! $set_menu !!}
         {!! $header !!}
         <div class="body">
