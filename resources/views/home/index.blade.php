@@ -30,7 +30,7 @@
         <div class="col-12 col-sm-6 col-md-3">
             <div class="box">
                 <div class="box-icon">
-                    <img src="archivos/img/user.png" alt="">
+                    <img src="archivos/img/user.png" alt="transport service providers">
                 </div>
                 <h3>Trustworthy</h3>
                 <p>All of our couriers are rated by customers just like you, so you can breathe easy.</p>
@@ -39,7 +39,7 @@
         <div class="col-12 col-sm-6 col-md-3">
             <div class="box">
                 <div class="box-icon">
-                    <img src="archivos/img/approve-invoice.png" alt="">
+                    <img src="archivos/img/approve-invoice.png" alt="simple and easy delivery">
                 </div>
                 <h3>Simple and Quick</h3>
                 <p>Just fill out our simple form, in less than 60 seconds, and start recieving quotes for your delivery.</p>
@@ -48,7 +48,7 @@
         <div class="col-12 col-sm-6 col-md-3">
             <div class="box">
                 <div class="box-icon">
-                    <img src="archivos/img/portfolio-icon-5.png" alt="">
+                    <img src="archivos/img/portfolio-icon-5.png" alt="delivery services">
                 </div>
                 <h3>Take control</h3>
                 <p>You choose the courier and service you want. All from the comfort of your mobile phone.</p>
@@ -57,7 +57,7 @@
         <div class="col-12 col-sm-6 col-md-3">
             <div class="box">
                 <div class="box-icon">
-                    <img src="archivos/img/hand.png" alt="">
+                    <img src="archivos/img/hand.png" alt="cheap delivery services">
                 </div>
                 <h3>Save money</h3>
                 <p>With our couriers competing for your delivery, you can save up to 75%.</p>
