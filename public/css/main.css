@@ -98,7 +98,7 @@ a:hover {
     height: 80vh;
     min-height: 500px;
     width: 100%;
-    background-image: url('../archivos/img/home-background.jpg');
+    background-image: url('../archivos/img/home_background.jpg');
     background-size: cover;
     background-repeat: no-repeat;
 }
