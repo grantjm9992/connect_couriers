@@ -41,7 +41,7 @@
     </div>
 </div>
 
-<script src="https://www.paypal.com/sdk/js?client-id=AT8RLW_TLQl_-1wfXibo_0ZrV_m-Q4PggBXupdCu-rZ0wS3F96HwbtZPruoDRZ6-NfgYet2vGDPDzeoU&currency=GBP"></script>
+<script src="https://www.paypal.com/sdk/js?client-id=Aa_nXZblNTxHLXrWB64InleoMiJM0dcP3-R8Ubrj2JOQ65WRogUmNVija8z_DIuVPToWR5H-FQLpKsJ8&currency=GBP"></script>
 <script>
   paypal.Buttons({
     createOrder: function(data, actions) {
