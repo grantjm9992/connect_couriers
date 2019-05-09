@@ -71,13 +71,13 @@ class PaymentsController extends Controller
 
         $payment = new \App\Payments;
         $payment->id_listing = $listing->id_listing;
-        $payment->id_payment = $response->result->id;
+        $payment->id_payment = $response['id'];
         $payment->file = "storage/payments/$id_listing"."_".$date->format('YmdHis').".json";
         $payment->save();
 
         file_put_contents( public_path( "storage/payments/$id_listing"."_".$date->format('YmdHis').".json"  ), json_encode( $response ) );
-        $isOkay = $this->checkPayment ($response->result->purchase_units[0]
-                                        ->payments->captures[0], $listing, $quote);
+        $isOkay = $this->checkPayment ($response['purchase_units'][0]
+                                        ['payments']['captures'][0], $listing, $quote);
 
         if ( $isOkay != "OK" ) return json_encode(
             array(
@@ -114,13 +114,13 @@ class PaymentsController extends Controller
 
     protected function checkPayment( $paymentObj , $listingObj, $quoteObj )
     {
-        if ( $paymentObj->status != "COMPLETED" )
+        if ( $paymentObj['status'] != "COMPLETED" )
         {
             return "PAYMENT_ERROR_1";
         }
         $expectedPrices = new \App\PriceCalculator( $quoteObj->amount_current );
 
-        if ( (int)$paymentObj->amount->value !== (int)$expectedPrices->comission )
+        if ( (int)$paymentObj['amount']['value'] !== (int)$expectedPrices->comission )
         {
             return "PAYMENT_ERROR_2";
         }
