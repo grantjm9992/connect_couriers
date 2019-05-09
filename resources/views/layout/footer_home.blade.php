@@ -3,13 +3,13 @@
         <div class="row">
             <div class="col-12 col-md-6 col-lg-4">
                 <h3 class="small-h3">
-                    <a href="Boxes">Box delivery quotes compare</a>
+                    <a href="Boxes">Box deliveries quotes compare</a>
                 </h3>
                 <h3 class="small-h3">
-                    <a href="Vehicle-Parts">Vehicle parts courier compare</a>
+                    <a href="Vehicle-Parts">Vehicle parts delivery compare</a>
                 </h3>
                 <h3 class="small-h3">
-                    <a href="Home-And-Garden">Home and Garden delivery compare</a>
+                    <a href="Home-And-Garden">Home and Garden deliveries compare</a>
                 </h3>
             </div>
             <div class="col-12 col-md-6 col-lg-4">
@@ -20,7 +20,7 @@
                     <a href="Man-And-Van">Man and van compare</a>
                 </h3>
                 <h3 class="small-h3">
-                    <a href="Moving-Home">Home removals delivery</a>
+                    <a href="Moving-Home">Home removals</a>
                 </h3>
             </div>
             <div class="col-12 col-md-6 col-lg-4">
