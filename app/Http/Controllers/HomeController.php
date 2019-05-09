@@ -23,7 +23,7 @@ class HomeController extends BaseController
         $this->secure = 1;
         parent::__construct();
         $this->keywords = "courier quote compare, courier, quote, compare, compare courier quotes, quotes, cheap courier services, cheap, services, transportation services, transportation, service, compare delivery quotes, delivery, price, prices, delivery quote compare, compare delivery prices, cheap delivery prices";
-        $this->description = "Compare cheap courier quotes for deliveries of parcels, both uk and international. Delivery quote comparisons from couriers with transportation service experience.";
+        $this->description = "Compare cheap courier quotes for deliveries of parcels. Delivery quote comparisons from couriers with transportation service experience.";
         $this->title = "Cheap courier quote compare";
         $this->set_menu = view('js/scroll_menu');
     }
