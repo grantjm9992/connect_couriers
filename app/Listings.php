@@ -46,7 +46,10 @@ class Listings extends Model
             $destination = urlencode($this->delivery_postcode);
             $url = "https://maps.googleapis.com/maps/api/distancematrix/json?&origins=$origin&destinations=$destination&key=AIzaSyAAs6KdmD9OYa2BHZb734w7dmA0QWWa5Dk";
             $data = json_decode( file_get_contents ( $url ) );
-            $this->distance = $data->rows[0]->elements[0]->distance->text;
+            if ( !is_null ( $data->rows[0]->elements[0]->distance ) )
+            {
+                $this->distance = $data->rows[0]->elements[0]->distance->text;
+            }
         }
         $this->save();
     }
@@ -153,7 +156,10 @@ class Listings extends Model
         $destination = urlencode($listing->delivery_postcode);
         $url = "https://maps.googleapis.com/maps/api/distancematrix/json?&origins=$origin&destinations=$destination&key=AIzaSyAAs6KdmD9OYa2BHZb734w7dmA0QWWa5Dk";
         $data = json_decode( file_get_contents ( $url ) );
-        $listing->distance = $data->rows[0]->elements[0]->distance->text;
+        if ( !is_null( $data->rows[0]->elements[0]->distance ) )
+        {
+            $listing->distance = $data->rows[0]->elements[0]->distance->text;
+        }
         if ( $dontSave === true ) return $listing;
         $listing->save();
     }

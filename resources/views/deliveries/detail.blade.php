@@ -205,10 +205,7 @@
                         {
                             message = "Removed from watching list.";
                         }
-                        $.notify(message, {
-                            className: "success",
-                            position: "bottom-left"
-                        });
+                        ccAlert(message)
                     }
                 }
             });

@@ -274,7 +274,7 @@
                 <h4 class="small-h4">eBay buyers and sellers also use Couriers Connect for their eBay courier delivery services. You just need to add the eBay number with the collection and delivery postcodes and we do the rest.</h4 class="small-h4">
             </p>
             <p>
-                <h4 class="small-h4">If you need an easy, smooth and cheap courier service or you need to ship something a bit more specialised we are here to help and we can answer any questions or concerns you may have.</h4 class="small-h4">
+                <h4 class="small-h4">If you need an easy, smooth and cheap parcel delivery service or you need to ship something a bit more specialised we are here to help and we can answer any questions or concerns you may have.</h4 class="small-h4">
             </p>
             <p>
                 The Couriers Connect team

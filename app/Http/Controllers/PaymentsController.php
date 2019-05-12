@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 
 use App\Quotes;
 use App\Listings;
-use App\Users;
 use App\Notifications;
 
 use App\PriceCalculator;
@@ -45,19 +44,30 @@ class PaymentsController extends Controller
 
     public function defaultAction()
     {
+        $user = \UserLogic::getUser();
         $id_quote = base64_decode( $_REQUEST['quote'] );
         $quote = Quotes::where('id_quote', $id_quote)->first();
         $quote->courier = $quote->getCourier();
         $prices = new PriceCalculator( $quote->amount_current );
         $quote->comission = $prices->comission;
+        $js = view('js/paypalbuttons', array(
+            "quote" => $quote,
+            "user" => $user
+        ));
         $this->cont->body = view('payments/stripe', array(
-            "quote" => $quote
+            "quote" => $quote,
+            "user" => $user,
+            "js" => $js
         ));
         return $this->RenderView();
     }
 
     public function comprobarResponseAction()
     {
+        /*
+        ¡¡Try this when you have internet!!
+        $client = ::client()
+        */
         
         $date = new \DateTime();
 
@@ -72,6 +82,7 @@ class PaymentsController extends Controller
         $payment = new \App\Payments;
         $payment->id_listing = $listing->id_listing;
         $payment->id_payment = $response['id'];
+        $payment->date_payment = $date->format('Y-m-d H:i:s');
         $payment->file = "storage/payments/$id_listing"."_".$date->format('YmdHis').".json";
         $payment->save();
 
@@ -102,7 +113,7 @@ class PaymentsController extends Controller
         $notification->bln_notified = 0;
         $notification->save();
 
-        $quoter = User::where('id', $quote->id_user )->first();
+        $quoter = \App\User::where('id', $quote->id_user )->first();
         \NotificationLogic::quoteAccepted( $quoter, $listing );
         return json_encode(
             array(

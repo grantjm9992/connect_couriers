@@ -11,14 +11,17 @@ class QuoteAccepted extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $user;
+    public $listing;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($user, $listing)
     {
-        //
+        $this->user = $user;
+        $this->listing = $listing;
     }
 
     /**
@@ -28,6 +31,9 @@ class QuoteAccepted extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        return $this->view('mails/quote_accepted' , array(
+            "user" => $this->user,
+            "listing" => $this->listing
+        ));
     }
 }

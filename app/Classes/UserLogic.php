@@ -24,6 +24,12 @@ class UserLogic {
         $user->date_online_expires = $date->format('Y-m-d H:i:s');
         $user->save();
     }
+    
+    public static function getUser( $id = null )
+    {
+        $id = ( is_null ( $id ) ) ? $_SESSION['id'] : $id;
+        return User::where('id', $id)->first();
+    }
 
     public function getUserStatus()
     {

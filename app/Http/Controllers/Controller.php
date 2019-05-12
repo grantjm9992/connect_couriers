@@ -111,7 +111,7 @@ class Controller extends BaseController
 
     protected function setHeaderAndFooter()
     {
-        $this->cont->footer = view('layout/footer_home');
+        $this->cont->footer = ( $this->secure === 1 ) ? view('layout/footer_home') : view('layout/footer') ;
         if ( isset( $_SESSION['id'] ) )
         {
             \UserLogic::updateUserStatus();

@@ -6,7 +6,7 @@ class PriceCalculator
 {
 
     const PRICEARRAY = array(
-        "minimum" => 5,
+        "minimum" => 1,
         "comission_ratio" => 0.11,
         "price_with_comission" => 1.11
     );
