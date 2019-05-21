@@ -860,6 +860,14 @@ table td, th {
   input:focus + .slider {
     box-shadow: 0 0 1px #86fc8e;
   }
+
+  input:checked + .formslider {
+    background-color: #6D5959 !important;
+  }
+  
+  input:focus + .formslider {
+    box-shadow: 0 0 1px #fff !important;
+  }
   
   input:checked + .slider:before {
     -webkit-transform: translateX(26px);
@@ -890,6 +898,7 @@ table td, th {
       padding: 40px 0;
   }
 
+
 /*
  * MEDIA QUERIES
  */
@@ -902,6 +911,13 @@ table td, th {
      -webkit-box-direction: normal!important;
      -ms-flex-direction: column!important;
      flex-direction: column!important;
+ }
+ .buttons
+ {
+     float: none;
+ }
+ .buttons > * {
+     margin-top: 10px;
  }
 }
  @media only screen and (max-width: 800px)

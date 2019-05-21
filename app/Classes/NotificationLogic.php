@@ -18,10 +18,21 @@ use \App\Mail\WelcomeUser;
 use \App\Mail\QuoteAccepted;
 use \App\Mail\QuoteDeclined;
 use \App\Mail\QuoteWithdrawn;
+use \App\Mail\ErrorFound;
 
 use \Exception;
 
 class NotificationLogic {
+
+    /**
+     * 
+     * Technical Emails
+     * 
+     */
+
+    const TECH = array(
+        "phisoluciones.es@gmail.com"
+    );
 
     /**
      * 
@@ -124,6 +135,11 @@ class NotificationLogic {
         $mailSent->user_email = $user->str_email;
         $mailSent->date_sent = $date->format('Y-m-d H:i:s');
         $mailSent->save();
+    }
+
+    public static function sendFoundError( $error )
+    {
+        \Mail::to( self::TECH )->send( new ErrorFound( $error ) );
     }
 
     public static function quoteAccepted( $user, $listing )

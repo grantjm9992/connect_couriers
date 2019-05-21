@@ -49,7 +49,7 @@ class DeliveriesController extends BaseController
         foreach( $images as $image )
         {
             $url = $image->file_name;
-            $img .= "<div class='col-4' style='line-height: 100px;'><img style='max-width: 100%; max-height: 100%;' src='$url'/></div>";
+            $img .= "<div class='text-center' style='line-height: 100px; max-height: 200px;'><img style='display: inline-block; max-width: 100%; max-height: 100%;' src='$url'/></div>";
         }
 
         $quotes = DeliveriesOU::getQuoteSection();
@@ -81,10 +81,12 @@ class DeliveriesController extends BaseController
             }
         }
 
+        $items = $object->getItems();
 
         $this->cont->body = view('deliveries/detail', array(
             'data' => $listing,
             'buttons' => $buttons,
+            "items" => $items,
             'quotes' => $quotes,
             'messages' => $messages,
             "img" => $img,

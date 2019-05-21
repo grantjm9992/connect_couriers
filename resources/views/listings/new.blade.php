@@ -1,5 +1,5 @@
 @inject('translator', 'App\Providers\TranslationProvider')
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAAs6KdmD9OYa2BHZb734w7dmA0QWWa5Dk&libraries=places"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAAs6KdmD9OYa2BHZb734w7dmA0QWWa5Dk&libraries=places&region=GB"></script>
 <div class="section">
     <form action="Listings.add">
         <div class="row">
@@ -14,22 +14,36 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" name="str_title" placeholder="Title">
+                    <input type="text" class="form-control" name="str_title" placeholder="Title" required>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" name="collection_postcode" id="collection_postcode" placeholder="Collection PostCode">
+                    <input type="text" class="form-control" name="collection_postcode" id="collection_postcode" placeholder="Collection PostCode" required>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" name="delivery_postcode" id="delivery_postcode" placeholder="Delivery PostCode">
+                    <input type="text" class="form-control" name="delivery_postcode" id="delivery_postcode" placeholder="Delivery PostCode" required>
                 </div>
                 <div class="form-group">
-                    <div class="form-check" style="text-align: left;">
-                        <input class="form-check-input" type="checkbox" value="" id="bln_flexible">
+                    <div class="" style="text-align: left;">
+                        <label class="switch">
+                            <input type="checkbox" class="" value="" id="bln_flexible">
+                            <span class="slider round formslider"></span>
+                        </label>
                         <input type="text" name="bln_flexible" hidden value="0">
-                        <label class="form-check-label" for="bln_flexible">
+                        <label style="margin-left: 40px;" class="form-check-label" for="bln_flexible">
                             I'm flexible
                         </label>
                     </div>
+                </div>
+                <div class="form-group">
+                    <label for="delivery">Delivery Timeframe</label>
+                    <select name="id_time_scale" id="id_time_scale" class="form-control">
+                        <option value="1">Fixed date</option>
+                        <option value="2">In the next week</option>
+                        <option value="3">In the next 2 weeks</option>
+                        <option value="4">In the next month</option>
+                    </select>
+                </div>
+                <div class="form-group">
                     <input type="text" class="form-control" name="delivery_date" autocomplete="off" id="delivery_date" placeholder="Delivery Date">
                 </div>
                 <div class="form-group">
@@ -41,15 +55,32 @@
 </div>
 <script>
     $(document).ready(function() {
-        $('#id_category').val('{{ $tipo }}');
+        var tipo = '{{ $tipo }}';
+        if ( tipo != "" )
+        {
+            $('#id_category').val(tipo);
+        }
         $('#delivery_date').datepicker();
+        $('#delivery').on("change", function() {
+            if ( $(this).val() != "1" )
+            {
+                $( "#delivery_date" ).datepicker( "option", "disabled", true );
+            }
+            else
+            {
+                $( "#delivery_date" ).datepicker( "option", "disabled", false );
+            }
+        });
         $('#bln_flexible').on('change', function() {
-            if(this.checked ) {
+            if($(this).is(":checked" ) )     {
                 $('[name="bln_flexible"]').val(1);
-                $('.e-datewidget').hide(500);
+                $('#delivery_date').val('');
+                $( "#delivery_date" ).datepicker( "option", "disabled", true );
+                $('#delivery').prop('disabled', true);
             } else {
                 $('[name="bln_flexible"]').val(0);
-                $('.e-datewidget').show(500);
+                if ( $("#delivery").val() == "1" ) $( "#delivery_date" ).datepicker( "option", "disabled", false );
+                $('#delivery').prop('disabled', false);
             }
         });
         var inputFrom = document.getElementById('collection_postcode');

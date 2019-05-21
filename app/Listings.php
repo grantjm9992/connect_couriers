@@ -10,15 +10,11 @@ use \App\Providers\TranslationProvider as Translator;
 
 class Listings extends Model
 {
-    public function __construct()
-    {
-        parent::__construct();
-    }
     protected $table = "listings";
     protected $primaryKey = "id_listing";
 
     protected $fillable = [
-        "str_title", "id_category", "str_description", "height", "width", "length", "weight", "weight_unit", "length_unit", "collection_postcode", "delivery_postcode", "distance"
+        "str_title", "id_category", "str_description", "height", "width", "length", "weight", "weight_unit", "length_unit", "collection_postcode", "delivery_postcode", "distance", "id_time_scale"
     ];
 
     public static function getListingWithUser($id)
@@ -46,7 +42,7 @@ class Listings extends Model
             $destination = urlencode($this->delivery_postcode);
             $url = "https://maps.googleapis.com/maps/api/distancematrix/json?&origins=$origin&destinations=$destination&key=AIzaSyAAs6KdmD9OYa2BHZb734w7dmA0QWWa5Dk";
             $data = json_decode( file_get_contents ( $url ) );
-            if ( !is_null ( $data->rows[0]->elements[0]->distance ) )
+            if ( is_object ( $data->rows[0]->elements[0]->distance ) && !is_null ( $data->rows[0]->elements[0]->distance ) )
             {
                 $this->distance = $data->rows[0]->elements[0]->distance->text;
             }
@@ -138,25 +134,26 @@ class Listings extends Model
 
     public static function addListing($dontSave = false)
     {
-        $dd1 = new \DateTime($_REQUEST['delivery_date']);
         $date = new \DateTime();
-        $listing = new Listings;
-        $listing->id_category = $_REQUEST['id_category'];
+        $listing = self::create($_REQUEST);
         $listing->date_listed = $date->format('Y-m-d H:i:s');
-        $listing->str_title = $_REQUEST['str_title'];
-        $listing->delivery_postcode = $_REQUEST['delivery_postcode'];
-        $listing->collection_postcode = $_REQUEST['collection_postcode'];
         if ( isset( $_SESSION['id'] ) && $_SESSION['id'] != "" ) $listing->id_user = $_SESSION['id'];
-        //if ( isset( $_REQUEST['bln_flexible'] ) && $_REQUEST['bln_flexible'] != "" ) $listing->bln_flexible = $_REQUEST['bln_flexible'];
-        $listing->delivery_date1 = $dd1->format('Y-m-d');
+        if ( isset( $_REQUEST['delivery_date'] ) && $_REQUEST['delivery_date'] != "" )
+        {
+            $dd1 = new \DateTime($_REQUEST['delivery_date']);
+            $listing->delivery_date1 = $dd1->format('Y-m-d');
+        }
         $date->modify('+ 1 month');
         $listing->expires_on = $date->format('Y-m-d H:i:s');
         
-        $origin = urlencode($listing->collection_postcode);
-        $destination = urlencode($listing->delivery_postcode);
+        // Get distance and time from Google API
+        $origin = urlencode($_REQUEST['collection_postcode']);
+        $destination = urlencode($_REQUEST['delivery_postcode']);
+        $listing->save();
         $url = "https://maps.googleapis.com/maps/api/distancematrix/json?&origins=$origin&destinations=$destination&key=AIzaSyAAs6KdmD9OYa2BHZb734w7dmA0QWWa5Dk";
+
         $data = json_decode( file_get_contents ( $url ) );
-        if ( !is_null( $data->rows[0]->elements[0]->distance ) )
+        if ( is_object ( $data->rows[0]->elements[0]->distance ) && !is_null ( $data->rows[0]->elements[0]->distance ) )
         {
             $listing->distance = $data->rows[0]->elements[0]->distance->text;
         }
@@ -167,17 +164,13 @@ class Listings extends Model
     
     public static function getMyListingsCount()
     {
-        /*$active = \App\Listings::where('id_user', $_SESSION['id'])
-                                ->where('expires_on', '>', 'NOW()')
-                                ->where('id_status', 1)->get();*/
+        
         $active = DB::select('SELECT * FROM listings WHERE id_user = '.$_SESSION['id'].' AND id_status = 1 AND expires_on > NOW() ');
                                 
         $accepted = \App\Listings::where('id_user', $_SESSION['id'])
                                 ->where('id_status', 2)->get();
-                                
-        /*$ended = \App\Listings::where('id_user', $_SESSION['id'])
-                                ->where('id_status', 3)->get();*/
-        $ended = DB::select('SELECT * FROM listings WHERE id_user = 1 AND ( id_status = 3 OR ( id_status = 1 AND expires_on < NOW() ) )');
+
+        $ended = DB::select('SELECT * FROM listings WHERE id_user = '.$_SESSION['id'].' AND ( id_status = 3 OR ( id_status = 1 AND expires_on < NOW() ) )');
         
         return array(
             'active' => count($active),

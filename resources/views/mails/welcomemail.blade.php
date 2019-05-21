@@ -1,6 +1,6 @@
 <div style="width: 100%;">
     <div style="height: 80px;">
-        <img src="{{ asset('https://couriersconnect.com/couriers-service-quote/archivos/img/logo/courier-quote-compare.png') }}" style="height: 80px;"/>
+        <img src="{{ asset('https://couriersconnect.com/couriers-service-quote/archivos/img/logo/compare-delivery-prices.png') }}" style="height: 80px;"/>
     </div>
     <h3>
         Welcome!

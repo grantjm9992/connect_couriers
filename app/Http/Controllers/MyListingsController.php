@@ -117,10 +117,15 @@ class MyListingsController extends BaseController
 
         $listing = Listings::where('id_listing', $this->id)->first();
         $listing->id_status = "3";
+        $listing->date_closed_on = $date->format('Y-m-d H:i:s');
+        $listing->expires_on = $date->format('Y-m-d H:i:s');
         $listing->save();
 
-        return \Redirect::to('MyAccount');
-        //$response = Listings::deleteAllListing();
+        return json_encode(
+            array(
+                "success" => 1
+            )
+        );
     }
 
     public function confirmDeleteAction()

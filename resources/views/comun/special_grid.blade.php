@@ -1,3 +1,4 @@
+@if ( $data != "" && count( $data ) > 0)
 <style>
 </style>
 <table style="width: 100%;" id="results">
@@ -10,40 +11,45 @@
         @foreach ( $data as $row )
             <tr>
                 <td>
+                    
                     <div class="col-12">
-                        <div class="listing-card" style="min-height: 100px;">
-                            <div class="container-fluid">
-                                <div class="row xs-center">
-                                    <div class="col-12 mylisting">
-                                        <p>
-                                            <a href="MyListings.detail?id={{ $row->id_listing }}">
-                                                <i class="fas fa-box"></i> {{ $row->str_title }}
-                                            </a>
-                                        </p>
+                        
+                        <div class="listing-card">
+                            @if ( $row->url_image != "" )
+                            <div class="image">
+                                <img src="{{ $row->url_image }}" />
+                            </div>
+                            @else
+                            <div class="image-icon">
+                                <img src="archivos/img/delivery-van.png" alt="">
+                            </div>
+                            @endif
+                            <div class="info">
+                                <div class="row">
+                                    <div class="col-12 mylisting mylistingtitle" style="max-height: 24px; overflow: hidden;">
+                                        <a href="MyListings.detail?id={{ $row->id_listing }}">
+                                            {{ $row->str_title }}
+                                        </a>                
                                     </div>
-                                    <div class="col-12 col-sm-5 mylisting">
-                                        <p>
-                                            <i class="fas fa-hourglass-end"></i> Expires: {{ $row->expires_on }}
-                                        </p>
-                                        <p>
-                                            <i class="fas fa-money-bill-wave"></i> <a href="MyListings.quotes?id={{ $row->id_listing }}">Quotes: {{ $row->quotes }}</a>
-                                        </p>
+                                    <div class="col-12 order-4 order-lg-1 col-lg-4 mylisting" title="View quotes">
+                                        <a href=""><i class="fas fa-money-bill-wave"></i> Quotes: {{ $row->quotes }}</a>
                                     </div>
-                                    <div class="col-12 col-sm-3 mylisting">
-                                        <p>
-                                            <i style="color: green;" class="fas fa-map-marker-alt"></i> {{ $row->collection_postcode }}
-                                        </p>
-                                        <p>
-                                            <i style="color: red;" class="fas fa-map-marker-alt"></i> {{ $row->delivery_postcode }}
-                                        </p>
+                                    <div class="col-12 order-2 order-lg-2 col-lg-4 mylisting">
+                                        <i style="color: green;" class="fas fa-map-marker-alt"></i> {{ $row->collection_postcode }}
                                     </div>
-                                    <div class="col-12 col-sm-4 mylisting">
-                                        <p>
-                                            <a href="MyListings.quotes?id={{ $row->id_listing }}"><i class="fas fa-money-bill-wave"></i> View quotes</a>
-                                        </p>
-                                        <p>
-                                            <a href="MyListings.detail?id={{ $row->id_listing }}"><i class="fas fa-pencil-alt"></i> Edit listing</a>
-                                        </p>
+                                    <div class="col-12 order-7 order-lg-4 col-lg-4 mylisting">
+                                        <i style="color: blue;" class="fas fa-clock"></i> Listed: {{ $row->date_listed }}
+                                    </div>
+                                    <div class="col-12 order-9 order-lg-3 col-lg-4 mylisting">
+                                        <a href="MyListings.detail?id={{ $row->id_listing }}" class="btn btn-outline-success">
+                                            <i class="fas fa-pencil-alt"></i> Edit listing
+                                        </a>
+                                    </div>
+                                    <div class="col-12 order-3 order-lg-5 col-lg-4 mylisting">
+                                        <i style="color: red;" class="fas fa-map-marker-alt"></i> {{ $row->delivery_postcode }}  
+                                    </div>
+                                    <div class="col-12 order-6 order-lg-6 col-lg-4 mylisting">
+                                        <i style="color: orange;" class="fas fa-hourglass-end"></i> {{ $row->expires_on }}
                                     </div>
                                 </div>
                             </div>
@@ -66,3 +72,17 @@
         $('#results_length').hide();
     })
 </script>
+@else
+<div class="row">
+    <div class="col-12 col-md-8">
+        <div class="alert alert-success" style="">
+            <i class="fas fa-exclamation-triangle"></i>  No results found.
+        </div>
+    </div>
+    <div class="col-12 col-md-4">
+        <a href="Listings.new" class="btn btn-outline-success buttons">
+            <i class="fas fa-plus-circle"></i> Add new listing
+        </a>        
+    </div>
+</div>
+@endif

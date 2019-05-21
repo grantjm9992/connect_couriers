@@ -3,8 +3,14 @@
     <h4 style="border-bottom: 1px solid; padding-bottom: 15px;">
         <i class="fas fa-pencil-alt"></i>  Edit Listing
         <div class="buttons">
-            <a href="{{ $returnURL }}" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Back</a>
+            <a href="MyAccount.myActiveListings" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Back</a>
+            <div onclick="deleteListing()" class="btn btn-outline-danger">
+                <i class="fas fa-minus-circle"></i> Delete
+            </div>
             <div class="btn btn-success" onclick="submitForm()"><i class="fas fa-save"></i> Save changes</div>
+            <a href="Deliveries.detail?id={{ $listing->id_listing }}&title={{ $listing->str_title }}" class="btn btn-outline-primary">
+                <i class="fas fa-user-circle"></i> Public view
+            </a>
         </div>
     </h4>
     <form action="MyListings.save">
@@ -208,5 +214,36 @@
                 }
             }
         })
+    }
+
+    function deleteListing()
+    {
+        var options = Array();
+        options.title = "Warning";
+        options.type = "confirm";
+        options.text = "Are you sure you want to delete the listing? This action cannot be undone";
+        options.icon = "warning";
+        options.thenFunction = confirmedDelete;
+        alert(options);
+    }
+    function confirmedDelete()
+    {
+        $.ajax({
+            type: "POST",
+            url: "MyListings.delete",
+            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+            data:
+            {
+                id: "{{ $listing->id_listing }}"
+            },
+            success: function(data)
+            {
+                var s = jQuery.parseJSON(data);
+                if ( s.success  === 1 )
+                {
+                    window.location = "MyAccount";
+                }
+            }
+        });
     }
 </script>

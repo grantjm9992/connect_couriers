@@ -1,17 +1,17 @@
 
 <div class="row item-section" item-id="{{ $item->id }}">
-    <div class="col-8">
+    <div class="col-12 order-2 order-md-1 col-md-8">
         <label for="str_description_{{ $item->id }}">Description</label>
         <input type="text" class="form-control" name="str_description_{{ $item->id }}" value="{{ $item->str_description }}">
     </div>
-    <div class="col-4">
+    <div class="col-12 order-1 order-md-2 col-md-4">
         <div class="buttons">
             <div class="btn btn-outline-danger" onclick="removeItem({{$item->id}})">
                 <i class="fas fa-times-circle"></i> Remove
             </div>
         </div>
     </div>
-    <div class="col-12 col-sm-6 col-md-3">
+    <div class="col-12 order-4 col-sm-6 col-md-3">
         <div class="input-group mb-3">
             <input type="number" class="form-control" name="height_{{ $item->id }}" min="0" placeholder="height" value="{{ $item->height }}" aria-describedby="length_unit_{{ $item->id }}">
             <div class="input-group-append">
@@ -23,7 +23,7 @@
             </div>
         </div>
     </div>
-    <div class="col-12 col-sm-6 col-md-3">
+    <div class="col-12 order-4 col-sm-6 col-md-3">
         <div class="input-group mb-3">
             <input type="number" class="form-control" name="width_{{ $item->id }}" min="0"  placeholder="width" value="{{ $item->width }}" aria-describedby="length_unit_{{ $item->id }}">
             <div class="input-group-append">
@@ -35,7 +35,7 @@
             </div>
         </div>
     </div>
-    <div class="col-12 col-sm-6 col-md-3">
+    <div class="col-12 order-4 col-sm-6 col-md-3">
         <div class="input-group mb-3">
             <input type="number" class="form-control" name="length_{{ $item->id }}" min="0"  placeholder="length" value="{{ $item->length }}" aria-describedby="length_unit_{{ $item->id }}">
             <div class="input-group-append">
@@ -47,7 +47,7 @@
             </div>
         </div>
     </div>
-    <div class="col-12 col-sm-6 col-md-3">
+    <div class="col-12 order-4 col-sm-6 col-md-3">
         <div class="input-group mb-3">
             <input type="number" class="form-control" placeholder="weight" name="weight_{{ $item->id }}" min="0"  value="{{ $item->weight }}" aria-describedby="weight_unit_{{ $item->id }}">
             <div class="input-group-append">
