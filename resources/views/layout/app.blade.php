@@ -38,12 +38,6 @@
         </div>
         {!! $footer !!}
         <script>
-            $(document).ready(function() {
-                $('[tooltip]').tooltipster({
-                    theme: 'coolTip',
-                    arrow: false
-                });
-            });
             $('input').on('change invalid', function() {
                 var textfield = $(this).get(0);
                 
