@@ -158,6 +158,9 @@ class Listings extends Model
             $listing->distance = $data->rows[0]->elements[0]->distance->text;
         }
         if ( $dontSave === true ) return $listing;
+
+        \NotificationLogic::newListingAdmin( $listing );
+
         $listing->save();
     }
 

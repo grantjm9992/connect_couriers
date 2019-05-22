@@ -34,6 +34,10 @@ class NotificationLogic {
         "phisoluciones.es@gmail.com"
     );
 
+    const ADMIN = array(
+        "phisoluciones.es@gmail.com", "gary@gmacd.co.uk", "info@dshub.co.uk"
+    );
+
     /**
      * 
      * Predefine message types
@@ -179,5 +183,10 @@ class NotificationLogic {
         $mailSent->user_email = $user->str_email;
         $mailSent->date_sent = $date->format('Y-m-d H:i:s');
         $mailSent->save();
+    }
+    
+    public static function newListingAdmin( $listing )
+    {
+        \Mail::to ( self::ADMIN )->send( new ListingAdmin( $listing ) );
     }
 }
