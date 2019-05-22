@@ -19,6 +19,7 @@ use \App\Mail\QuoteAccepted;
 use \App\Mail\QuoteDeclined;
 use \App\Mail\QuoteWithdrawn;
 use \App\Mail\ErrorFound;
+use \App\Mail\ListingAdmin;
 
 use \Exception;
 
