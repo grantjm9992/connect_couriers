@@ -13,7 +13,7 @@
                     </div>
                     @else
                     <div style="display: inline-block; font-size: 30px; margin-right: 10px; line-height: 38px; height: 38px;" toggleFavs>
-                        Add to watching list <i class="far fa-heart"></i>
+                        <span style="font-size: 18px;">Add to watching list</span> <i class="far fa-heart"></i>
                     </div>
                     @endif
                     <div onclick="addQuote({{ $data->id_listing }})" class="btn btn-outline-primary"><i class="fas fa-plus"></i> Add quote</div>
