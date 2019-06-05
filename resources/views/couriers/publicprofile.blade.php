@@ -1,5 +1,10 @@
 @inject('translator', 'App\Providers\TranslationProvider')
 <script src="{{ asset('/js/tooltipster.bundle.min.js') }}"></script>
+<script>
+    $(document).ready( function() {
+        $('[tooltip]').tooltipster();
+    });
+</script>
 <div class="container-fluid">
     <div class="listing">
         <div class="listing-nav">
