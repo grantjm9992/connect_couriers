@@ -1,9 +1,9 @@
 @inject('translator', 'App\Providers\TranslationProvider')
 <div class="col-12">
     <div class="listing-card">
-        @if ( $listing->url_image != "" )
+        @if ( $listing->file_name != "" && file_exists( $listing->file_name ) )
         <div class="image">
-            <img src="{{ $listing->url_image }}" />
+            <img src="{{ $listing->file_name }}" />
         </div>
         @else
         <div class="image-icon">

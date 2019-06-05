@@ -317,7 +317,7 @@ class Listings extends Model
 
     public static function getSearch()
     {
-        $data = DB::select('SELECT *, listing_status.description AS status, (SELECT COUNT(*) FROM quotes WHERE quotes.id_listing = listings.id_listing AND quotes.id_status = 1) AS quotes FROM listings LEFT JOIN listing_status ON listing_status.id = listings.id_status WHERE listings.expires_on > NOW() AND listings.id_status = 1 '.Listings::makeWhere().Listings::makeOrder());
+        $data = DB::select('SELECT *, ( SELECT file_name FROM images_listings WHERE images_listings.id_listing = listings.id_listing LIMIT 1) AS file_name, listing_status.description AS status, (SELECT COUNT(*) FROM quotes WHERE quotes.id_listing = listings.id_listing AND quotes.id_status = 1) AS quotes FROM listings LEFT JOIN listing_status ON listing_status.id = listings.id_status WHERE listings.expires_on > NOW() AND listings.id_status = 1 '.Listings::makeWhere().Listings::makeOrder());
         return Listings::makeSearchArray( $data );
     }
 
