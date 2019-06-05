@@ -1,4 +1,5 @@
 @inject('translator', 'App\Providers\TranslationProvider')
+<link rel="stylesheet" href="{{ asset('/css/tooltipster.bundle.min.css') }}">
 <script src="{{ asset('/js/tooltipster.bundle.min.js') }}"></script>
 <script>
     $(document).ready( function() {
