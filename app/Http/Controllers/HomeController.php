@@ -24,7 +24,7 @@ class HomeController extends BaseController
         parent::__construct();
         $this->keywords = "cheap courier services, cheap delivery services, cheap couriers, cheap delivery, courier, quote, compare, compare courier quotes, quotes, cheap, services, transportation services, transportation, service, compare delivery quotes, delivery, price, prices, delivery quote compare, cheap delivery prices";
         $this->description = "Cheap courier services and cheap delivery. Delivery price comparison from couriers with transportation service experience.";
-        $this->title = "Cheap courier quote compare";
+        $this->title = "Cheap courier services";
         $this->set_menu = view('js/scroll_menu');
     }
     
