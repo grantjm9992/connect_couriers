@@ -1,5 +1,5 @@
 @inject('translator', 'App\Providers\TranslationProvider')
-
+<script src="{{ asset('/js/tooltipster.bundle.min.js') }}"></script>
 <div class="container-fluid">
     <div class="listing">
         <div class="listing-nav">

@@ -13,7 +13,7 @@
                     </div>
                     @else
                     <div style="display: inline-block; font-size: 30px; margin-right: 10px; line-height: 38px; height: 38px;" toggleFavs>
-                        <i class="far fa-heart"></i>
+                        Add to watching list <i class="far fa-heart"></i>
                     </div>
                     @endif
                     <div onclick="addQuote({{ $data->id_listing }})" class="btn btn-outline-primary"><i class="fas fa-plus"></i> Add quote</div>
@@ -53,15 +53,27 @@
                     <div class="card-body">
                         <div class="item-info">
                             <div class="row">
+                                @if ( $data->str_description != "" )
                                 <div class="col-12">
                                     {{ $data->str_description }}
                                 </div>
                                 <div class="col-12 col-md-6">
-                                    Dimensions: {{ $data->height }}{{ $data->units }} x {{ $data->width }}{{ $data->units }} x {{ $data->length }} {{ $data->length_unit }}
+                                    Dimensions:
+                                    @if ( $data->height != "" )
+                                    {{ $data->height }}{{ $data->units }} x {{ $data->width }}{{ $data->units }} x {{ $data->length }} {{ $data->length_unit }}
+                                    @else
+                                    N/A
+                                    @endif
                                 </div>
                                 <div class="col-12 col-md-6">
-                                    Weight: {{ $data->weight }} {{ $data->weight_unit }}
+                                    Weight:
+                                    @if ( $data->height != "" )
+                                     {{ $data->weight }} {{ $data->weight_unit }}
+                                    @else
+                                    N/A
+                                    @endif
                                 </div>
+                                @endif
                             </div>
                         </div>
                         @foreach ( $items as $item )
