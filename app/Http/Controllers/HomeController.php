@@ -22,8 +22,8 @@ class HomeController extends BaseController
     public function __construct() {
         $this->secure = 1;
         parent::__construct();
-        $this->keywords = "courier quote compare, courier, quote, compare, compare courier quotes, quotes, cheap courier services, cheap, services, transportation services, transportation, service, compare delivery quotes, delivery, price, prices, delivery quote compare, compare delivery prices, cheap delivery prices";
-        $this->description = "Compare cheap courier quotes for deliveries of parcels. Delivery quote comparisons from couriers with transportation service experience.";
+        $this->keywords = "cheap courier services, cheap delivery services, cheap couriers, cheap delivery, courier, quote, compare, compare courier quotes, quotes, cheap, services, transportation services, transportation, service, compare delivery quotes, delivery, price, prices, delivery quote compare, cheap delivery prices";
+        $this->description = "Cheap courier services and cheap delivery. Delivery price comparison from couriers with transportation service experience.";
         $this->title = "Cheap courier quote compare";
         $this->set_menu = view('js/scroll_menu');
     }

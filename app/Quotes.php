@@ -55,7 +55,7 @@ class Quotes extends Model
         }
         $quote->id_listing = $_REQUEST['id_listing'];
         $quote->id_user = $_SESSION['id'];
-        $quote->code_currency = "EUR";
+        $quote->code_currency = "GBP";
         $quote->id_status = 1;
         $quote->date_sent = $date->format('Y-m-d H:i:s');
         $quote->save();
@@ -74,8 +74,8 @@ class Quotes extends Model
 
     /**
      * Update quotes on the listing which has received the quote
-     * If the current lowest bid is a bid of 40€ with a reserve of 30€ and someone bids 39€ with a reserve of 32€, the lowest bid for the listing should be 31€, the current bid of the first quote should be 31€ and the current bid of the second quote should be 32€
-     * If the current lowest bid is a bid of 40€ with a reserver of 30€ and someone bids 35€ with a reserve of 20€, the lowest bid for the listing should be 29€, the current bid of the first quote should be 30€ and the current bid of the second quote should be 29€
+     * If the current lowest bid is a bid of 40£ with a reserve of 30£ and someone bids 39£ with a reserve of 32£, the lowest bid for the listing should be 31£, the current bid of the first quote should be 31£ and the current bid of the second quote should be 32£
+     * If the current lowest bid is a bid of 40£ with a reserver of 30£ and someone bids 35£ with a reserve of 20£, the lowest bid for the listing should be 29£, the current bid of the first quote should be 30£ and the current bid of the second quote should be 29£
      */
     public static function updateQuotesForListing( $listing, $new_quote)
     {

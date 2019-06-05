@@ -158,7 +158,7 @@
 </div>
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAAs6KdmD9OYa2BHZb734w7dmA0QWWa5Dk&libraries=places"></script>
 <script src="{{ asset('/js/dropzone.js') }}"></script>
-<link rel="stylesheet" type="text/css" href="{{ asset('/css/dropzone.css') }}"></script>
+<link rel="stylesheet" type="text/css" href="{{ asset('/css/dropzone.css') }}">
 <script>
     function submitForm()
     {

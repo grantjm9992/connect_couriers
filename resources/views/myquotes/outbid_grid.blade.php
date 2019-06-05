@@ -44,7 +44,7 @@
                                             <p>
                                                 <div class="input-group mb-3">
                                                     <div class="input-group-prepend">
-                                                        <span class="input-group-text" id="basic-addon1">€</span>
+                                                        <span class="input-group-text" id="basic-addon1">£</span>
                                                     </div>
                                                     <input type="text" name="new_quote" class="form-control" placeholder="New quote" aria-label="New quote" aria-describedby="basic-addon1">
                                                 </div>
@@ -52,7 +52,7 @@
                                             <p>
                                                 <div class="input-group mb-3">
                                                     <div class="input-group-prepend">
-                                                        <span class="input-group-text" id="basic-addon1">€</span>
+                                                        <span class="input-group-text" id="basic-addon1">£</span>
                                                     </div>
                                                     <input type="text" name="min_quote" class="form-control" placeholder="New minimum quote" aria-label="New minimum quote" aria-describedby="basic-addon1">
                                                 </div>

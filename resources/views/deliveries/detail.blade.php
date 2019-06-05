@@ -89,7 +89,7 @@
                     </div>
                     <div class="card-body">
                         @if ( $quotes != "" )
-                        <div class="alert alert-info">Current lowest quote: {{ $data->lowest_quote }} EUR</div>
+                        <div class="alert alert-info">Current lowest quote: {{ $data->lowest_quote }} GBP</div>
                         @else
                         <div class="alert alert-warning"><i class="fas fa-exclamation-circle"></i>  No quotes have been placed</div>
                         @endif

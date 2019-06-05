@@ -25,7 +25,7 @@
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-success" style="width: 100%;">
-                        Login
+                        Sign Up
                     </button>
                 </div>
             </form>

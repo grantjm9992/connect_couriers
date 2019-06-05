@@ -62,8 +62,8 @@ class Controller extends BaseController
         $this->cont = new \ArrayObject();
         $this->campos = array();
         $this->title = "Couriers Connect";
-        $this->description = "";
-        $this->keywords = "";
+        $this->description = "Cheap delivery services by Connect Couriers";
+        $this->keywords = "cheap delivery, cheap delivery services, cheap courier services, courier services";
         $this->pageTitle = "";
         $this->botonera = "";
         $this->iconClass = "";
