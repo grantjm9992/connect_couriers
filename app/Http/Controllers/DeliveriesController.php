@@ -54,7 +54,7 @@ class DeliveriesController extends BaseController
 
         $quotes = DeliveriesOU::getQuoteSection();
         $messages = DeliveriesOU::getMessageSection();
-        $url = ( isset( $_SERVER['HTTP_REFERER'] ) && $_SERVER['HTTP_REFERER'] != "" ) ? $_SERVER['HTTP_REFERER'] : "Deliveries.search";
+        $url = ( isset( $_SERVER['HTTP_REFERER'] ) && $_SERVER['HTTP_REFERER'] != "" && !strpos( $_SERVER['HTTP_REFERER'], $_SERVER['REQUEST_URI'] ) ) ? $_SERVER['HTTP_REFERER'] : "Deliveries.search";
         $expires_on = new \DateTime( $listing->expires_on );
         $now = new \DateTime();
 

@@ -8,12 +8,18 @@
             <div>
                 @if ( isset( $_SESSION['id_user_type'] ) and $_SESSION['id_user_type'] == "2" )
                     @if ( $data->is_favourite === 1 )
-                    <div class="favourite" style="cursor: pointer; display: inline-block; font-size: 30px; margin-right: 10px; line-height: 38px; height: 38px;" toggleFavs>
-                        <i class="fas fa-heart"></i>
+                    <div class="btn btn-outline-success fav" toggleFavs>
+                        <i class="fas fa-eye"></i>
+                        <span>
+                            Stop watching
+                        </span>
                     </div>
                     @else
-                    <div style="display: inline-block; font-size: 30px; margin-right: 10px; line-height: 38px; height: 38px;" toggleFavs>
-                        <span style="font-size: 18px;">Add to watching list</span> <i class="far fa-heart"></i>
+                    <div class="btn btn-outline-success" toggleFavs>
+                        <i class="fas fa-eye"></i> 
+                        <span>
+                            Watch this listing
+                        </span>
                     </div>
                     @endif
                     <div onclick="addQuote({{ $data->id_listing }})" class="btn btn-outline-primary"><i class="fas fa-plus"></i> Add quote</div>
@@ -83,10 +89,20 @@
                                         {{ $item->str_description }}
                                     </div>
                                     <div class="col-12 col-md-6">
-                                        Dimensions: {{ $item->height }}{{ $item->units }} x {{ $item->width }}{{ $item->units }} x {{ $item->length }} {{ $item->length_unit }}
+                                        Dimensions:
+                                        @if ( $item->height != "" )
+                                        {{ $item->height }}{{ $item->units }} x {{ $item->width }}{{ $item->units }} x {{ $item->length }} {{ $item->length_unit }}
+                                        @else
+                                        N/A
+                                        @endif
                                     </div>
                                     <div class="col-12 col-md-6">
-                                        Weight: {{ $item->weight }} {{ $item->weight_unit }}
+                                        Weight:
+                                        @if ( $item->height != "" )
+                                        {{ $item->weight }} {{ $item->weight_unit }}
+                                        @else
+                                        N/A
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -138,18 +154,16 @@
     {
         $('[toggleFavs]').click( function() {
             var i = 0;
-            if ( $(this).hasClass('favourite') )
+            if ( $(this).hasClass('fav') )
             {
-                $(this).removeClass('favourite');
-                $(this).find('i').removeClass('fas');
-                $(this).find('i').addClass('far');
+                $(this).removeClass('fav');
+                $(this).find('span').html('Watch this listing')
             }
             else
             {
                 i = 1;
-                $(this).addClass('favourite');
-                $(this).find('i').addClass('fas');
-                $(this).find('i').removeClass('far');
+                $(this).addClass('fav');
+                $(this).find('span').html('Stop watching')
             }
             $.ajax({
                 type: "POST",

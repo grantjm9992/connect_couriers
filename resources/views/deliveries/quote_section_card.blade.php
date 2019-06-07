@@ -4,7 +4,9 @@
         <div class="col-12" style="">
             <div class="row quote-row" style="">
                 <div class="col-8 col-sm-12 col-md-5">
+                <a href="Couriers?id={{ $quote->id_user }}" style="color: inherit; text-decoration: none;">
                     {{ $quote->str_user }} ({{ $quote->user_feedback }})            
+                </a>
                 </div>
                 <div class="col-6 col-sm-6 col-md-3">
                     {{ $quote->num_cantidad }} {{ $quote->code_currency }}            
@@ -46,7 +48,7 @@
                         Vehicle:
                     </div>
                     <div class="col-12 col-sm-8">
-                    
+                        {{ $quote->str_vehicle }}
                     </div>
                 </div>
                 <div class="row quote-information">
@@ -54,7 +56,7 @@
                         Timeframe:
                     </div>
                     <div class="col-12 col-sm-8">
-
+                        {{ $quote->str_time_scale }}
                     </div>
                 </div>
                 <div class="row quote-information">

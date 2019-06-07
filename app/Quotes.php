@@ -27,7 +27,6 @@ class Quotes extends Model
                             LEFT JOIN vehicles ON vehicles.id_vehicle = quotes.id_vehicle
                             LEFT JOIN time_scales ON time_scales.id_time_scale = quotes.id_time_scale
                             WHERE id_status = $status AND id_listing = ".$id." ".Quotes::makeLimit($limit));
-
         return $quotes;
     }
 
