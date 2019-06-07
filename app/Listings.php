@@ -153,7 +153,7 @@ class Listings extends Model
         $url = "https://maps.googleapis.com/maps/api/distancematrix/json?&origins=$origin&destinations=$destination&key=AIzaSyAAs6KdmD9OYa2BHZb734w7dmA0QWWa5Dk";
 
         $data = json_decode( file_get_contents ( $url ) );
-        if ( is_object( $data ) && count( $data->rows > 0 ) && count( $data->rows->elements > 0 ) && is_object ( $data->rows[0]->elements[0]->distance ) && !is_null ( $data->rows[0]->elements[0]->distance ) )
+        if ( is_object( $data ) && is_object( $data->rows ) && is_object( $data->rows->elements ) && is_object ( $data->rows[0]->elements[0]->distance ) && !is_null ( $data->rows[0]->elements[0]->distance ) )
         {
             $listing->distance = $data->rows[0]->elements[0]->distance->text;
         }
