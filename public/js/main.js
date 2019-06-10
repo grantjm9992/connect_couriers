@@ -26,7 +26,8 @@ $(document).ready( function() {
 			left: 0,
 			padding: "50px",
 			lineHeight: "calc(100vh - 100px)",
-			textAlign: "center"
+            textAlign: "center",
+            zIndex: 10001
 		});
 		$(holder).html('<img src="'+url+'" style="max-height: 100%; max-width: 100%;">');
 		$('body').append(holder);
