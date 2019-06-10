@@ -38,6 +38,11 @@
             <div class="col-12 col-md-8" style="padding: 0 0 0 10px;">
                 <div class="container-fluid" style="border-left: 1px solid rgba(0, 0, 0, 0.15);">
                     <p>
+                        <a href="Users?id={{$data->id_user}}">
+                            {{ $data->str_user }} ({{ $data->feedback_user }})
+                        </a>
+                    </p>
+                    <p>
                         {{ $data->str_title }}
                     </p>
                     <p>
