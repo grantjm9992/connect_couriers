@@ -19,7 +19,7 @@
         <link rel="icon" type="image/vnd.microsoft.icon" href="couriers-service-quote/courier-quote-compare.ico" sizes="16x16">
         <link rel="stylesheet" href="{{ asset('https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css' ) }}" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="{{ asset('/css/main.css?version=1.2.2')}}">
-        <link rel="stylesheet" href="{{ asset('/css/jquery-ui.min.css')}}"></link>
+        <link rel="stylesheet" href="{{ asset('/css/jquery-ui.min.css')}}">
         <link rel="stylesheet" href="{{ asset('https://use.fontawesome.com/releases/v5.3.1/css/all.css')}}" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
         <link rel="stylesheet" href="{{ asset('/css/slick.css') }}">
         <link rel="stylesheet" href="{{ asset('/css/slick-theme.css') }}">
@@ -29,7 +29,7 @@
         <script src="{{ asset('https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js')}}" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script src="{{ asset('/js/jquery-ui.min.js')}}"></script>
         <script src="{{ asset('/js/slick.min.js')}}"></script>
-        <script src="{{ asset('/js/main.js?v1.0.1')}}"></script>
+        <script src="{{ asset('/js/main.js?v1.0.2')}}"></script>
         {!! $set_menu !!}
         {!! $header !!}
         <div class="body">

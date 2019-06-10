@@ -7,7 +7,7 @@
         </div>
         @else
         <div class="image-icon">
-            <img src="archivos/img/delivery-van.png" alt="">
+            <img src="archivos/img/delivery-van.png" noopen alt="">
         </div>
         @endif
         <div class="info">

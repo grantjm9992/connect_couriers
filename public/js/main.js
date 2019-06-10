@@ -14,26 +14,29 @@ $(document).on('click', 'a[href^="/#"]', function (event) {
 $(document).ready( function() {
 	$('img').click( function() {
 		closeHolder();
-		var url = $(this).attr('src');
-		var holder = document.createElement('div');
-		holder.id = "img_holder";
-		$(holder).css({
-			height: "100vh",
-			width: "100vw",
-			background: "rgba(0,0,0,0.75)",
-			position: "fixed",
-			top: 0,
-			left: 0,
-			padding: "50px",
-			lineHeight: "calc(100vh - 100px)",
-            textAlign: "center",
-            zIndex: 10001
-		});
-		$(holder).html('<img src="'+url+'" style="max-height: 100%; max-width: 100%;">');
-		$('body').append(holder);
-		$(holder).click( function() {
-			closeHolder();
-		});
+        if ( !$(this).hasAttribute('noopen') )
+        {
+            var url = $(this).attr('src');
+            var holder = document.createElement('div');
+            holder.id = "img_holder";
+            $(holder).css({
+                height: "100vh",
+                width: "100vw",
+                background: "rgba(0,0,0,0.75)",
+                position: "fixed",
+                top: 0,
+                left: 0,
+                padding: "50px",
+                lineHeight: "calc(100vh - 100px)",
+                textAlign: "center",
+                zIndex: 10001
+            });
+            $(holder).html('<img src="'+url+'" style="max-height: 100%; max-width: 100%;">');
+            $('body').append(holder);
+            $(holder).click( function() {
+                closeHolder();
+            });
+        }
 	});
 	document.addEventListener("keydown", function(event) {
 		if ( event.which === 27 )
