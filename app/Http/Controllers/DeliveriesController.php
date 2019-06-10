@@ -42,13 +42,22 @@ class DeliveriesController extends BaseController
         $quotes = Quotes::getForListing($id, null);
         $msgs = Messages::getForListing($id);
 
-        $this->title = "Cheap $listing->str_title Delivery with Couriers Connect";
-        $this->keywords = "cheap delivery, cheap courier services, cheap delivery services, delivery, courier services, cheap $listing->str_title delivery ";
         $titleArray = explode(" ", $listing->str_title);
-        foreach ( $titleArray as $word )
+        if ( str_len($listing->str_title) > 45 )
         {
-            $this->keywords .= ", $word ";
+            $i = 0;
+            foreach ( $titleArray as  $word )
+            {
+                if ( $i += str_len( $word ) + 1 < 45 ) $insert .= " $word";
+            }
         }
+        else
+        {
+            $insert = $listing->str_title;
+        }
+        $this->title = "Cheap$insert Delivery";
+        $this->keywords = "cheap delivery, cheap courier services, cheap delivery services, delivery, courier services, cheap $listing->str_title delivery ";
+
         $quote_html = view('comun/nodata');
         $mesages = view('comun/nodata');
         $images = DB::select('SELECT * FROM images_listings WHERE id_listing = '.$id);
