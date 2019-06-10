@@ -14,7 +14,7 @@ $(document).on('click', 'a[href^="/#"]', function (event) {
 $(document).ready( function() {
 	$('img').click( function() {
 		closeHolder();
-        if ( !$(this).hasAttr('noopen') )
+        if ( !$(this)[0].hasAttribute('noopen') )
         {
             var url = $(this).attr('src');
             var holder = document.createElement('div');
