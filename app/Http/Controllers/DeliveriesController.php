@@ -42,6 +42,13 @@ class DeliveriesController extends BaseController
         $quotes = Quotes::getForListing($id, null);
         $msgs = Messages::getForListing($id);
 
+        $this->title = "Cheap $listing->str_title Delivery with Couriers Connect";
+        $this->keywords = "cheap delivery, cheap courier services, cheap delivery services, delivery, courier services, cheap $listing->str_title delivery ";
+        $titleArray = explode(" ", $listing->str_title);
+        foreach ( $titleArray as $word )
+        {
+            $this->keywords .= ", $word ";
+        }
         $quote_html = view('comun/nodata');
         $mesages = view('comun/nodata');
         $images = DB::select('SELECT * FROM images_listings WHERE id_listing = '.$id);
@@ -49,7 +56,7 @@ class DeliveriesController extends BaseController
         foreach( $images as $image )
         {
             $url = $image->file_name;
-            $img .= "<div class='text-center' style='line-height: 100px; max-height: 200px;'><img style='display: inline-block; max-width: 100%; max-height: 100%;' src='$url'/></div>";
+            $img .= "<div class='text-center' style='line-height: 100px; max-height: 200px;'><img style='display: inline-block; max-width: 100%; max-height: 100%;' alt='Cheap $listing->str_title delivery' $src='$url'/></div>";
         }
 
         $quotes = DeliveriesOU::getQuoteSection();

@@ -3,11 +3,11 @@
     <div class="listing-card">
         @if ( $listing->file_name != "" && file_exists( $listing->file_name ) )
         <div class="image">
-            <img src="{{ $listing->file_name }}" />
+            <img src="{{ $listing->file_name }}" alt="Cheap {{ $listing->str_title }} delivery" />
         </div>
         @else
         <div class="image-icon">
-            <img src="archivos/img/delivery-van.png" noopen alt="">
+            <img src="archivos/img/delivery-van.png" noopen alt="Cheap {{ $listing->str_title }} delivery">
         </div>
         @endif
         <div class="info">

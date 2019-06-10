@@ -25,9 +25,9 @@ class Controller extends BaseController
     // cont->body es el contenido
     protected $cont;
     // titulo que sale en la pestaña.
-    protected $title;
-    protected $keywords;
-    protected $description;
+    public $title;
+    public $keywords;
+    public $description;
     // Si hay que construir una tabla
     protected $campos;
     protected $gridId;
