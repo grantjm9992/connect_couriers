@@ -5,8 +5,8 @@
 .scrolled {
     transition: 500ms ease-in-out;
     background-color: #fff;
-    color: #6D9DC5;
-    border-bottom: 0.5px solid #6D9DC5;
+    color: #754668;
+    border-bottom: 0.5px solid #754668;
     box-shadow: 0 1px 1px;
 }
 
@@ -20,8 +20,8 @@ img
 }
 
 .scrolled a {
-    color: #6D9DC5;
-    border-color: #6D9DC5;
+    color: #754668;
+    border-color: #754668;
 }
 
 .btn-top-right {
@@ -117,30 +117,30 @@ a:hover {
 }
 
 .btn-cc {
-    background-color: #0635C9 !important;
+    background-color: #754668 !important;
     color: #D4E1F4 !important;
-    border-color: #0635C9;
+    border-color: #754668;
     width: 100%;
 }
 
 
 .btn-cc-outline {
-    border-color: #0635C9;
+    border-color: #754668;
     background-color: transparent;
-    color: #0635C9;    
+    color: #754668;    
 }
 
 .btn-cc-outline:hover {
     border-color: #D4E1F4;
-    background-color: #0635C9;
+    background-color: #754668;
     color: #fff;    
 }
 
 
 .btn-cc:hover {
     background-color: #D4E1F4 !important;
-    color: #0635C9 !important;
-    border-color: #0635C9;
+    color: #754668 !important;
+    border-color: #754668;
 }
 
 .splash-container {
@@ -170,7 +170,7 @@ a:hover {
 .splash-container > .title > div > span {
     font-size: 16px;
     background-color: #fff;
-    color: #0635C9;
+    color: #754668;
     padding: 6px;
     border-radius: 50%;
 }
@@ -271,12 +271,12 @@ a:hover {
     font-size: 36px;
     font-weight: 500;
     width: 100%;
-    color: #0635C9;
+    color: #754668;
     text-align: center;
 }
 
 .section-services {
-    background-color: #0635C9;
+    background-color: #754668;
     color: #fff;
     width: 100%;
     padding: 40px 15%;
@@ -294,7 +294,7 @@ a:hover {
 }
 
 .bkg-white {    
-    color: #0635C9;
+    color: #754668;
     background-color: #fff;
 }
 
@@ -337,7 +337,7 @@ a:hover {
     height: 50px;
     width: 50px;
     border-radius: 50%;
-    background-color: #0635C9;
+    background-color: #754668;
     color: #fff;
     font-weight: 500;
     font-size: 24px;
@@ -357,7 +357,7 @@ a:hover {
 footer {
     width: 100%;
     padding: 40px 15%;
-    background-color: #6D9DC5;
+    background-color: #2D2D2A;
     color: #fff;
 }
 
@@ -370,8 +370,8 @@ footer {
 }
 .btn-success-outline:hover {
     background-color: #1BE5BE;
-    color: #6D9DC5;
-    border-color: #6D9DC5;
+    color: #754668;
+    border-color: #754668;
     width: 100%;
 }
 
@@ -447,7 +447,7 @@ color: #6C809A;
 }
 
 .cc {
-    color: #6D9DC5;
+    color: #754668;
 }
 
 
@@ -646,8 +646,8 @@ body {
 
 .bg-darkGrey
 {
-    background-color: rgba(109,157,197,0.2);
-    color: rgba(109,157,197,0.7);
+    background-color: rgba(0, 0, 0, 0.1);
+    color: #754668;
 }
 
 .item-section
@@ -714,17 +714,16 @@ body {
 .card
 {
     margin: 10px 0;
-    border-color: #0635C9;
+    border-color: #754668;
 }
 .card-header
 {
-    border-color: #0635C9;
-    background: rgba(212,225,244,0.7);
+    border-color: #754668;
 }
 
 body
 {
-    color: #0635C9;
+    color: #754668;
 }
 
 .btn-inverse
@@ -735,7 +734,7 @@ body
 
 .btn-inverse:hover
 {
-    background-color: #0635C9;
+    background-color: #754668;
     color: #fff;
 }
 
@@ -748,7 +747,7 @@ body
 
 .dark-gray
 {
-    color: #6D9DC5 !important;
+    color: #754668 !important;
 }
 
 .pointer {
@@ -828,7 +827,7 @@ table td, th {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #6D9DC5;
+    background-color: #754668;
     -webkit-transition: .4s;
     transition: .4s;
   }
@@ -866,7 +865,7 @@ table td, th {
   }
 
   input:checked + .formslider {
-    background-color: #0635C9 !important;
+    background-color: #754668 !important;
   }
   
   input:focus + .formslider {
