@@ -3,9 +3,6 @@
 <div class="container-fluid">
     <div class="listing">
         <div class="listing-nav">
-            <a href="{{ $url }}" class="btn btn-cc-outline">
-                <i class="fas fa-arrow-left"></i> Back
-            </a>
         </div>
         <div class="row">
             <div class="card width100">

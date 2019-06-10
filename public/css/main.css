@@ -5,8 +5,8 @@
 .scrolled {
     transition: 500ms ease-in-out;
     background-color: #fff;
-    color: #6D9DC5;
-    border-bottom: 0.5px solid #6D9DC5;
+    color: #EF476F;
+    border-bottom: 0.5px solid #EF476F;
     box-shadow: 0 1px 1px;
 }
 
@@ -20,8 +20,8 @@ img
 }
 
 .scrolled a {
-    color: #6D9DC5;
-    border-color: #6D9DC5;
+    color: #EF476F;
+    border-color: #EF476F;
 }
 
 .btn-top-right {
@@ -36,8 +36,8 @@ img
 }
 
 .btn-top-right:hover {
-    color: #1BE5BE;
-    border-color: #1BE5BE;
+    color: #EF476F;
+    border-color: #EF476F;
 }
 
 .btn-top-right-solid {
@@ -46,9 +46,9 @@ img
 }
 
 .btn-top-right-solid:hover {
-    color: #1BE5BE !important;
+    color: #EF476F !important;
     background: transparent;
-    border-color: #1BE5BE;
+    border-color: #EF476F;
 }
 
 a {
@@ -68,12 +68,12 @@ a:hover {
 }
 
 .alert-color {
-    color: #1BE5BE;
+    color: #EF476F;
     text-shadow: 0 0 18px orange;
 }
 
 a:hover {
-    color: #1BE5BE;
+    color: #EF476F;
 }
 
 .navbar-text > span {
@@ -81,7 +81,7 @@ a:hover {
     cursor: pointer;
 }
 .navbar-text > span:hover {
-    color: #1BE5BE;
+    color: #EF476F;
 }
 
 .body{
@@ -117,30 +117,30 @@ a:hover {
 }
 
 .btn-cc {
-    background-color: #0635C9 !important;
-    color: #D4E1F4 !important;
-    border-color: #0635C9;
+    background-color: #EF476F !important;
+    color: #fff !important;
+    border-color: #EF476F;
     width: 100%;
 }
 
 
 .btn-cc-outline {
-    border-color: #0635C9;
+    border-color: #EF476F;
     background-color: transparent;
-    color: #0635C9;    
+    color: #EF476F;    
 }
 
 .btn-cc-outline:hover {
-    border-color: #D4E1F4;
-    background-color: #0635C9;
-    color: #fff;    
+    border-color: #fff;
+    background-color: #EF476F;
+    color: #fff !important;
 }
 
 
 .btn-cc:hover {
-    background-color: #D4E1F4 !important;
-    color: #0635C9 !important;
-    border-color: #0635C9;
+    background-color: #fff !important;
+    color: #EF476F !important;
+    border-color: #EF476F;
 }
 
 .splash-container {
@@ -170,7 +170,7 @@ a:hover {
 .splash-container > .title > div > span {
     font-size: 16px;
     background-color: #fff;
-    color: #0635C9;
+    color: #374059;
     padding: 6px;
     border-radius: 50%;
 }
@@ -271,12 +271,12 @@ a:hover {
     font-size: 36px;
     font-weight: 500;
     width: 100%;
-    color: #0635C9;
+    color: #374059;
     text-align: center;
 }
 
 .section-services {
-    background-color: #0635C9;
+    background-color: #6D7486;
     color: #fff;
     width: 100%;
     padding: 40px 15%;
@@ -294,7 +294,7 @@ a:hover {
 }
 
 .bkg-white {    
-    color: #0635C9;
+    color: #374059;
     background-color: #fff;
 }
 
@@ -337,7 +337,7 @@ a:hover {
     height: 50px;
     width: 50px;
     border-radius: 50%;
-    background-color: #0635C9;
+    background-color: #374059;
     color: #fff;
     font-weight: 500;
     font-size: 24px;
@@ -357,21 +357,21 @@ a:hover {
 footer {
     width: 100%;
     padding: 40px 15%;
-    background-color: #6D9DC5;
+    background-color: #6D7486;
     color: #fff;
 }
 
 
 .btn-success-outline {
-    color: #1BE5BE;
+    color: #EF476F;
     background-color: transparent;
-    border-color: #1BE5BE;
+    border-color: #EF476F;
     width: 100%;
 }
 .btn-success-outline:hover {
-    background-color: #1BE5BE;
-    color: #6D9DC5;
-    border-color: #6D9DC5;
+    background-color: #EF476F;
+    color: #EF476F;
+    border-color: #EF476F;
     width: 100%;
 }
 
@@ -447,7 +447,7 @@ color: #6C809A;
 }
 
 .cc {
-    color: #6D9DC5;
+    color: #EF476F;
 }
 
 
@@ -566,6 +566,7 @@ body {
 }
 
 .mylisting {
+    color: #6D7486;
     min-height: 30px;
     font-size: 16px !important;
 }
@@ -646,8 +647,8 @@ body {
 
 .bg-darkGrey
 {
-    background-color: rgba(109,157,197,0.2);
-    color: rgba(109,157,197,0.7);
+    background-color: #DCE1E9;
+    color: #6D7486;
 }
 
 .item-section
@@ -714,17 +715,17 @@ body {
 .card
 {
     margin: 10px 0;
-    border-color: #0635C9;
+    border-color: #374059;
 }
 .card-header
 {
-    border-color: #0635C9;
-    background: rgba(212,225,244,0.7);
+    border-color: #374059;
+    background: #DCE1E9;
 }
 
 body
 {
-    color: #0635C9;
+    color: #374059;
 }
 
 .btn-inverse
@@ -735,7 +736,7 @@ body
 
 .btn-inverse:hover
 {
-    background-color: #0635C9;
+    background-color: #374059;
     color: #fff;
 }
 
@@ -748,7 +749,7 @@ body
 
 .dark-gray
 {
-    color: #6D9DC5 !important;
+    color: #EF476F !important;
 }
 
 .pointer {
@@ -828,7 +829,7 @@ table td, th {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #6D9DC5;
+    background-color: #EF476F;
     -webkit-transition: .4s;
     transition: .4s;
   }
@@ -866,7 +867,7 @@ table td, th {
   }
 
   input:checked + .formslider {
-    background-color: #0635C9 !important;
+    background-color: #374059 !important;
   }
   
   input:focus + .formslider {
