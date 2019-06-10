@@ -22,7 +22,7 @@
                                 @else
                                 <div data-tooltip-content="#status_tooltip" tooltip style="height: 13px; width: 13px; border-radius: 50%; background-color: grey; position: absolute; right: 10px; bottom: 10px;"></div>
                                 @endif
-                                <img src="archivos/img/avatar.png" style="max-width: 128px; max-height: 128px; border-radius: 50%;">
+                                <img src="archivos/img/avatar.png" noopen style="max-width: 128px; max-height: 128px; border-radius: 50%;">
                             </div>
                             <div class="public-profile">
                                 <div class="row">
@@ -110,6 +110,9 @@
         </div>
     <!-- FEEDBACK TABLE -->
     {!! $feedback_table !!}
+    </div>
+    <div class="container-fluid">
+        {!! $listings !!}
     </div>
 </div>
 

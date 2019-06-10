@@ -32,7 +32,7 @@
                 @if ( $img != "" )
                     {!! $img !!}
                 @else
-                    <img src="archivos\img\delivery-van.png" style="max-height: 100%; max-width: 100%;">
+                    <img src="archivos\img\delivery-van.png" noopen style="max-height: 100%; max-width: 100%;">
                 @endif
             </div>
             <div class="col-12 col-md-8" style="padding: 0 0 0 10px;">

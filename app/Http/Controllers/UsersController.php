@@ -30,9 +30,11 @@ class UsersController extends Controller
         $userStatus = \UserLogic::_getUserStatus( $user );
 
         $url = ( isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER'] != "" ) ? $_SERVER['HTTP_REFERER'] : url('/');
-
+        $listings = $this->activeListings();
+        
         $this->cont->body = view('users/publicprofile', array(
             "user" => $user,
+            "listings" => $listings,
             "feedback" => $feedback,
             "feedback_table" => $feedback_table,
             "userStatus" => $userStatus,
@@ -40,6 +42,22 @@ class UsersController extends Controller
         ));
 
         return $this->RenderView();
+    }
+
+    protected function activeListings()
+    {
+
+        $listings = \App\Listings::where('id_user', $_REQUEST['id'])->get();
+        
+        $html = "";
+        foreach ( $listings as $listing )
+        {
+            $html .= view('users/listing', array(
+                "listing" => $listing
+            ));
+        }
+
+        return $html;
     }
 
     public function feedbackPaginatedAction()
