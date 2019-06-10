@@ -29,11 +29,14 @@ class UsersController extends Controller
         
         $userStatus = \UserLogic::_getUserStatus( $user );
 
+        $url = ( isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER'] != "" ) ? $_SERVER['HTTP_REFERER'] : url('/');
+
         $this->cont->body = view('users/publicprofile', array(
             "user" => $user,
             "feedback" => $feedback,
             "feedback_table" => $feedback_table,
-            "userStatus" => $userStatus
+            "userStatus" => $userStatus,
+            "url" => $url
         ));
 
         return $this->RenderView();
