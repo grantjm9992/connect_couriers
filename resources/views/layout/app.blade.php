@@ -18,7 +18,7 @@
         <meta name="keywords" content="{!! $keywords !!}"> 
         <link rel="icon" type="image/vnd.microsoft.icon" href="couriers-service-quote/courier-quote-compare.ico" sizes="16x16">
         <link rel="stylesheet" href="{{ asset('https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css' ) }}" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="{{ asset('/css/main.css?version=1.2.3')}}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('/css/main.css?version=1.2.4')}}">
         <link rel="stylesheet" href="{{ asset('/css/jquery-ui.min.css')}}">
         <link rel="stylesheet" href="{{ asset('https://use.fontawesome.com/releases/v5.3.1/css/all.css')}}" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
         <link rel="stylesheet" href="{{ asset('/css/slick.css') }}">
