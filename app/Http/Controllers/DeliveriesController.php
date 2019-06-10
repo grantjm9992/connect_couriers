@@ -43,12 +43,12 @@ class DeliveriesController extends BaseController
         $msgs = Messages::getForListing($id);
 
         $titleArray = explode(" ", $listing->str_title);
-        if ( \str_len($listing->str_title) > 45 )
+        if ( \strlen($listing->str_title) > 45 )
         {
             $i = 0;
             foreach ( $titleArray as  $word )
             {
-                if ( $i += \str_len( $word ) + 1 < 45 ) $insert .= " $word";
+                if ( $i += \strlen( $word ) + 1 < 45 ) $insert .= " $word";
             }
         }
         else
