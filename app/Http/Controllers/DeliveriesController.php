@@ -56,7 +56,7 @@ class DeliveriesController extends BaseController
         foreach( $images as $image )
         {
             $url = $image->file_name;
-            $img .= "<div class='text-center' style='line-height: 100px; max-height: 200px;'><img style='display: inline-block; max-width: 100%; max-height: 100%;' alt='Cheap $listing->str_title delivery' $src='$url'/></div>";
+            $img .= "<div class='text-center' style='line-height: 100px; max-height: 200px;'><img style='display: inline-block; max-width: 100%; max-height: 100%;' alt='Cheap $listing->str_title delivery' src='$url'/></div>";
         }
 
         $quotes = DeliveriesOU::getQuoteSection();
