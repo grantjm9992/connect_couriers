@@ -202,6 +202,5 @@ class NotificationLogic {
             $i++;
             \Mail::to( $courier->str_email )->send( new NewListing( $listing, $courier ) );
         }
-        die( $i );
     }
 }
