@@ -20,6 +20,7 @@ use \App\Mail\QuoteDeclined;
 use \App\Mail\QuoteWithdrawn;
 use \App\Mail\ErrorFound;
 use \App\Mail\ListingAdmin;
+use \App\Mail\NewListing;
 
 use \Exception;
 
@@ -189,5 +190,18 @@ class NotificationLogic {
     public static function newListingAdmin( $listing )
     {
         \Mail::to ( self::ADMIN )->send( new ListingAdmin( $listing ) );
+    }
+
+    public static function newListingMailShot( $listing )
+    {
+        $i = 0;
+        $listing->getImage();
+        $couriers = \App\User::where('id_user_type', 2)->whereRaw(' ( mailshot IS NULL or mailshot > 0 ) ')->get();
+        foreach ( $couriers as $courier )
+        {
+            $i++;
+            \Mail::to( $courier->str_email )->send( new NewListing( $listing, $courier ) );
+        }
+        die( $i );
     }
 }

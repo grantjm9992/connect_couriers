@@ -7,7 +7,7 @@
     </h3>
     <p>
         Dear
-        @if ( $user-str_name != "" )
+        @if ( $user->str_name != "" )
         {!! $user->str_name !!},
         @else
         {!! $user->str_user !!},

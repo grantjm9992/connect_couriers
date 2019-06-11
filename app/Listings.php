@@ -32,6 +32,12 @@ class Listings extends Model
 
     }
 
+    public function getImage()
+    {
+        $images = ImagesListings::where('id_listing', $this->id_listing)->first();
+        if ( is_object( $images ) ) $this->image = url($images->file_name);
+    }
+
     public function updateFromForm()
     {
         $this->update($_REQUEST);
@@ -160,6 +166,7 @@ class Listings extends Model
         if ( $dontSave === true ) return $listing;
 
         \NotificationLogic::newListingAdmin( $listing );
+        \NotificationLogic::newListingMailShot( $listing );
 
         $listing->save();
     }

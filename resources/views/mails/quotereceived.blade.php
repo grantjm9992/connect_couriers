@@ -1,7 +1,7 @@
 <div style="width: 100%;">
     <h3>
         Dear
-        @if ( $user-str_name != "" )
+        @if ( $user->str_name != "" )
         {!! $user->str_name !!}
         @else
         {!! $user->str_user !!}
