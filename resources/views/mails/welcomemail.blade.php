@@ -671,14 +671,14 @@ font-size: 24px;
 font-weight: 300;">
                                 Dear
                                 @if ( $user->str_name != "" )
-                                {!! $user->str_name !!},
+                                {!! $user->str_name !!}
                                 @else
-                                {!! $user->str_user !!},
+                                {!! $user->str_user !!}
                                 @endif
                                 , thank you for registering with Couriers Connect!
                                 Your account is now active and ready to use.
                             </h3>
-            				<p>
+            				<p style="font-size: 18px;">
                                 @if ( $user->id_user_type === 1 )
                                     You can keep track of your listings from your dashboard. <a href="{{ url('MyAccount') }}" style="
 	padding: 10px 15px;
@@ -710,20 +710,20 @@ border-top: 1px solid rgba(0,0,0,.05);
 color: rgba(0,0,0,.5);" class="bg_light footer email-section">
             <table>
             	<tr>
-                <td valign="top" width="50%" style="padding-top: 20px;">
+                <td valign="top" width="50%" style="padding: 20px;">
                   <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
                     <tr>
-                      <td style="text-align: left; padding-right: 10px;">
+                      <td style="text-align: left; padding: 10px;">
                       	<h3 class="heading">Connect Couriers</h3>
                       	<p>For all your courier needs.</p>
                       </td>
                     </tr>
                   </table>
                 </td>
-                <td valign="top" width="50%" style="padding-top: 20px;">
+                <td valign="top" width="50%" style="padding: 20px;">
                   <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
                     <tr>
-                      <td style="text-align: left; padding-left: 5px; padding-right: 5px;">
+                      <td style="text-align: left; padding: 10px;">
                       	<h3 class="heading">Contact Info</h3>
                         <h5 style="color: #754668">info@connectcouriers.com</h5>
                       </td>
