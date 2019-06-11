@@ -114,7 +114,7 @@ class MyListingsController extends BaseController
 
     public function deleteAction()
     {
-
+        $date = new \DateTime();
         $listing = Listings::where('id_listing', $this->id)->first();
         $listing->id_status = "3";
         $listing->date_closed_on = $date->format('Y-m-d H:i:s');
