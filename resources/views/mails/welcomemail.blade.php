@@ -637,7 +637,7 @@ color: rgba(0,0,0,1);
           	<table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
           		<tr>
           			<td class="logo" style="text-align: center; color: #754668; font-size: 24px;">
-			            <h1><a href="#" style=" color: #754668; font-size: 24px;">Connect Couriers</a></h1>
+			            <h1><a href="{{ url('/') }}" style=" color: #754668; font-size: 24px;">Connect Couriers</a></h1>
                         <div style="height: 80px;">
                             <img src="{{ asset('https://couriersconnect.com/couriers-service-quote/archivos/img/logo/compare-delivery-prices.png') }}" style="height: 80px;"/>
                         </div>
@@ -710,7 +710,7 @@ border-top: 1px solid rgba(0,0,0,.05);
 color: rgba(0,0,0,.5);" class="bg_light footer email-section">
             <table>
             	<tr>
-                <td valign="top" width="33.333%" style="padding-top: 20px;">
+                <td valign="top" width="50%" style="padding-top: 20px;">
                   <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
                     <tr>
                       <td style="text-align: left; padding-right: 10px;">
@@ -720,23 +720,12 @@ color: rgba(0,0,0,.5);" class="bg_light footer email-section">
                     </tr>
                   </table>
                 </td>
-                <td valign="top" width="33.333%" style="padding-top: 20px;">
+                <td valign="top" width="50%" style="padding-top: 20px;">
                   <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
                     <tr>
                       <td style="text-align: left; padding-left: 5px; padding-right: 5px;">
                       	<h3 class="heading">Contact Info</h3>
-                      	<ul style="list-style: none;">
-                            <li><span class="text" style="color: #754668">info@connectcouriers.com</span></li>
-                        </ul>
-                      </td>
-                    </tr>
-                  </table>
-                </td>
-                <td valign="top" width="33.333%" style="padding-top: 20px;">
-                  <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
-                    <tr>
-                      <td style="text-align: left; padding-left: 10px;">
-                      	<a href="{{ url('/') }}" class="heading">Connect Couriers</a>
+                        <h5 style="color: #754668">info@connectcouriers.com</h5>
                       </td>
                     </tr>
                   </table>
